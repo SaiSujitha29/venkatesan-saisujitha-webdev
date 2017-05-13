@@ -8,6 +8,6 @@ web-app called PrintOnTheGo at hackMIT using Javascript, Html, CSS and Google Ma
  was to locate the user and find out the nearest available printer on Campus and to send notifications to the
  maintenance team when a printer stopped working. The purpose of this repository is for the summer 1 2017 WebDev class.
 
-[Heroku](https://sujitha-webdev.herokuapp.com/)
-[Project](https://sujitha-webdev.herokuapp.com/project/index.html)
-[Assignment](https://sujitha-webdev.herokuapp.com/assignment/index.html)
+* [Heroku](https://sujitha-webdev.herokuapp.com/)
+* [Project](https://sujitha-webdev.herokuapp.com/project/index.html)
+* [Assignment](https://sujitha-webdev.herokuapp.com/assignment/index.html)
