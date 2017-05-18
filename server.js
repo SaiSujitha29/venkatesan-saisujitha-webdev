@@ -10,7 +10,7 @@
 //
 // require ("./test/app.js")(app);
 //
-// var port = process.env.PORT || 3000;
+ var port = process.env.PORT || 3000;
 //
 // app.listen(port);
 var express = require('express');
