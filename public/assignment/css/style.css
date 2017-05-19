@@ -16,9 +16,21 @@ body {
     color: white;
 }
 
+.navbar-header {
+    width: 100%;
+}
+
+.navbar-default .navbar-link {
+    color: white;
+}
+
 nav.navbar.navbar-default.navbar-fixed-top {
     right: 0px;
     padding-right: 15px;
+}
+
+.navbar.navbar-default a {
+    color: white;
 }
 
 .scrollable-left {
