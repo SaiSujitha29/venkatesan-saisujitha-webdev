@@ -1,67 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/styles.css" rel="stylesheet"/>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                Websites
-            </a>
+            <a class="navbar-brand" href="#">Website List</a>
+            <p class="navbar-text pull-right">
+                <a href="website-new.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus "></span>
+                </a>
+            </p>
         </div>
-    </div>
+    </div><!-- /.container-fluid -->
 </nav>
 
 <div class="container-fluid">
+    <h1>Website List</h1>
+
     <ul class="list-group">
-        <li class="list-group-item active">
-            <div class="row">
-                <div class="col-lg-5 col-md-8 col-sm-11 col-xs-11">
-                    Website Name
-                </div>
-                <div class="col-lg-3 visible-lg">
-                    Created
-                </div>
-                <div class="col-md-3 hidden-sm  hidden-xs">
-                    Updated
-                </div>
-                <div class="col-sm-1">
-
-                </div>
-            </div>
-        </li>
-
-
         <li class="list-group-item">
-            <div class="row">
-                <div class="col-lg-5 col-md-8 col-sm-11 col-xs-11">
-                    <a href="../page/page-list.html">
-                        Cras justo odio
-                    </a>
-                </div>
-                <div class="col-lg-3 visible-lg">
-                    1/1/2017
-                </div>
-                <div class="col-md-3 hidden-sm  hidden-xs">
-                    2/2/2017
-                </div>
-                <div class="col-sm-1">
-                    <a href="website-edit.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
+            <a href="../page/page-list.html">
+                Cras justo odio
+            </a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
         </li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+        <li class="list-group-item">
+            <a href="../page/page-list.html">
+                Dapibus ac facilisis in
+            </a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="../page/page-list.html">
+                Morbi leo risus
+            </a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="../page/page-list.html">
+                Porta ac consectetur ac
+            </a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="../page/page-list.html">
+                Vestibulum at eros
+            </a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+        </li>
     </ul>
 </div>
 
@@ -71,8 +77,15 @@
             <a class="navbar-brand" href="#">
                 Footer
             </a>
+
+            <p class="navbar-text pull-right">
+                <a href="../user/profile.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
         </div>
     </div>
 </nav>
+
 </body>
 </html>
