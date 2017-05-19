@@ -4,8 +4,8 @@ textarea.form-control {
 }
 
 body {
-    margin-top: 70px;
-    margin-bottom: 60px;
+    padding-top: 70px;
+    padding-bottom: 60px;
 }
 
 .navbar-default {
@@ -14,4 +14,18 @@ body {
 
 .navbar-default .navbar-brand {
     color: white;
+}
+
+nav.navbar.navbar-default.navbar-fixed-top {
+    right: 0px;
+    padding-right: 15px;
+}
+
+.scrollable-left {
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    overflow: scroll;
+    padding-top: 15px;
+    padding-bottom: 30px;
 }

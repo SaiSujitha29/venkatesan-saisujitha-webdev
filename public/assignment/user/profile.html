@@ -13,78 +13,56 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="#">Profile</a>
+            <p class="navbar-text pull-right">
+                <a href="#" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok "></span>
+                </a>
+            </p>
         </div>
-
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 
 <div class="container-fluid">
+    <h2>Profile</h2>
 
     <label for="username">Username</label>
-    <input readonly value="alice" id="username" class="form-control"/>
+    <input type=text
+           placeholder="alice"
+           id="username"
+           class="form-control"/>
 
     <label for="password">Password</label>
-    <input type="password" id="password" class="form-control"/>
+    <input type="password"
+           placeholder="ifnerfoirengo"
+           id="password"
+           class="form-control"/>
 
     <label for="verify">Verify Password</label>
-    <input type="password" id="verify" class="form-control"/>
+    <input type="password"
+           placeholder="ifnerfoirengo"
+           id="verify"
+           class="form-control"/>
 
     <label for="first">First</label>
-    <input id="first" placeholder="Alice" class="form-control"/>
+    <input type="text"
+           placeholder="Alice"
+           id="first"
+           class="form-control"/>
 
     <label for="last">Last</label>
-    <input id="last" placeholder="Wonderland" class="form-control"/>
+    <input type="text"
+           placeholder="Wonderland"
+           id="last"
+           class="form-control"/>
 
     <label for="email">Email</label>
-    <input type="email" id="email" placeholder="w.alice@webdev.com" class="form-control"/>
+    <input type="email"
+           placeholder="w.alice@webdev.com"
+           id="email"
+           class="form-control"/>
 
-    <a href="../website/website-list.html" class="btn btn-block btn-primary">Logout</a>
+    <a href="../website/website-list.html" class="btn btn-block btn-primary">Websites</a>
     <a href="login.html" class="btn btn-block btn-danger">Logout</a>
 </div>
 
@@ -95,13 +73,11 @@
                 Footer
             </a>
 
-            <div class="row navbar-text">
-                <div class="col-s-3">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user pull-right"></span>
-                    </a>
-                </div>
-            </div>
+            <p class="navbar-text pull-right">
+                <a href="#" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
         </div>
 
     </div>
