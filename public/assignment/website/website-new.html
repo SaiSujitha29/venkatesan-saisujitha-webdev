@@ -11,35 +11,37 @@
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <div class="row">
-                <div class="navbar-text hidden-xs">
-                    <p>
-                            <span class="glyphicon glyphicon-chevron-left "></span>
-                    </p>
-
-                    <a href="#">Websites</a>
-
-                    <p>
-                        <span class="glyphicon glyphicon-chevron-plus "></span>
-                    </p>
-                </div>
-                <div class="navbar-text">
-                    <p class="visible-xs">
-                        <span class="glyphicon glyphicon-chevron-left "></span>
-                    </p>
-                    <a class="navbar-brand " href="#">New Website</a>
-                    <p>
-                        <a href="website-list.html" class="navbar-link">
-                            <span class="glyphicon glyphicon-ok "></span>
-                        </a>
-                </div>
-            </div>
-
+    <div class="container-fluid row">
+        <div class="col-xs-4 hidden-xs">
+            <p class="navbar-text pull-left">
+                <a class="navbar-link" href="website-list.html">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="website-list.html">Websites</a>
+            <p class="navbar-text pull-right">
+                <a class="navbar-link" href="/assignment/websites/website-new.html">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
         </div>
-    </div><!-- /.container-fluid -->
+        <div class="col-xs-12 col-sm-8">
+            <p class="navbar-text pull-left visible-xs">
+                <a class="navbar-link" href="website-list.html">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+            </p>
+            <a class="navbar-brand">Edit Website</a>
+            <p class="navbar-text pull-right">
+                <a class="navbar-link" href="/assignment/websites/website-list.html">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+    </div>
 </nav>
 
 <div class="container-fluid">

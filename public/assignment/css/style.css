@@ -1,5 +1,6 @@
 input.form-control,
-textarea.form-control {
+textarea.form-control,
+select.form-control{
     margin-bottom: 5px;
 }
 
@@ -40,4 +41,20 @@ nav.navbar.navbar-default.navbar-fixed-top {
     overflow: scroll;
     padding-top: 15px;
     padding-bottom: 30px;
+}
+
+.wd-widget {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.wd-toolbar {
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    right: 0px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 10px;
+    opacity: 0.8;
 }
