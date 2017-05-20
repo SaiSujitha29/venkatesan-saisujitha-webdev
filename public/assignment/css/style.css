@@ -9,6 +9,14 @@ body {
     padding-bottom: 60px;
 }
 
+.list-group-item {
+    border: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 .navbar-default {
     background-color: darkgray;
 }
@@ -57,4 +65,9 @@ nav.navbar.navbar-default.navbar-fixed-top {
     padding-bottom: 5px;
     border-bottom-left-radius: 10px;
     opacity: 0.8;
+}
+
+.wd-choose {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

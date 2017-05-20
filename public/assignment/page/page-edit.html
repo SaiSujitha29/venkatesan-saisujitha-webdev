@@ -11,26 +11,41 @@
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-
-            <a class="navbar-brand" href="#">Pages</a>
-            <p class="navbar-text pull-right">
-                <a href="page-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-ok "></span>
+    <div class="container-fluid row">
+        <div class="col-xs-4 hidden-xs">
+            <p class="navbar-text pull-left">
+                <a class="navbar-link" href="page-list.html">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
                 </a>
             </p>
 
-            <a class="navbar-brand" href="#">Edit Page</a>
+            <a class="navbar-brand" href="page-list.html">Pages</a>
+
             <p class="navbar-text pull-right">
-                <a href="page-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus "></span>
+                <a class="navbar-link" href="page-new.html">
+                    <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
-
         </div>
-    </div><!-- /.container-fluid -->
+        <div class="col-xs-12 col-sm-8">
+            <p class="navbar-text pull-left visible-xs">
+                <a class="navbar-link" href="page-list.html">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+            </p>
+
+            <a class="navbar-brand">Edit Page</a>
+
+            <p class="navbar-text pull-right">
+                <a class="navbar-link" href="page-list.html">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+    </div>
 </nav>
 
 <div class="container-fluid">
@@ -39,124 +54,49 @@
     <div class="row">
         <div class="col-xs-4 hidden-xs">
             <ul class="list-group">
-
-                <li class="list-group-item active">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-8 col-xs-11">
-                            Name
-                        </div>
-                        <div class="col-lg-3 visible-lg">
-                            Created
-                        </div>
-                        <div class="col-md-3 hidden-sm hidden-xs">
-                            Last
-                        </div>
-                        <div class="col-xs-1"></div>
-                    </div>
+                <li class ="list-group-item">
+                    <a href="../page/page-edit.html">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href ="../widget/widget-list.html">
+                        Blog Post
+                    </a>
                 </li>
 
-                <li class="list-group-item ">
-                    <div class="row">
-                        <div class="col-lg-5 col-xs-11">
-                            <a href="../page/page-list.html">
-                                Home
-                            </a>
-                        </div>
-                        <div class="col-lg-3 visible-lg">
-                            Column 2
-                        </div>
-                        <div class="col-md-3 hidden-sm hidden-xs">
-                            Column 3
-                        </div>
-                        <div class="col-xs-1">
-                            <a href="website-edit.html">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-8 col-xs-11">
-                            <a href="../page/page-list.html">
-                                Blog Post
-                            </a>
-                        </div>
-                        <div class="col-lg-3 visible-lg">
-                            Column 2
-                        </div>
-                        <div class="col-md-3 hidden-sm hidden-xs">
-                            Column 3
-                        </div>
-                        <div class="col-xs-1">
-                            <a href="website-edit.html">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a>
-                        </div>
-                    </div>
+                <li class ="list-group-item">
+                    <a href="../page/page-edit.html">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href ="../widget/widget-list.html">
+                        Blogs
+                    </a>
                 </li>
 
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-8 col-xs-11">
-                            <a href="../page/page-list.html">
-                                Blog
-                            </a>
-                        </div>
-                        <div class="col-lg-3 visible-lg">
-                            Column 2
-                        </div>
-                        <div class="col-md-3 hidden-sm hidden-xs">
-                            Column 3
-                        </div>
-                        <div class="col-xs-1">
-                            <a href="website-edit.html">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a>
-                        </div>
-                    </div>
+                <li class ="list-group-item">
+                    <a href="../page/page-edit.html">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href ="../widget/widget-list.html">
+                        Home
+                    </a>
                 </li>
 
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-8 col-xs-11">
-                            <a href="../page/page-list.html">
-                                About
-                            </a>
-                        </div>
-                        <div class="col-lg-3 visible-lg">
-                            Column 2
-                        </div>
-                        <div class="col-md-3 hidden-sm hidden-xs">
-                            Column 3
-                        </div>
-                        <div class="col-xs-1">
-                            <a href="website-edit.html">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a>
-                        </div>
-                    </div>
+                <li class ="list-group-item">
+                    <a href="../page/page-edit.html">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href ="../widget/widget-list.html">
+                        About Us
+                    </a>
                 </li>
 
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-8 col-xs-11">
-                            <a href="../page/page-list.html">
-                                Contact Us
-                            </a>
-                        </div>
-                        <div class="col-lg-3 visible-lg">
-                            Column 2
-                        </div>
-                        <div class="col-md-3 hidden-sm hidden-xs">
-                            Column 3
-                        </div>
-                        <div class="col-xs-1">
-                            <a href="website-edit.html">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a>
-                        </div>
-                    </div>
+                <li class ="list-group-item">
+                    <a href="../page/page-edit.html">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href ="../widget/widget-list.html">
+                        Contact Us
+                    </a>
                 </li>
             </ul>
         </div>
@@ -165,19 +105,20 @@
             <label for="name">Name</label>
             <input class="form-control"
                    type="text"
-                   placeholder="facebook"
-                   value="Blogger"
-                   id="name"
-            />
+                   placeholder="Page Name"
+                   id="name"/>
 
-            <label for="description">Description</label>
-            <textarea class="form-control"
-                      rows="5"
-                      placeholder="facebook wefiwbgowighqaeoifihwpfoihenrvoiwrhnvowirvhwp"
-                      value="Blogger"
-                      id="description">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</textarea>
+            <label for="title">Title</label>
+            <input class="form-control"
+                   type="text"
+                   placeholder="Page Title"
+                   id="title"/>
 
-            <a class="btn btn-block btn-danger" href="website-list.html">Delete</a>
+            <a class="btn btn-block btn-danger"
+               href="../page/page-list.html">
+                Delete
+            </a>
+
         </div>
     </div>
 </div>
