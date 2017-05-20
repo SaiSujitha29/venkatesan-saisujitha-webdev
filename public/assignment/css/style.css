@@ -34,8 +34,11 @@ a:hover {
 }
 
 nav.navbar.navbar-default.navbar-fixed-top {
-    right: 0px;
-    padding-right: 15px;
+    position: absolute;
+}
+
+nav.navbar.navbar-default.navbar-fixed-bottom {
+    position: absolute;
 }
 
 .navbar.navbar-default a {
