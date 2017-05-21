@@ -1,0 +1,81 @@
+body {
+    overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.75;
+    font-family: 'Open Sans', sans-serif;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    outline: none;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border: 0px;
+    padding: 20px 0;
+    transition: all 0.3s;
+}
+
+.navbar-brand {
+    font-size: 30px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #fff;
+    outline: none;
+}
+
+.navbar-default .navbar-nav > li > a {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    outline: none;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #fed136;
+    background-color: transparent;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #fed136;
+    border-color: #fed136;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+header {
+    background-image: url('https://api.services.trvl.com/backgrounds/images/singapore_1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+    color: whitesmoke;
+}
+
+header .intro-text .intro-heading {
+    font-family: 'Patua One', cursive;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 50px;
+    margin-bottom: 25px;
+}
+
+header .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+}

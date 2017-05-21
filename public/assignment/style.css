@@ -1,0 +1,18 @@
+body{
+    margin-top: 25px;
+}
+
+h1 {
+    color: cornflowerblue;
+    padding-bottom: 20px;
+}
+
+h3 {
+    color: #d9534f;
+    padding-bottom: 15px;
+}
+
+a.btn {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
