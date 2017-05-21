@@ -4,6 +4,25 @@ select.form-control{
     margin-bottom: 5px;
 }
 
+head {
+    position: static;
+}
+
+footer {
+    position: static;
+}
+
+div.container-fluid.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+div.row.content {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
 div.container-fluid.user-main {
     padding-top: 20px;
     margin-left: 20px;
