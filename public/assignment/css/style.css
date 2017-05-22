@@ -61,11 +61,11 @@ a:hover {
 }
 
 nav.navbar.navbar-default.navbar-fixed-top {
-    position: absolute;
+    position: fixed;
 }
 
 nav.navbar.navbar-default.navbar-fixed-bottom {
-    position: absolute;
+    position: fixed;
 }
 
 .navbar.navbar-default a {
@@ -100,4 +100,11 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 .wd-choose {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.div .container {
+    padding-bottom: 20%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
