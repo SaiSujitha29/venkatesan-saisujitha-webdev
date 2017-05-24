@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Login</title>
+    <title>Register</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
+    <link href="../../css/style.css" rel="stylesheet"/>
 </head>
-
 <body>
     <div class="container-fluid user-main">
 
-        <h1>Login</h1>
+        <h1>Register</h1>
 
         <label for="username">Username</label>
         <input type="text"
                id="username"
                class="form-control"
-               placeholder="username (Example:bob123)"/>
+               placeholder="username"/>
 
         <label for="password">Password</label>
         <input type="password"
@@ -25,16 +24,22 @@
                class="form-control"
                placeholder="password (Example:sdsfefedi19243_8&)"/>
 
-        <a class="btn btn-primary btn-block"
-           href="../website/website-list.html">
-            Login
-        </a>
+        <label for="verify">Verify Password</label>
+        <input type="password"
+               id="verify"
+               class="form-control"
+               placeholder="password (Example:sdsfefedi19243_8&)"/>
 
-        <a class="btn btn-success btn-block"
-           href="register.html">
+        <a class="btn btn-primary btn-block"
+           href="profile.view.client.html">
             Register
         </a>
-    </div>
 
+        <a class="btn btn-danger  btn-block"
+           href="login.view.client.html">
+            Cancel
+        </a>
+
+    </div>
 </body>
 </html>
