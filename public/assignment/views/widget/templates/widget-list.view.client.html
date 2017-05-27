@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>List of Widgets</title>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -26,66 +16,41 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="wd-widget">
+
+    <div ng-repeat="widget in model.widgets" class="wd-widget">
         <div class="wd-toolbar">
             <a href="widget-heading.view.client.html">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-        <h1>GIZMODO</h1>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-toolbar">
-            <a href="widget-heading.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <h3>Welcome to GIZMODO's Star Warsssssssssssss</h3>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-toolbar">
-            <a href="widget-image.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <img width= 100% src="http://www.ie-wallpapers.com/data/out/213/35924475-star-wars-pics.jpg">
-    </div>
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADING" ng-switch="widget.size">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
+                <h6 ng-switch-when="6">{{widget.text}}</h6>
+            </div>
 
-    <div class="wd-widget">
-        <div class="wd-toolbar">
-            <span class="glyphicon glyphicon-cog"></span>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <p>
-            This animated entry in the "Star Wars" franchise fills the gap between the events of "Episode III" and
-            "Episode IV." Imperial forces occupy a remote planet and are ruling -- and ruining -- its inhabitants'
-            lives with an iron fist. A clever, disparate crew aboard the starship Ghost takes a stand against the
-            Empire, facing new villains and colorful adversaries. The rebels on the Ghost include leader Kanan, ace
-            pilot Hera, feisty heroine Sabine, tough guy Zeb and 14-year-old con artist Ezra.
-        </p>
-    </div>
+            <div ng-switch-when="IMAGE">
+                <img ng-src="{{widget.url}}"
+                     width="{{widget.width}}"/>
+            </div>
 
-    <div class="wd-widget">
-        <div class="wd-toolbar">
-            <a href="widget-youtube.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <div class="embed-con">
-            <iframe width="100%" src="https://www.youtube.com/embed/zB4I68XVPzQ" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
+            <div ng-switch-when="HTML"
+                 ng-bind-html="model.trustThisContent(widget.text)">
+            </div>
 
-    <div class="wd-widget">
-        <div class="wd-toolbar">
-            <span class="glyphicon glyphicon-cog"></span>
-            <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="YOUTUBE">
+                <iframe src="{{model.getYouTubeEmbedUrl(widget.url)}}"
+                        width="{{widget.width}}"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
+
         </div>
-        <p>The central character in the series is <a href="/wiki/Harry_Potter_(character)" title="Harry Potter (character)">Harry Potter</a>, an English boy who lives with his aunt, uncle, and cousin, and who discovers, at the age of eleven, that he is a <a href="/wiki/Magician_(fantasy)" title="Magician (fantasy)">wizard</a>, though he lives in the ordinary world of non-magical people known as <a href="/wiki/Muggles" class="mw-redirect" title="Muggles">Muggles</a>.<sup id="cite_ref-11" class="reference"><a href="#cite_note-11">[11]</a></sup> The wizarding world exists parallel to the Muggle world, albeit hidden and in secrecy. His magical ability is inborn and children with such abilities are invited to attend exclusive magic schools that teach the necessary skills to succeed in the <a href="/wiki/Wizarding_world" class="mw-redirect" title="Wizarding world">wizarding world</a>.<sup id="cite_ref-muggle_guide_12-0" class="reference"><a href="#cite_note-muggle_guide-12">[12]</a></sup> Harry becomes a student at <a href="/wiki/Hogwarts" title="Hogwarts">Hogwarts</a> School of Witchcraft and Wizardry, a wizarding academy in Scotland and it is here where most of the events in the series take place. As Harry develops through his adolescence, he learns to overcome the problems that face him: magical, social and emotional, including ordinary teenage challenges such as friendships, infatuation, romantic relationships, schoolwork and exams, anxiety, depression, stress, and the greater test of preparing himself for the confrontation, that lies ahead, in wizarding Britain's increasingly-violent second wizarding war.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[13]</a></sup></p>
     </div>
 </div>
 
@@ -108,5 +73,3 @@
         </p>
     </div>
 </nav>
-</body>
-</html>
