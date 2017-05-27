@@ -108,3 +108,22 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
     height: 100%;
     position: absolute;
 }
+
+.home body{
+    margin-top: 25px;
+}
+
+.home h1 {
+    color: cornflowerblue;
+    padding-bottom: 20px;
+}
+
+.home h3 {
+    color: #d9534f;
+    padding-bottom: 15px;
+}
+
+.home a.btn {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

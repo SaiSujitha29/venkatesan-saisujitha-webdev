@@ -1,0 +1,93 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-4 hidden-xs">
+            <p class="navbar-text pull-left">
+                <a class="navbar-link" href="#!/user/{{model.user_id}}/website">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+            </p>
+            <a class="navbar-brand">Websites</a>
+            <p class="navbar-text pull-right">
+                <a class="navbar-link" href="#!/user/{{model.user_id}}/website/new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <p class="navbar-text pull-left visible-xs">
+                <a class="navbar-link" href="#!/user/{{model.user_id}}/website">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+            </p>
+            <a class="navbar-brand">Edit Website</a>
+            <p class="navbar-text pull-right">
+                <a class="navbar-link" ng-click="model.updateWebsite(model.website)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+
+    <div class="row content">
+        <div class="col-xs-4 hidden-xs">
+            <ul class="list-group">
+
+                <li ng-repeat="website in model.websites" class ="list-group-item">
+                    <a href="#!/user/{{model.user_id}}/website/{{website._id}}">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href="#!/user/{{model.user_id}}/website/{{website._id}}/page">
+                        {{website.name}}
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <label for="name">Name</label>
+            <input class="form-control"
+                   type="text"
+                   placeholder="facebook"
+                   ng-model="model.website.name"
+                   id="name"
+            />
+
+            <label for="description">Description</label>
+            <textarea class="form-control"
+                      rows="5"
+                      placeholder="facebook wefiwbgowighqaeoifihwpfoihenrvoiwrhnvowirvhwp"
+                      ng-model="model.website.description"
+                      id="description">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</textarea>
+
+            <a class="btn btn-block btn-danger"
+               ng-click="model.deleteWebsite(model.websiteId)">
+                Delete
+            </a>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Footer
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a href="#!/user/{{model.user_id}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

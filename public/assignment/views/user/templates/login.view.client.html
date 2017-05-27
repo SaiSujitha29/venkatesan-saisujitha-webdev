@@ -1,0 +1,33 @@
+<div class="container-fluid user-main">
+
+    <h1>Login</h1>
+
+    <div ng-show="vm.message" class="alert alert-info">
+        {{vm.message}}
+    </div>
+
+
+    <label for="username">Username</label>
+    <input type="text"
+           id="username"
+           ng-model="username"
+           class="form-control"
+           placeholder="username (Example:bob123)"/>
+
+    <label for="password">Password</label>
+    <input type="password"
+           id="password"
+           ng-model="password"
+           class="form-control"
+           placeholder="password (Example:sdsfefedi19243_8&)"/>
+    <!--href="../../website/templates/website-list.view.client.html"-->
+    <a ng-click="vm.login(username, password)"
+       class="btn btn-primary btn-block">
+        Login
+    </a>
+
+    <a class="btn btn-success btn-block"
+       href="#!/register">
+        Register
+    </a>
+</div>

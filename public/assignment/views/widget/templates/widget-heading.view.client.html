@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Edit Widget</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/style.css" rel="stylesheet"/>
+    <link href="../../../css/style.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -42,17 +42,15 @@
            id="text"
            class="form-control"/>
 
-    <label for="url">Url</label>
-    <input type="url"
-           placeholder="https://www.youtube.com/Aaq3Ah4oNAE"
-           id="url"
-           class="form-control"/>
-
-    <label for="width">Width</label>
-    <input type="text"
-           placeholder="100%"
-           id="width"
-           class="form-control"/>
+    <label for="size">Size</label>
+    <select id="size" class="form-control">
+        <option>1 (X-Large)</option>
+        <option>2 (Larger)</option>
+        <option>3 (Large)</option>
+        <option>4 (Medium)</option>
+        <option>5 (Small)</option>
+        <option>6 (Smallest)</option>
+    </select>
 
     <a href="widget-list.view.client.html" class="btn btn-block btn-danger">Delete</a>
 </div>
@@ -65,7 +63,7 @@
             </a>
 
             <p class="navbar-text pull-right">
-                <a href="../user/profile.view.client.html" class="navbar-link">
+                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>
