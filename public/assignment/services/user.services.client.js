@@ -52,6 +52,7 @@
             });
             var index = users.indexOf(user);
             users.splice(index, 1);
+            console.log(users);
         }
 
         function findUserByCredentials(username, password) {
