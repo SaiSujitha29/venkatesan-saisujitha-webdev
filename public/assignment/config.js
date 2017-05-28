@@ -85,8 +85,5 @@
                 controller: 'widgetEditController',
                 controllerAs: 'model'
             });
-
-
-
     }
 })();

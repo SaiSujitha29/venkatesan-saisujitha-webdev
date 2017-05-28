@@ -2,14 +2,17 @@
     <div class="container-fluid row">
         <div class="col-xs-4 hidden-xs">
             <p class="navbar-text pull-left">
+
                 <a class="navbar-link" href="#!/user/{{model.user_id}}/website">
-                <span class="glyphicon glyphicon-chevron-left">
-                </span>
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
+
             </p>
             <a class="navbar-brand">Websites</a>
+
             <p class="navbar-text pull-right">
-                <a class="navbar-link" href="#!/user/{{model.user_id}}/website/new">
+                <a class="navbar-link"
+                   ng-click="model.createWebsite(website)">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
@@ -46,7 +49,6 @@
                         {{website.name}}
                     </a>
                 </li>
-
             </ul>
         </div>
         <div class="col-xs-12 col-sm-8">

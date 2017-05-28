@@ -7,11 +7,13 @@
 
         var model = this;
         var userId = $routeParams['userId'];
-
         model.user = userService.findUserById(userId);
+
+        // event handlers
         model.updateUser = updateUser;
 
-        function updateUser() {
+        // implmentation
+        function updateUser(userId, user) {
             userService.updateUser(userId, user);
         }
 

@@ -12,15 +12,14 @@
         model.createPage = createPage;
 
         function init() {
-            model.pages = pageService.findAllPagesForUser(model.websiteId);
+            model.pages = pageService.findPageByWebsiteId(model.websiteId);
         }
 
         init();
         
-        function createPage(websiteId, page) {
-            page.websiteId = model.websiteId;
+        function createPage(page) {
             pageService.createPage(model.websiteId, page);
-            $location.url("#!/user/{{model.user_id}}/website/{{model.websiteId}}/page");
+            $location.url('/user/'+ model.user_id + '/website/' + model.websiteId + '/page');
         }
 
     }

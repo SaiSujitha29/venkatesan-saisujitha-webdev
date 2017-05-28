@@ -15,7 +15,7 @@
         model.deleteWebsite = deleteWebsite;
 
         function init() {
-            model.websites = websiteService.findAllWebsitesForUser(model.user_id);
+            model.websites = websiteService.findAllWebsitesByUser(model.user_id);
             model.website = websiteService.findWebsiteById(model.websiteId);
         }
 
@@ -23,20 +23,18 @@
 
         //implementation
         function createWebsite(website) {
-            website.developerId = model.user_id;
-            websiteService.createWebsite(website);
+            websiteService.createWebsite(model.user_id, website);
             $location.url('user/' + model.user_id + '/website');
         }
 
         function updateWebsite(websiteId, website) {
             websiteService.updateWebsite(websiteId, website);
-
+            $location.url('user/' + model.user_id + '/website');
         }
 
         function deleteWebsite(websiteId) {
             websiteService.deleteWebsite(websiteId);
             $location.url('user/' + model.user_id + '/website');
         }
-
     }
 })();
