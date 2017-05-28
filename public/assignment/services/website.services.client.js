@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .factory('websiteService', websiteService);
 
     function websiteService() {

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .config(configuration);
 
     function configuration($routeProvider) {

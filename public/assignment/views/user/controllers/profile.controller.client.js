@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('profileController', profileController);
 
     function profileController($location,userService, $routeParams) {

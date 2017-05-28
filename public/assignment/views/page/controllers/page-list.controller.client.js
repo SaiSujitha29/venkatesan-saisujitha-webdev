@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('pageListController', pageListController);
 
     function pageListController($routeParams, pageService, $location) {

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('widgetEditController', widgetEditController);
     
     function widgetEditController($sce, $routeParams, widgetService, $location) {

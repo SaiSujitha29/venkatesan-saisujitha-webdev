@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('registerController', registerController);
 
     function registerController($location, userService) {

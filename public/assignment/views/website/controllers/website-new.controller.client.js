@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('websiteNewController', websiteNewController);
 
     function websiteNewController($routeParams, websiteService, $location) {

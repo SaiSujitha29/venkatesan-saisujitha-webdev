@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('widgetNewController', widgetNewController);
     
     function widgetNewController($sce, $routeParams, widgetService, $location) {
