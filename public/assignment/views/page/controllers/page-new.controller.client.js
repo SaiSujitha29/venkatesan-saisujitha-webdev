@@ -16,11 +16,10 @@
         }
 
         init();
-        
+
         function createPage(page) {
             pageService.createPage(model.websiteId, page);
             $location.url('/user/'+ model.user_id + '/website/' + model.websiteId + '/page');
         }
-
     }
 })();
