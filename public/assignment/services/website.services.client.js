@@ -20,7 +20,7 @@
             findWebsiteById: findWebsiteById,
             updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite,
-            findAllWebsitesByUser: findAllWebsitesByUser
+            findWebsitesByUser: findWebsitesByUser
         };
 
         return api;
@@ -54,7 +54,7 @@
             });
         }
 
-        function findAllWebsitesByUser(userId) {
+        function findWebsitesByUser(userId) {
             var resultSet = [];
             for( var w in websites){
                 if (websites[w].developerId === userId) {

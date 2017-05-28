@@ -14,8 +14,9 @@
         model.updateWebsite = updateWebsite;
         model.deleteWebsite = deleteWebsite;
 
+        // initializing the websites
         function init() {
-            model.websites = websiteService.findAllWebsitesByUser(model.user_id);
+            model.websites = websiteService.findWebsitesByUser(model.user_id);
             model.website = websiteService.findWebsiteById(model.websiteId);
         }
 

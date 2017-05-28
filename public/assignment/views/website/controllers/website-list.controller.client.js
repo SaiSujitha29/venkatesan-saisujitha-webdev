@@ -8,8 +8,9 @@
         var model = this;
         model.user_id = $routeParams['userId'];
 
+        // initializing the websites
         function init() {
-            model.websites = websiteService.findAllWebsitesByUser(model.user_id);
+            model.websites = websiteService.findWebsitesByUser(model.user_id);
         }
         init();
 

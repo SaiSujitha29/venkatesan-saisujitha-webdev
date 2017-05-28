@@ -12,7 +12,7 @@
         // event handlers
         model.updateUser = updateUser;
 
-        // implmentation
+        // implementation
         function updateUser(userId, user) {
             userService.updateUser(userId, user);
         }

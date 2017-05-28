@@ -28,11 +28,12 @@
         }
 
         function updatePage(pageId, page) {
-            var page = pages.find(function (page) {
-                return page._id === pageId;
-            });
-            var index = pages.indexOf(page);
-            pages.push(index);
+            for (var p in pages){
+                if(pages[p]._id == pageId){
+                    pages[p] = page;
+                    break;
+                }
+            }
         }
 
         function deletePage(pageId) {
