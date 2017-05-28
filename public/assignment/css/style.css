@@ -84,6 +84,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 .wd-widget {
     position: relative;
     margin-bottom: 10px;
+    padding-bottom: 2px;
 }
 
 .wd-toolbar {
@@ -111,6 +112,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 
 .home body{
     margin-top: 25px;
+    padding-bottom: 90%;
 }
 
 .home h1 {

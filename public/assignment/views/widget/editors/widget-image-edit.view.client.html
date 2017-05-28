@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Edit Widget</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="../templates/widget-list.view.client.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left "></span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">Widget Edit</a>
             <p class="navbar-text pull-right">
-                <a href="../templates/widget-list.view.client.html" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widgetId, model.widget)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok "></span>
                 </a>
             </p>
@@ -46,10 +35,12 @@
     <input type="url"
            placeholder="https://img.clipartfest.com/d6c029ed5585cd5555cde910dba170f3_laughing-smiley-clipart-yay_300-186.jpeg"
            id="url"
+           ng-model="model.widget.url"
            class="form-control"/>
 
     <label for="width">Width</label>
     <input type="text"
+           ng-model="model.widget.width"
            placeholder="100%"
            id="width"
            class="form-control"/>
@@ -57,10 +48,10 @@
     <label for="file">Upload</label>
     <input id="file" multiple type="file" class="form-control"/>
 
-    <a href="../templates/widget-list.view.client.html"
+    <a href="widget-list.view.client.html"
        class="btn btn-block btn-primary">Upload Image</a>
 
-    <a href="../templates/widget-list.view.client.html" class="btn btn-block btn-danger">Delete</a>
+    <a ng-click="model.deleteWidget(model.widgetId)" class="btn btn-block btn-danger">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -79,6 +70,3 @@
 
     </div>
 </nav>
-
-</body>
-</html>

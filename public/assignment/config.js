@@ -5,6 +5,8 @@
 
     function configuration($routeProvider) {
         $routeProvider
+
+            // user routing
             .when('/', {
                 templateUrl: 'home.html'
             })
@@ -27,6 +29,7 @@
                 controllerAs: 'model'
             })
 
+            // websiting routing
             .when('/user/:userId/website', {
                 templateUrl: 'views/website/templates/website-list.view.client.html',
                 controller: 'websiteListController',
@@ -45,6 +48,7 @@
                 controllerAs: 'model'
             })
 
+            // page routing
             .when('/user/:userId/website/:websiteId/page', {
                 templateUrl: 'views/page/templates/page-list.view.client.html',
                 controller: 'pageListController',
@@ -63,9 +67,22 @@
                 controllerAs: 'model'
             })
 
+            // widget routing
             .when('/user/:userId/website/:websiteId/page/:pageId/widget', {
                 templateUrl: 'views/widget/templates/widget-list.view.client.html',
                 controller: 'widgetListController',
+                controllerAs: 'model'
+            })
+
+            .when('/user/:userId/website/:websiteId/page/:pageId/widget/new', {
+                templateUrl: 'views/widget/templates/widget-chooser.view.client.html',
+                controller: 'widgetNewController',
+                controllerAs: 'model'
+            })
+
+            .when('/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId', {
+                templateUrl: 'views/widget/templates/widget-edit.view.client.html',
+                controller: 'widgetEditController',
                 controllerAs: 'model'
             });
 

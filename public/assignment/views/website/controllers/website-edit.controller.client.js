@@ -30,7 +30,7 @@
 
         function updateWebsite(websiteId, website) {
             websiteService.updateWebsite(websiteId, website);
-            $location.url('user/' + model.user_id + '/website');
+
         }
 
         function deleteWebsite(websiteId) {

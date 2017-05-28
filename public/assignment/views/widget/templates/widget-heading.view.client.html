@@ -1,8 +1,62 @@
-<div ng-switch="widget.size">
-    <h1 ng-switch-when="1">{{widget.text}}</h1>
-    <h2 ng-switch-when="2">{{widget.text}}</h2>
-    <h3 ng-switch-when="3">{{widget.text}}</h3>
-    <h4 ng-switch-when="4">{{widget.text}}</h4>
-    <h5 ng-switch-when="5">{{widget.text}}</h5>
-    <h6 ng-switch-when="6">{{widget.text}}</h6>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="widget-list.view.client.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left "></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">Widget Edit</a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.createWidget(widget)" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok "></span>
+                </a>
+            </p>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid user-main">
+
+    <label for="name">Name</label>
+    <input type=text
+           placeholder="name (Example: alice)"
+           id="name"
+           ng-model="widget.text"
+           class="form-control"/>
+
+    <label for="text">Text</label>
+    <input type="text"
+           placeholder="Starrrrrrrrrrrrrrrrrrrrrrrr Warssssssssssssssssssssssssss"
+           ng-model="widget.name"
+           id="text"
+           class="form-control"/>
+
+    <label for="size">Size</label>
+    <input id="size"
+           type="text"
+           ng-model="widget.size"
+           class="form-control">
+    </input>
+
+    <a href="widget-list.view.client.html" class="btn btn-block btn-danger">Delete</a>
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Footer
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+
+    </div>
+</nav>

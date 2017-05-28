@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Choose Widget</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -27,7 +17,7 @@
 <div class="container-fluid">
 
     <div class="wd-choose">
-        <a href="../editors/widget-heading-edit.view.client.html">
+        <a ng-click="model.widgetType(1); model.createWidget(widget)">
             Header
         </a>
     </div>
@@ -63,13 +53,13 @@
     </div>
 
     <div class="wd-choose">
-        <a href="../editors/widget-image-edit.view.client.html">
+        <a ng-click="model.widgetType(2); model.createWidget(widget)">
             Image
         </a>
     </div>
 
     <div class="wd-choose">
-        <a href="../editors/widget-youtube-edit.view.client.html">
+        <a ng-click="model.widgetType(3); model.createWidget(widget)">
             Youtube
         </a>
     </div>
@@ -102,6 +92,3 @@
 
     </div>
 </nav>
-
-</body>
-</html>

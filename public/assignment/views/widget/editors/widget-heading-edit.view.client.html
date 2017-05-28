@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Edit Widget</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="../templates/widget-list.view.client.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left "></span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">Widget Edit</a>
             <p class="navbar-text pull-right">
-                <a href="../templates/widget-list.view.client.html" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widgetId, model.widget)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok "></span>
                 </a>
             </p>
@@ -34,6 +23,7 @@
     <input type=text
            placeholder="name (Example: alice)"
            id="name"
+           ng-model="model.widget.text"
            class="form-control"/>
 
     <label for="text">Text</label>
@@ -43,16 +33,13 @@
            class="form-control"/>
 
     <label for="size">Size</label>
-    <select id="size" class="form-control">
-        <option>1 (X-Large)</option>
-        <option>2 (Larger)</option>
-        <option>3 (Large)</option>
-        <option>4 (Medium)</option>
-        <option>5 (Small)</option>
-        <option>6 (Smallest)</option>
-    </select>
+    <input id="size"
+           type="text"
+           ng-model="model.widget.size"
+           class="form-control">
+    </input>
 
-    <a href="../templates/widget-list.view.client.html" class="btn btn-block btn-danger">Delete</a>
+    <a ng-click="model.deleteWidget(model.widgetId)" class="btn btn-block btn-danger">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -71,6 +58,3 @@
 
     </div>
 </nav>
-
-</body>
-</html>
