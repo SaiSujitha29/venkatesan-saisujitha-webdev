@@ -6,7 +6,7 @@
     function pageEditController($routeParams, pageService, $location) {
 
         var model = this;
-        model.user_id = $routeParams['userId'];
+        model.userId = $routeParams['userId'];
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
 
@@ -25,7 +25,7 @@
         //implementation
         function createPage(page) {
             pageService.createPage(model.websiteId, page);
-            $location.url('/user/' + model.user_id + '/website/' + model.websiteId + '/page');
+            $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page');
         }
 
         function updatePage(pageId, page) {

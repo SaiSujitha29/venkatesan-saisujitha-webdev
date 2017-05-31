@@ -3,21 +3,21 @@
     <div class="container-fluid row">
         <div class="col-xs-4 hidden-xs">
             <p class="navbar-text pull-left">
-                <a class="navbar-link" href="#!/user/{{model.user_id}}/website">
+                <a class="navbar-link" href="#!/user/{{model.userId}}/website">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
                 </a>
             </p>
             <a class="navbar-brand">Websites</a>
             <p class="navbar-text pull-right">
-                <a class="navbar-link" href="#!/user/{{model.user_id}}/website/new">
+                <a class="navbar-link" href="#!/user/{{model.userId}}/website/new">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
         </div>
         <div class="col-xs-12 col-sm-8">
             <p class="navbar-text pull-left visible-xs">
-                <a class="navbar-link" href="#!/user/{{model.user_id}}/website">
+                <a class="navbar-link" href="#!/user/{{model.userId}}/website">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
                 </a>
@@ -25,7 +25,7 @@
             <a class="navbar-brand">Edit Website</a>
 
             <p class="navbar-text pull-right">
-                <a class="navbar-link" ng-click="model.updateWebsite(model.website)">
+                <a class="navbar-link" ng-click="model.updateWebsite(model.website._id, model.website)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -42,10 +42,10 @@
             <ul class="list-group">
 
                 <li ng-repeat="website in model.websites" class ="list-group-item">
-                    <a href="#!/user/{{model.user_id}}/website/{{website._id}}">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
-                    <a href="#!/user/{{model.user_id}}/website/{{website._id}}/page">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
                         {{website.name}}
                     </a>
                 </li>
@@ -85,7 +85,7 @@
             </a>
 
             <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.user_id}}" class="navbar-link">
+                <a href="#!/user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

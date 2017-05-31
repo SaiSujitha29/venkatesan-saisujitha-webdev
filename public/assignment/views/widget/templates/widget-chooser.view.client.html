@@ -4,13 +4,13 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/user/{{model.user_id}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left "></span>
                 </a>
             </p>
 
-            <a class="navbar-brand" href="#">Choose Widget</a>
+            <a class="navbar-brand">Choose Widget</a>
         </div>
     </div><!-- /.container-fluid -->
 </nav>
@@ -18,7 +18,7 @@
 <div class="container-fluid">
 
     <div class="wd-choose">
-        <a ng-click="model.widgetType(1); model.createWidget(widget)">
+        <a ng-click="model.widgetType(1); model.createWidget(model.pageId, widget)">
             Header
         </a>
     </div>
@@ -54,13 +54,13 @@
     </div>
 
     <div class="wd-choose">
-        <a ng-click="model.widgetType(2); model.createWidget(widget)">
+        <a ng-click="model.widgetType(2); model.createWidget(model.pageId, widget)">
             Image
         </a>
     </div>
 
     <div class="wd-choose">
-        <a ng-click="model.widgetType(3); model.createWidget(widget)">
+        <a ng-click="model.widgetType(3); model.createWidget(model.pageId, widget)">
             Youtube
         </a>
     </div>
@@ -85,7 +85,7 @@
             </a>
 
             <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.user_id}}" class="navbar-link">
+                <a href="#!/user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

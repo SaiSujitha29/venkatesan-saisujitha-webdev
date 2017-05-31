@@ -18,8 +18,10 @@
             userService.updateUser(userId, user);
         }
 
-        function deleteUser(userId) {
+        function deleteUser(id) {
+            console.log(id);
             userService.deleteUser(model.user._id);
+            //userService.deleteUser(id);
             $location.url('/');
             console.log(userService.findUserByUsername('bob'));
 

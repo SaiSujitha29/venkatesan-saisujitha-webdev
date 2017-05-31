@@ -6,7 +6,7 @@
     function widgetListController($sce, $routeParams, widgetService) {
 
         var model = this;
-        model.user_id = $routeParams['userId'];
+        model.userId = $routeParams['userId'];
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
         model.widgetId = $routeParams.widgetId;

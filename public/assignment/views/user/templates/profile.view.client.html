@@ -9,7 +9,7 @@
 
             <p class="navbar-text pull-right">
 
-                <a ng-click="model.updateUser(user._id)"
+                <a ng-click="model.updateUser(model.user._id, model.user)"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-ok "></span>
                 </a>
@@ -17,12 +17,11 @@
 
             <p class="navbar-text pull-right">
 
-                <a ng-click="model.deleteUser(user._Id)"
+                <a ng-click="model.deleteUser(model.user._id)"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-remove"></span>
                 </a>
             </p>
-
         </div>
     </div>
 </nav>

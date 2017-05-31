@@ -6,7 +6,7 @@
     function pageNewController($routeParams, pageService, $location) {
 
         var model = this;
-        model.user_id = $routeParams['userId'];
+        model.userId = $routeParams['userId'];
         model.websiteId = $routeParams.websiteId;
         
         model.createPage = createPage;
@@ -17,9 +17,9 @@
 
         init();
 
-        function createPage(page) {
-            pageService.createPage(model.websiteId, page);
-            $location.url('/user/'+ model.user_id + '/website/' + model.websiteId + '/page');
+        function createPage(websiteId, page) {
+            pageService.createPage(websiteId, page);
+            $location.url('/user/'+ model.userId + '/website/' + websiteId + '/page');
         }
     }
 })();

@@ -6,7 +6,7 @@
     function websiteEditController($routeParams, websiteService, $location) {
 
         var model = this;
-        model.user_id = $routeParams['userId'];
+        model.userId = $routeParams['userId'];
         model.websiteId = $routeParams.websiteId;
 
         //event handlers
@@ -16,7 +16,7 @@
 
         // initializing the websites
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.user_id);
+            model.websites = websiteService.findWebsitesByUser(model.userId);
             model.website = websiteService.findWebsiteById(model.websiteId);
         }
 
@@ -24,18 +24,18 @@
 
         //implementation
         function createWebsite(website) {
-            websiteService.createWebsite(model.user_id, website);
-            $location.url('user/' + model.user_id + '/website');
+            websiteService.createWebsite(model.userId, website);
+            $location.url('user/' + model.userId + '/website');
         }
 
         function updateWebsite(websiteId, website) {
             websiteService.updateWebsite(websiteId, website);
-            $location.url('user/' + model.user_id + '/website');
+            $location.url('user/' + model.userId + '/website');
         }
 
         function deleteWebsite(websiteId) {
             websiteService.deleteWebsite(websiteId);
-            $location.url('user/' + model.user_id + '/website');
+            $location.url('user/' + model.userId + '/website');
         }
     }
 })();

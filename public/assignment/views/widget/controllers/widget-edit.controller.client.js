@@ -6,7 +6,7 @@
     function widgetEditController($sce, $routeParams, widgetService, $location) {
 
         var model = this;
-        model.user_id = $routeParams['userId'];
+        model.userId = $routeParams['userId'];
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
         model.widgetId = $routeParams.widgetId;
@@ -23,12 +23,12 @@
 
         function deleteWidget(widgetId) {
             widgetService.deleteWidget(widgetId);
-            $location.url('/user/' + model.user_id + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+            $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
         }
         
         function updateWidget(widgetId, widget) {
             widgetService.updateWidget(widgetId, widget);
-            $location.url('/user/' + model.user_id + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+            $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
         }
 
     }

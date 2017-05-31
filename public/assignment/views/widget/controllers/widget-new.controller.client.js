@@ -6,7 +6,7 @@
     function widgetNewController($sce, $routeParams, widgetService, $location) {
 
         var model = this;
-        model.user_id = $routeParams['userId'];
+        model.userId = $routeParams['userId'];
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
         model.widgetId = $routeParams.widgetId;
@@ -39,8 +39,8 @@
                     "url": "" };
                 widget.widgetType = "YOUTUBE";
             }
-            widgetService.createWidget(model.pageId, widget);
-            $location.url('/user/' + model.user_id + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id);
+            widgetService.createWidget(pageId, widget);
+            $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + pageId + '/widget/' + widget._id);
             console.log(model.widgets);
         }
     }
