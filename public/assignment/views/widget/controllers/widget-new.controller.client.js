@@ -12,7 +12,13 @@
         model.widgetId = $routeParams.widgetId;
 
         function init() {
-            model.widgets = widgetService.findAllWidgetsByPageId(model.pageId);
+            widgetService
+                .findAllWidgetsByPageId(model.pageId)
+                .then(renderWidgets);
+
+            function renderWidgets(widgets) {
+                model.widgets = widgets;
+            }
         }
         init();
 
@@ -39,8 +45,11 @@
                     "url": "" };
                 widget.widgetType = "YOUTUBE";
             }
-            widgetService.createWidget(pageId, widget);
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + pageId + '/widget/' + widget._id);
+            widgetService
+                .createWidget(pageId, widget)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + pageId + '/widget/' + widget._id);
+                });
             console.log(model.widgets);
         }
     }
