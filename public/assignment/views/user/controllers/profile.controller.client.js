@@ -7,7 +7,14 @@
 
         var model = this;
         var userId = $routeParams['userId'];
-        model.user = userService.findUserById(userId);
+
+        userService
+            .findUserById(userId)
+            .then(renderUser);
+
+        function renderUser(user) {
+            model.user = user;
+        }
 
         // event handlers
         model.updateUser = updateUser;
@@ -15,16 +22,20 @@
 
         // implementation
         function updateUser(userId, user) {
-            userService.updateUser(userId, user);
+            userService
+                .updateUser(userId, user)
+                .then(function () {
+                   model.message = "User updated successfully";
+                });
         }
 
         function deleteUser(id) {
-            console.log(id);
-            userService.deleteUser(model.user._id);
-            //userService.deleteUser(id);
-            $location.url('/');
-            console.log(userService.findUserByUsername('bob'));
 
+            userService
+                .deleteUser(id)
+                .then(function () {
+                    $location.url('/');
+                });
         }
 
     }

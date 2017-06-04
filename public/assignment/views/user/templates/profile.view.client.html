@@ -28,6 +28,11 @@
 
 <div class="container-fluid user-main">
 
+    <div class="alert alert-info"
+         ng-show="model.message">
+        {{model.message}}
+    </div>
+
     <label for="username">Username</label>
     <input type=text
            ng-model="model.user.username"

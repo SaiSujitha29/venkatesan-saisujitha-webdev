@@ -16,26 +16,50 @@
 
         // initializing the websites
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
+            websiteService
+                .findWebsitesByUser(model.userId)
+                .then(renderWebsites);
+
+            function renderWebsites(websites) {
+                model.websites = websites
+            }
+
+            websiteService
+                .findWebsiteById(model.websiteId)
+                .then(renderWebsite);
+
+            function renderWebsite(website) {
+                model.website = website;
+            }
         }
 
         init();
 
         //implementation
         function createWebsite(website) {
-            websiteService.createWebsite(model.userId, website);
-            $location.url('user/' + model.userId + '/website');
+            website.developerId = model.userId;
+
+            websiteService
+                .createWebsite(model.userId, website)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function updateWebsite(websiteId, website) {
-            websiteService.updateWebsite(websiteId, website);
-            $location.url('user/' + model.userId + '/website');
+            websiteService
+                .updateWebsite(websiteId, website)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function deleteWebsite(websiteId) {
-            websiteService.deleteWebsite(websiteId);
-            $location.url('user/' + model.userId + '/website');
+            websiteService
+                .deleteWebsite(websiteId)
+                .then(function() {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
     }
 })();

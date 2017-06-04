@@ -13,21 +13,36 @@
         // implementation
         function register(username, password, password2) {
 
-            if (password !== password2){
+            if(username === null || username === '' || typeof username === 'undefined') {
+                model.error = 'Please enter username';
+                return;
+            }
+
+            if (password !== password2 || password === null || typeof password === 'undefined'){
                 model.error = "Passwords must match";
                 return;
             }
 
-            var found = userService.findUserByUsername(username);
+            userService
+                .findUserByUsername(username)
+                .then(handleError, newUser)
+                .then(userUrl);
 
-            if (found !== null){
-                model.error = "Username not available";
-            } else {
+            function handleError() {
+                model.error = "sorry, that username is taken";
+            }
+
+            function newUser() {
                 var user = {
                     username: username,
                     password: password
                 };
-                userService.createUser(user);
+
+                return userService
+                    .createUser(user);
+            }
+
+            function userUrl() {
                 $location.url('/user/' + user._id);
             }
         }

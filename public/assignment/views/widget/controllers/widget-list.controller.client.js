@@ -12,7 +12,19 @@
         model.widgetId = $routeParams.widgetId;
 
         function init() {
-            model.widgets = widgetService.findAllWidgetsByPageId(model.pageId);
+
+            widgetService
+                .findAllWidgetsByPageId(model.pageId)
+                .then(renderWidgets, handleError);
+
+            function renderWidgets(widgets) {
+                model.widgets = widgets;
+            }
+
+            function handleError(error) {
+                console.log("erorr");
+                model.error = "no widgets Available currently";
+            }
         }
 
         init();
