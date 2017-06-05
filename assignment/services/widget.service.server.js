@@ -98,9 +98,15 @@ function uploadImage(req, res) {
 
     console.log(myFile);
     //widget = getWidgetById(widgetId);
-    var widget = {};
+    var widget = null;
+    for(var w in widgets) {
+        if (widgets[w]._id === widgetId) {
+            widget=widgets[w];
+            break;
+        }
+    }
     widget.url = '/assignment/uploads/'+filename;
     var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/" + websiteId + "/page/"
-    + pageId+ "/widget/" + widgetId;
+    + pageId + "/widget/" + widgetId;
     res.redirect(callbackUrl);
 }
