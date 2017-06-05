@@ -10,7 +10,7 @@
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
-            findAllWidgetsByPageId: findAllWidgetsByPageId
+            findAllWidgetsByPageId: findAllWidgetsByPageId,
         };
 
         return api;
