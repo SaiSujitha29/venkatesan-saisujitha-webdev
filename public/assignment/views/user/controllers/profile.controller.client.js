@@ -26,6 +26,8 @@
                 .updateUser(userId, user)
                 .then(function () {
                    model.message = "User updated successfully";
+                }, function(error){
+
                 });
         }
 
