@@ -31,7 +31,6 @@
         }
 
         function createWidget(pageId, widget) {
-
             if (model.type === 1){
                 widget = {"_id": "", "widgetType": "", "pageId": "", "text": ""};
                 widget.widgetType = "HEADING";
@@ -47,7 +46,7 @@
             }
             widgetService
                 .createWidget(pageId, widget)
-                .then(function () {
+                .then(function (widget) {
                     $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + pageId + '/widget/' + widget._id);
                 });
             console.log(model.widgets);

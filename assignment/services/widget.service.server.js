@@ -1,7 +1,7 @@
 var app = require('../../express');
 
 var multer = require('multer'); // npm install multer --save
-var upload = multer({ dest: __dirname+'/../../public/assignment/uploads'});
+var upload = multer({ dest: __dirname + '/../../public/assignment/uploads'});
 
 app.get('/api/page/:pageId/widget', findAllWidgetsByPageId);
 app.get('/api/widget/:widgetId', findWidgetById);
@@ -9,6 +9,7 @@ app.post('/api/page/:pageId/widget', createWidget);
 app.put('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId', deleteWidget);
 app.post ("/api/upload", upload.single('myFile'), uploadImage);
+app.put('/page/:pageId/widget', sortWidget);
 
 var widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -54,6 +55,7 @@ function createWidget(req, res) {
     var pageId = req.params['pageId'];
     var widget = req.body;
     widget._id  = (new Date()).getTime() + "";
+    console.log(widget._id);
     widget.pageId = pageId;
     widgets.push(widget);
     res.send(widget);
@@ -79,6 +81,24 @@ function deleteWidget(req, res) {
     });
     var index = widgets.indexOf(widget);
     widgets.splice(index, 1);
+    res.sendStatus(200);
+}
+
+function sortWidget(req, res) {
+    var initial = req.query['initial'];
+    var final = req.query['final'];
+    var cachedWidgets = [];
+    var length = widgets.length;
+    for (var i = length - 1; i >= 0; i--) {
+        if (widgets[i].pageId === req.params.pageId) {
+            cachedWidgets.unshift(widgets[i]);
+            widgets.splice(i, 1);
+        }
+    }
+    var widget = cachedWidgets[initial];
+    cachedWidgets.splice(initial, 1);
+    cachedWidgets.splice(final, 0, widget);
+    widgets = widgets.concat(cachedWidgets);
     res.sendStatus(200);
 }
 

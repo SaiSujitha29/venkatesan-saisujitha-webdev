@@ -6,12 +6,16 @@
     function ImageSearchController (FlickrService) {
 
         var model = this;
-
         model.searchPhotos = searchPhotos;
         model.selectPhoto = selectPhoto;
 
         function selectPhoto(photo) {
-            console.log(photo);
+            var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server;
+            url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
+            WidgetService
+                .changeWidget(websiteId, pageId, widgetId, {url: url})
+                .then(function () {
+                });
         }
 
         function searchPhotos(searchTerm) {

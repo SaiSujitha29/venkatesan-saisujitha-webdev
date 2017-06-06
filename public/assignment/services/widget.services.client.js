@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .factory('widgetService', widgetService);
 
-    function widgetService($http) {
+    function widgetService($http, $routeParams) {
 
         var api = {
             createWidget: createWidget,
@@ -11,6 +11,7 @@
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
             findAllWidgetsByPageId: findAllWidgetsByPageId,
+            sortWidget: sortWidget
         };
 
         return api;
@@ -29,6 +30,12 @@
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function sortWidget(initial, final) {
+            var url = "/page/"+ $routeParams['pageId'] + "/widget?initial=" + initial + "&final=" + final;
+            return $http
+                .put(url);
         }
 
         function deleteWidget(widgetId) {
