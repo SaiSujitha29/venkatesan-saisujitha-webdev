@@ -96,8 +96,6 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    console.log(myFile);
-    //widget = getWidgetById(widgetId);
     var widget = null;
     for(var w in widgets) {
         if (widgets[w]._id === widgetId) {
