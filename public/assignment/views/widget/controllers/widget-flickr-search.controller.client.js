@@ -11,6 +11,17 @@
         model.pageId = $routeParams['pageId'];
         model.widgetId = $routeParams.widgetId;
 
+        function init() {
+            widgetService
+                .findWidgetById(model.widgetId)
+                .then(renderWidget);
+
+            function renderWidget(widget) {
+                model.widget = widget;
+            }
+        }
+        init();
+
         model.searchPhotos = searchPhotos;
         model.selectPhoto = selectPhoto;
 
@@ -18,11 +29,10 @@
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server;
             url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
 
-            widget =  {'_id': model.widgetId, 'name': '', 'widgetType': 'IMAGE', 'pageId': model.pageId, 'width': '',
-               'url': url, 'text': ''};
+            model.widget.url = url;
 
             widgetService
-                .updateWidget(model.widgetId, widget)
+                .updateWidget(model.widgetId, model.widget)
                 .then(function () {
                     $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/'
                         + model.pageId + '/widget/' + model.widgetId);

@@ -1,7 +1,9 @@
 var app = require('../../express');
 
 app.get('/api/user/:userId', findUserById);
-app.get('/api/user', findUserByCredentials);
+// findUserByCredentials and findUserByUsername are combined
+// as a single function findUser since they have the same URL pattern
+app.get('/api/user', findUser);
 app.post('/api/user', createUser);
 app.put('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
@@ -21,9 +23,10 @@ function findUserById(req, res) {
     res.json(user);
 }
 
-function findUserByCredentials(req, res) {
+function findUser(req, res) {
     var username = req.query['username'];
     var password = req.query['password'];
+    //to check if the url is /api/user?username=username&password=password
     if(typeof password === 'undefined'){
         for(var u in users) {
             var user = users[u];
