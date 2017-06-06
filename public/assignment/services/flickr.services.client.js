@@ -15,7 +15,6 @@
             var url = urlBase
                 .replace("API_KEY", key)
                 .replace("TEXT", searchTerm);
-            console.log("in client");
             return $http.get(url);
         }
     }
