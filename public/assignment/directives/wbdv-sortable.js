@@ -18,7 +18,6 @@
                         .sortWidget(initial, final);
                 } });
         }
-
         return {
             link: linkFunction
         }
