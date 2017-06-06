@@ -8,7 +8,7 @@ app.get('/api/widget/:widgetId', findWidgetById);
 app.post('/api/page/:pageId/widget', createWidget);
 app.put('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId', deleteWidget);
-app.post ("/api/upload", upload.single('myFile'), uploadImage);
+app.post("/api/upload", upload.single('myFile'), uploadImage);
 app.put('/page/:pageId/widget', sortWidget);
 
 var widgets = [
