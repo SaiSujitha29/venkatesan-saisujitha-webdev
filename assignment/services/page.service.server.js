@@ -1,4 +1,5 @@
 var app = require('../../express');
+var pageModel = require('../model/page/page.model.server');
 
 app.get('/api/website/:websiteId/page', findPageByWebsiteId);
 app.get('/api/page/:pageId', findPageById);
@@ -14,55 +15,57 @@ var pages = [
 
 function findPageByWebsiteId(req, res) {
     var websiteId = req.params['websiteId'];
-    var resultSet = [];
-    for( var p in pages){
-        if (pages[p].websiteId === websiteId) {
-            resultSet.push(pages[p]);
-        }
-    }
-    res.json(resultSet);
+    pageModel
+        .findPageByWebsiteId(websiteId)
+        .then(function (pages) {
+            res.json(pages);
+        });
 }
 
 function findPageById(req, res) {
     var pageId = req.params['pageId'];
-    var page = pages.find(function (page) {
-        return page._id === pageId;
-    });
-    if(page){
-        res.json(page);
-        return;
-    }
-    res.sendStatus(404);
+    pageModel
+        .findPageById(pageId)
+        .then(function (page) {
+            res.json(page);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }
 
 function createPage(req, res) {
     var page = req.body;
     var websiteId = req.params['websiteId'];
-    page._id = (new Date()).getTime() + "";
-    page.websiteId = websiteId;
-    pages.push(page);
-    res.send(page);
+
+    pageModel
+        .createPage(websiteId, page)
+        .then(function (page) {
+            res.json(page);
+        });
+
 }
 
 function updatePage(req, res) {
     var page = req.body;
     var pageId = req.params.pageId;
-    for(var p in pages){
-        if (pages[p]._id == pageId){
-            pages[p] = page;
+
+    pageModel
+        .updatePage(pageId, page)
+        .then(function () {
             res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }
 
 function deletePage(req, res) {
     var pageId = req.params['pageId'];
-    var page = pages.find(function (page) {
-        return page._id === pageId;
-    });
-    var index = pages.indexOf(page);
-    pages.splice(index, 1);
-    res.sendStatus(200);
+
+    pageModel
+        .deletePage(pageId)
+        .then(function () {
+            res.sendStatus(200);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }

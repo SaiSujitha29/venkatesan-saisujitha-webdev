@@ -1,4 +1,5 @@
 var app = require('../../express');
+var userModel = require('../model/user/user.model.server');
 
 app.get('/api/user/:userId', findUserById);
 // findUserByCredentials and findUserByUsername are combined
@@ -17,10 +18,11 @@ var users = [
 
 function findUserById(req, res) {
     var userId = req.params['userId'];
-    var user = users.find(function (user) {
-        return user._id === userId;
-    });
-    res.json(user);
+    userModel
+        .findUserById(userId)
+        .then(function (user) {
+            res.json(user);
+        });
 }
 
 function findUser(req, res) {
@@ -28,54 +30,55 @@ function findUser(req, res) {
     var password = req.query['password'];
     //to check if the url is /api/user?username=username&password=password
     if(typeof password === 'undefined'){
-        for(var u in users) {
-            var user = users[u];
-            if( user.username === username) {
-                res.json(user);
-                return;
-            }
-        }
-        res.sendStatus(404);
+        userModel
+            .findUserByUsername(username)
+            .then(function (user) {
+                if(user !== null){
+                    console.log(user);
+                    res.json(user);
+                }
+                else {
+                    res.sendStatus(404);
+                }
+            });
     }
     else {
-        for (var u in users) {
-            var user = users[u];
-            if(user.username === username &&
-                user.password === password) {
+        userModel
+            .findUserByCredentials(username, password)
+            .then(function (user) {
                 res.json(user);
-                return;
-            }
-        }
-        res.sendStatus(404);
+            },function (err) {
+                res.sendStatus(404);
+            });
     }
 }
 
 function createUser(req, res) {
     var user = req.body;
-    user._id  = (new Date()).getTime() + "";
-    users.push(user);
-    res.send(user);
+    userModel
+        .createUser(user)
+        .then(function (user) {
+            res.json(user);
+        });
 }
 
 function updateUser(req, res) {
     var user = req.body;
     var userId = req.params.userId;
-    for(var u in users){
-        if (users[u]._id == userId){
-            users[u] = user;
+    userModel
+        .updateUser(userId, user)
+        .then(function (status) {
             res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+        },function (err) {
+            res.sendStatus(404);
+        });
 }
 
 function deleteUser(req, res) {
     var userId = req.params.userId;
-    var user = users.find(function (user) {
-        return user._id === userId;
-    });
-    var index = users.indexOf(user);
-    users.splice(index, 1);
-    res.sendStatus(200);
+    userModel
+        .deleteUser(userId)
+        .then(function () {
+            res.sendStatus(200);
+        });
 }

@@ -1,8 +1,10 @@
-/**
- * Created by SaiSujitha on 6/6/2017.
- */
-
 var mongoose = require('mongoose');
-var userSchema = require();
-
-var userModel = mongoose.model('UserModel');
+var userSchema = mongoose.Schema({
+    username: {type: String, require: true},
+    password: {type: String, require: true},
+    firstName: String,
+    lastName: String,
+    dateCreated: {type: Date, default: Date.now},
+    rating: {type: Number, default: 0}
+}, {collection: "user"});
+module.exports = userSchema;
