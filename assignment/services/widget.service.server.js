@@ -1,5 +1,5 @@
 var app = require('../../express');
-var widgetModel = require('../model/widget/widet.model.server');
+var widgetModel = require('../model/widget/widget.model.server');
 
 var multer = require('multer'); // npm install multer --save
 var upload = multer({ dest: __dirname + '/../../public/assignment/uploads'});
@@ -26,18 +26,14 @@ var widgets = [
 
 function findAllWidgetsByPageId(req, res) {
     var pageId = req.params['pageId'];
-    var resultSet = [];
-    for( var w in widgets){
-        if (widgets[w].pageId === pageId) {
-            resultSet.push(widgets[w]);
-        }
-    }
-    if(resultSet){
-        res.json(resultSet);
-        return;
-    }
-    res.sendStatus(404);
 
+    widgetModel
+        .findAllWidgetsByPageId(pageId)
+        .then(function (widgets) {
+           res.json(widgets);
+        },function (err) {
+            res.sendStatus(404);
+        });
 }
 
 function findWidgetById(req, res) {
@@ -59,6 +55,7 @@ function createWidget(req, res) {
     widgetModel
         .createWidget(pageId, widget)
         .then(function (widget) {
+            console.log(widget);
             res.json(widget);
         });
 }

@@ -18,7 +18,7 @@
 <div class="container-fluid">
 
     <div class="wd-choose">
-        <a ng-click="model.widgetType(1); model.createWidget(model.pageId, widget)">
+        <a ng-click="model.widgetType('HEADING'); model.createWidget(model.pageId, widget)">
             Header
         </a>
     </div>
@@ -54,13 +54,13 @@
     </div>
 
     <div class="wd-choose">
-        <a ng-click="model.widgetType(2); model.createWidget(model.pageId, widget)">
+        <a ng-click="model.widgetType('IMAGE'); model.createWidget(model.pageId, widget)">
             Image
         </a>
     </div>
 
     <div class="wd-choose">
-        <a ng-click="model.widgetType(3); model.createWidget(model.pageId, widget)">
+        <a ng-click="model.widgetType('YOUTUBE'); model.createWidget(model.pageId, widget)">
             Youtube
         </a>
     </div>
