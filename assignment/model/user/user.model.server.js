@@ -42,3 +42,5 @@ function updateUser(userId, user) {
 function findUserByUsername(username) {
     return userModel.findOne({username: username});
 }
+
+

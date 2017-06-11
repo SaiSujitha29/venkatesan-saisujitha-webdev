@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var websiteSchema = require('./website.schema.server');
+var userModel = require('../user/user.model.server');
 var websiteModel = mongoose.model('WebsiteModel', websiteSchema);
 websiteModel.createWebsite = createWebsite;
 websiteModel.findAllWebsitesByUser = findAllWebsitesByUser;
@@ -11,11 +12,19 @@ module.exports = websiteModel;
 
 function createWebsite(userId, website) {
     website._user = userId;
-    return websiteModel.create(website);
+    return websiteModel
+        .create(website)
+        .then( function (website) {
+          userModel
+              .findUserById(userId)
+              .then(function (user) {
+                  user.websites.push(website._id);
+                  user.save();
+              });
+        });
 }
 
 function findAllWebsitesByUser(userId) {
-    console.log(websiteModel.find({_user: userId}));
     return websiteModel
         .find({_user: userId})
         .populate('_user', 'username')
@@ -27,7 +36,18 @@ function findWebsiteById(websiteId) {
 }
 
 function deleteWebsite(websiteId) {
-    return websiteModel.remove({_id: websiteId});
+    return websiteModel
+        .remove({_id: websiteId})
+        .then(function () {
+            userModel
+                .findOne({websites: websiteId})
+                 .then(function (user) {
+                     var index = user.websites.indexOf(websiteId);
+                     user.websites.splice(index, 1);
+                     user.save();
+                     }
+                 );
+        });
 }
 
 function updateWebsite(websiteId, website) {

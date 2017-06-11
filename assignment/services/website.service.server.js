@@ -22,7 +22,6 @@ function findAllWebsitesByUser(req, res) {
     websiteModel
         .findAllWebsitesByUser(userId)
         .then(function (websites) {
-            console.log(websites);
            res.json(websites);
         });
 }

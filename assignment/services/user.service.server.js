@@ -34,7 +34,6 @@ function findUser(req, res) {
             .findUserByUsername(username)
             .then(function (user) {
                 if(user !== null){
-                    console.log(user);
                     res.json(user);
                 }
                 else {
