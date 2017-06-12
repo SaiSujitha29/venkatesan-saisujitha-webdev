@@ -22,13 +22,14 @@
 
     <label for="name">Name</label>
     <input type=text
-           placeholder="name (Example: alice)"
+           placeholder="Lorem Ipsum Lorem Ipsum"
            id="name"
            ng-model="model.widget.name"
            class="form-control"/>
 
     <label for="text">Text</label>
     <input  type="text"
+            placeholder="Lorem Ipsum Lorem Ipsum"
             ng-model="model.widget.text"
             id="text"
             class="form-control"/>
@@ -44,8 +45,10 @@
             ng-model="model.widget.placeholder"
             class="form-control"/>
 
-    Formatted
-    <input ng-model="model.widget.formatted" type="checkbox"/>
+    <label for ="formatted">Formatted</label>
+    <input id="formatted"
+           ng-model="model.widget.formatted"
+           type="checkbox"/>
 
     <a ng-click="model.deleteWidget(model.widgetId)"
        class="btn btn-block btn-danger">
