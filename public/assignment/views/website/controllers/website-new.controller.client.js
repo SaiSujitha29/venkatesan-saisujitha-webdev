@@ -28,7 +28,6 @@
             // websiteService.createWebsite(id, website);
             // $location.url('user/' + id + '/website');
             if (typeof website === 'undefined'){
-                console.log("Inside");
                 model.error = "Website Name required";
                 return;
             }

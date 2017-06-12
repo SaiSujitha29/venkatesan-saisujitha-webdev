@@ -30,7 +30,6 @@
         }
 
         function createWidget(pageId, widget) {
-            //widget = {widget:widgetType = model.type};
             var widget = {};
             widget.widgetType = model.type;
             console.log(widget);

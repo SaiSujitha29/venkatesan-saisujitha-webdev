@@ -38,7 +38,6 @@
         //implementation
         function createWebsite(website) {
             if (typeof website === 'undefined'){
-                console.log("Inside");
                 model.error = "Website Name required";
                 return;
             }
@@ -53,7 +52,6 @@
 
         function updateWebsite(websiteId, website) {
             if (website.name === ""){
-                console.log("Inside");
                 model.error = "Website Name required";
                 return;
             }

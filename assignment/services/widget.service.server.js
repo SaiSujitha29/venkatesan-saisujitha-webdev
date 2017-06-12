@@ -94,19 +94,6 @@ function sortWidget(req, res) {
         }, function (err) {
             res.sendStatus(404);
         });
-    // var cachedWidgets = [];
-    // var length = widgets.length;
-    // for (var i = length - 1; i >= 0; i--) {
-    //     if (widgets[i].pageId === req.params.pageId) {
-    //         cachedWidgets.unshift(widgets[i]);
-    //         widgets.splice(i, 1);
-    //     }
-    // }
-    // var widget = cachedWidgets[initial];
-    // cachedWidgets.splice(initial, 1);
-    // cachedWidgets.splice(final, 0, widget);
-    // widgets = widgets.concat(cachedWidgets);
-    // res.sendStatus(200);
 }
 
 function uploadImage(req, res) {

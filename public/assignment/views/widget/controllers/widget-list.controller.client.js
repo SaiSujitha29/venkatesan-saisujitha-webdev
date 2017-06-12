@@ -22,7 +22,6 @@
             }
 
             function handleError(error) {
-                console.log("erorr");
                 model.error = "no widgets Available currently";
             }
         }

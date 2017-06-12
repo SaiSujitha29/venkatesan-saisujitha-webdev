@@ -38,7 +38,6 @@
         //implementation
         function createPage(page) {
             if (typeof page === 'undefined'){
-                console.log("Inside");
                 model.error = "Page Name required";
                 return;
             }

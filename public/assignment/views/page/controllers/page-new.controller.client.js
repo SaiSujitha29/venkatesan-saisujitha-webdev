@@ -25,7 +25,6 @@
 
         function createPage(websiteId, page) {
             if (typeof page === 'undefined'){
-                console.log("Inside");
                 model.error = "Page Name required";
                 return;
             }
