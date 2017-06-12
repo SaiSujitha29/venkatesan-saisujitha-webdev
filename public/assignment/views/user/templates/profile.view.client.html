@@ -33,6 +33,11 @@
         {{model.message}}
     </div>
 
+    <div ng-show="model.error"
+         class="alert alert-danger">
+        {{model.error}}
+    </div>
+
     <label for="username">Username</label>
     <input type=text
            ng-model="model.user.username"

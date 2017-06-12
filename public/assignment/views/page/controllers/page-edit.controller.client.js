@@ -37,6 +37,11 @@
 
         //implementation
         function createPage(page) {
+            if (typeof page === 'undefined'){
+                console.log("Inside");
+                model.error = "Page Name required";
+                return;
+            }
             pageService
                 .createPage(model.websiteId, page)
                 .then(function () {
@@ -45,6 +50,10 @@
         }
 
         function updatePage(pageId, page) {
+            if (page.name === ""){
+                model.error = "Page name required";
+                return;
+            }
             pageService
                 .updatePage(pageId, page)
                 .then(function () {

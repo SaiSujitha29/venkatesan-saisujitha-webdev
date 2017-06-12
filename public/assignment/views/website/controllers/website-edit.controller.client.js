@@ -37,8 +37,13 @@
 
         //implementation
         function createWebsite(website) {
-            website.developerId = model.userId;
+            if (typeof website === 'undefined'){
+                console.log("Inside");
+                model.error = "Website Name required";
+                return;
+            }
 
+            website.developerId = model.userId;
             websiteService
                 .createWebsite(model.userId, website)
                 .then(function () {
@@ -47,6 +52,11 @@
         }
 
         function updateWebsite(websiteId, website) {
+            if (website.name === ""){
+                console.log("Inside");
+                model.error = "Website Name required";
+                return;
+            }
             websiteService
                 .updateWebsite(websiteId, website)
                 .then(function () {

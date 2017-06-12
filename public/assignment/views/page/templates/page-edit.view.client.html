@@ -56,6 +56,11 @@
         </div>
         <div class="col-xs-12 col-sm-8">
 
+            <div ng-show="model.error"
+                 class="alert alert-danger">
+                {{model.error}}
+            </div>
+
             <label for="name">Name</label>
             <input class="form-control"
                    type="text"

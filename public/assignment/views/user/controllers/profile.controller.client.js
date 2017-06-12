@@ -22,6 +22,10 @@
 
         // implementation
         function updateUser(userId, user) {
+            if (user.username === ""){
+                model.message = "Username required";
+                return;
+            }
             userService
                 .updateUser(userId, user)
                 .then(function () {
@@ -32,7 +36,6 @@
         }
 
         function deleteUser(id) {
-
             userService
                 .deleteUser(id)
                 .then(function () {
