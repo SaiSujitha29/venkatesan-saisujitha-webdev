@@ -10,7 +10,7 @@ app.post('/api/page/:pageId/widget', createWidget);
 app.put('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId', deleteWidget);
 app.post("/api/upload", upload.single('myFile'), uploadImage);
-app.put('/page/:pageId/widget', sortWidget);
+app.put('/page/:pageId/widget', reorderWidget);
 
 var widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -54,7 +54,6 @@ function createWidget(req, res) {
     widgetModel
         .createWidget(pageId, widget)
         .then(function (widget) {
-            console.log(widget);
             res.json(widget);
         });
 }
@@ -82,14 +81,14 @@ function deleteWidget(req, res) {
         });
 }
 
-function sortWidget(req, res) {
+function reorderWidget(req, res) {
     var initial = req.query['initial'];
     var final = req.query['final'];
     var pageId = req.query['pageId'];
 
     widgetModel
         .reorderWidget(pageId, initial, final)
-        .then(function () {
+        .then(function (status) {
             res.sendStatus(200);
         }, function (err) {
             res.sendStatus(404);
@@ -110,9 +109,21 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    var widget = widgetModel.findWidgetById(widgetId);
-    widget.url = '/assignment/uploads/'+filename;
-    var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/" + websiteId + "/page/"
-    + pageId + "/widget/" + widgetId;
-    res.redirect(callbackUrl);
+    widgetModel
+        .findWidgetById(widgetId)
+        .then(function (widget) {
+            widget.url = '/assignment/uploads/'+filename;
+
+            widgetModel
+                .updateWidget(widgetId, widget)
+                .then(function () {
+                    var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/" + websiteId + "/page/"
+                        + pageId + "/widget/" + widgetId;
+                    res.redirect(callbackUrl);
+                }, function (err) {
+                    res.sendStatus(404);
+                });
+        });
+
+
 }

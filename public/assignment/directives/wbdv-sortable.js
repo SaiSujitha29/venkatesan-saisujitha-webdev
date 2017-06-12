@@ -15,7 +15,7 @@
                 stop: function(event, ui) {
                     final = ui.item.index();
                     widgetService
-                        .sortWidget(initial, final);
+                        .reorderWidget(initial, final);
                 } });
         }
         return {
