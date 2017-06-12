@@ -18,6 +18,8 @@
 
          function createWidget(pageId, widget) {
              var url = '/api/page/'+pageId+'/widget';
+             console.log("start");
+             console.log(widget);
              return $http.post(url,widget)
                  .then(function (response) {
                      return response.data;

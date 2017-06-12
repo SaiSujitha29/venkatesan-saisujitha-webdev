@@ -133,3 +133,21 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 .glyphicon-play {
     padding-right: 10px;
 }
+
+.youtube-widget {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.youtube-widget iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cog{
+    z-index: 1;
+}

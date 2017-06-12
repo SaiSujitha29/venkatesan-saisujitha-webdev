@@ -1,0 +1,62 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left "></span>
+                </a>
+            </p>
+            <a class="navbar-brand">Widget Edit</a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget(model.widgetId, model.widget)" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok "></span>
+                </a>
+            </p>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid user-main">
+
+    <label for="name">Name</label>
+    <input type=text
+           placeholder="name (Example: alice)"
+           id="name"
+           ng-model="model.widget.name"
+           class="form-control"/>
+
+    <label for="html">HTML</label>
+    <div ng-model="model.widget.text"
+         id="html"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+    </div>
+
+    <a ng-click="model.deleteWidget(model.widgetId)"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Footer
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a href="#!/user/{{model.userId}}"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+
+    </div>
+</nav>

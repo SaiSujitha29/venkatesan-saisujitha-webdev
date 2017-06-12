@@ -38,20 +38,19 @@ function findAllWidgetsByPageId(req, res) {
 
 function findWidgetById(req, res) {
     var widgetId = req.params['widgetId'];
-    var widget = widgets.find(function (widget) {
-        return widget._id === widgetId;
-    });
-    if (widget){
-        res.json(widget);
-        return;
-    }
-    res.sendStatus(404);
+
+    widgetModel
+        .findWidgetById(widgetId)
+        .then(function (widget) {
+            res.json(widget);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }
 
 function createWidget(req, res) {
     var pageId = req.params['pageId'];
     var widget = req.body;
-
     widgetModel
         .createWidget(pageId, widget)
         .then(function (widget) {
@@ -63,42 +62,51 @@ function createWidget(req, res) {
 function updateWidget(req, res) {
     var widgetId = req.params['widgetId'];
     var widget = req.body;
-    for(var w in widgets){
-        if (widgets[w]._id == widgetId){
-            widgets[w] = widget;
+
+    widgetModel
+        .updateWidget(widgetId, widget)
+        .then(function () {
             res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }
 
 function deleteWidget(req, res) {
     var widgetId = req.params['widgetId'];
-    var widget = widgets.find(function (widget) {
-        return widget._id === widgetId;
-    });
-    var index = widgets.indexOf(widget);
-    widgets.splice(index, 1);
-    res.sendStatus(200);
+
+    widgetModel
+        .deleteWidget(widgetId)
+        .then(function () {
+            res.sendStatus(200);
+        });
 }
 
 function sortWidget(req, res) {
     var initial = req.query['initial'];
     var final = req.query['final'];
-    var cachedWidgets = [];
-    var length = widgets.length;
-    for (var i = length - 1; i >= 0; i--) {
-        if (widgets[i].pageId === req.params.pageId) {
-            cachedWidgets.unshift(widgets[i]);
-            widgets.splice(i, 1);
-        }
-    }
-    var widget = cachedWidgets[initial];
-    cachedWidgets.splice(initial, 1);
-    cachedWidgets.splice(final, 0, widget);
-    widgets = widgets.concat(cachedWidgets);
-    res.sendStatus(200);
+    var pageId = req.query['pageId'];
+
+    widgetModel
+        .reorderWidget(pageId, initial, final)
+        .then(function () {
+            res.sendStatus(200);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+    // var cachedWidgets = [];
+    // var length = widgets.length;
+    // for (var i = length - 1; i >= 0; i--) {
+    //     if (widgets[i].pageId === req.params.pageId) {
+    //         cachedWidgets.unshift(widgets[i]);
+    //         widgets.splice(i, 1);
+    //     }
+    // }
+    // var widget = cachedWidgets[initial];
+    // cachedWidgets.splice(initial, 1);
+    // cachedWidgets.splice(final, 0, widget);
+    // widgets = widgets.concat(cachedWidgets);
+    // res.sendStatus(200);
 }
 
 function uploadImage(req, res) {
@@ -115,13 +123,7 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    var widget = null;
-    for(var w in widgets) {
-        if (widgets[w]._id === widgetId) {
-            widget=widgets[w];
-            break;
-        }
-    }
+    var widget = widgetModel.findWidgetById(widgetId);
     widget.url = '/assignment/uploads/'+filename;
     var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/" + websiteId + "/page/"
     + pageId + "/widget/" + widgetId;
