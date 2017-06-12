@@ -10,7 +10,7 @@ app.post('/api/page/:pageId/widget', createWidget);
 app.put('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId', deleteWidget);
 app.post("/api/upload", upload.single('myFile'), uploadImage);
-app.put('/page/:pageId/widget', reorderWidget);
+app.put('/api/page/:pageId/widget', reorderWidget);
 
 var widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},

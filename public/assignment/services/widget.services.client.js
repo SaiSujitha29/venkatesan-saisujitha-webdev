@@ -35,7 +35,7 @@
         }
 
         function reorderWidget(initial, final) {
-            var url = "/page/"+ $routeParams['pageId'] + "/widget?initial=" + initial + "&final=" + final;
+            var url = "/api/page/"+ $routeParams['pageId'] + "/widget?initial=" + initial + "&final=" + final;
             console.log(url);
             return $http
                 .put(url);
