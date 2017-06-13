@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var pageSchema = require('./page.schema.server');
 var websiteModel = require('../website/website.model.server');
 var pageModel = mongoose.model('PageModel', pageSchema);
+
 pageModel.createPage = createPage;
 pageModel.findPageByWebsiteId = findPageByWebsiteId;
 pageModel.findPageById = findPageById;
