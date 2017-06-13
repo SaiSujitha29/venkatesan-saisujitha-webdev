@@ -7,20 +7,19 @@
         var initial = -1;
         var final = -1;
         function linkFunction(scope, element) {
-            $(element).sortable({
+            jQuery(element).sortable({
                 axis: 'y' ,
                 start: function(event, ui) {
-                    initial = ui.item.index();
+                    initial = (jQuery(ui.item).index)();
                 },
                 stop: function(event, ui) {
-                    final = ui.item.index();
+                    final = (jQuery(ui.item).index)();
                     widgetService
-                        .reorderWidget(initial, final);
+                        .sortWidgets(initial, final);
                 } });
         }
         return {
             link: linkFunction
         }
-    };
-
+    }
 })();

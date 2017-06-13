@@ -55,16 +55,18 @@ function updateWidget(widgetId, widget) {
     });
 }
 
-function reorderWidget(pageId, initial, final) {
-    return pageModel
-        .findPageById(pageId)
-        .then(function (page) {
-            var widgets = page.widgets;
-
-            var index = widgets.splice(initial,1)[0];
-            widgets.splice(final,0, index);
-            page.widgets = widgets;
-            return pageModel.updatePage(pageId, page);
+function reorderWidget(pageId, initial, final){
+    return widgetModel
+        .find({_pageId: pageId})
+        .then(function (widgets) {
+            var widget = widgets[initial];
+            widgets.splice(initial, 1);
+            widgets.splice(final, 0, widget);
+            widgetModel
+                .remove({_pageId: pageId})
+                .then(function (success) {
+                    widgetModel.insertMany(widgets);
+                })
         })
 }
 

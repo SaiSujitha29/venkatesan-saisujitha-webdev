@@ -11,7 +11,7 @@
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
             findAllWidgetsByPageId: findAllWidgetsByPageId,
-            reorderWidget: reorderWidget
+            sortWidgets: sortWidgets
         };
 
         return api;
@@ -34,11 +34,13 @@
                 });
         }
 
-        function reorderWidget(initial, final) {
+        function sortWidgets(initial, final) {
             var url = "/api/page/"+ $routeParams['pageId'] + "/widget?initial=" + initial + "&final=" + final;
             console.log(url);
-            return $http
-                .put(url);
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function deleteWidget(widgetId) {
