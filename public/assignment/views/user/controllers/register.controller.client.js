@@ -18,7 +18,17 @@
                 return;
             }
 
-            if(password !== password2 || password === null || typeof password === 'undefined') {
+            if(password === null || password === '' || typeof password === 'undefined') {
+                model.error = 'password is required';
+                return;
+            }
+
+            if(password2 === null || password2 === '' || typeof password2 === 'undefined') {
+                model.error = 'verify password is required';
+                return;
+            }
+
+            if(password !== password2) {
                 model.error = "passwords must match";
                 return;
             }
@@ -36,11 +46,11 @@
                             password: password
                         };
                         return userService
-                            .createUser(newUser);
+                            .register(newUser);
                     }
                 )
                 .then(function (user) {
-                    $location.url('/user/' + user._id);
+                    $location.url('/profile');
                 });
         }
     }

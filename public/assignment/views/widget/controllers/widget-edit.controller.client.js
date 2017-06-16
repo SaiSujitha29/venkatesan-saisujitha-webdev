@@ -43,6 +43,10 @@
         }
         
         function updateWidget(widgetId, widget) {
+            if (widget.name === "" ||typeof widget === 'undefined'|| widget.name === null){
+                model.error = "Widget Name required";
+                return;
+            }
             widgetService
                 .updateWidget(widgetId, widget)
                 .then(function () {

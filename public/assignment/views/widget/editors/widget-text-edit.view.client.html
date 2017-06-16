@@ -20,6 +20,11 @@
 
 <div  class="container-fluid user-main">
 
+    <div ng-show="model.error"
+         class="alert alert-danger">
+        {{model.error}}
+    </div>
+
     <label for="name">Name</label>
     <input type=text
            placeholder="Lorem Ipsum Lorem Ipsum"

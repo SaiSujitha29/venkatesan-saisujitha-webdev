@@ -25,9 +25,7 @@
 
         //implementation
         function createWebsite(id, website) {
-            // websiteService.createWebsite(id, website);
-            // $location.url('user/' + id + '/website');
-            if (typeof website === 'undefined'){
+            if (typeof website === 'undefined' || website === "" || website === null){
                 model.error = "Website Name required";
                 return;
             }
