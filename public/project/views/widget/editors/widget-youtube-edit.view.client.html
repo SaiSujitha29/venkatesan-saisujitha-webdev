@@ -29,28 +29,33 @@
     <input type=text
            placeholder="name (Example: alice)"
            id="name"
-           ng-model="model.widget.name"
            class="form-control"/>
 
     <label for="text">Text</label>
     <input type="text"
            placeholder="Starrrrrrrrrrrrrrrrrrrrrrrr Warssssssssssssssssssssssssss"
            id="text"
-           ng-model="model.widget.text"
            class="form-control"/>
 
-    <label for="size">Size</label>
-    <input id="size"
-           type="text"
-           ng-model="model.widget.size"
-           class="form-control">
-    </input>
+    <label for="url">Url</label>
+    <input type="url"
+           placeholder="https://img.clipartfest.com/d6c029ed5585cd5555cde910dba170f3_laughing-smiley-clipart-yay_300-186.jpeg"
+           ng-model="model.widget.url"
+           id="url"
+           class="form-control"/>
+
+    <label for="width">Width</label>
+    <input type="text"
+           placeholder="100%"
+           ng-model="model.widget.width"
+           id="width"
+           class="form-control"/>
+
 
     <a ng-click="model.deleteWidget(model.widgetId)"
        class="btn btn-block btn-danger">
         Delete
     </a>
-
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

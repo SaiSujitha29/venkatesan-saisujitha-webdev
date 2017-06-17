@@ -1,0 +1,40 @@
+<div class="container-fluid user-main">
+
+    <h1>Login</h1>
+
+    <div ng-show="vm.error" class="alert alert-danger">
+        {{vm.error}}
+    </div>
+
+
+    <label for="username">Username</label>
+    <input type="text"
+           id="username"
+           ng-model="username"
+           class="form-control"
+           placeholder="username (Example:bob123)"/>
+
+    <label for="password">Password</label>
+    <input type="password"
+           id="password"
+           ng-model="password"
+           class="form-control"
+           placeholder="password (Example:sdsfefedi19243_8&)"/>
+
+    <a ng-click="vm.login(username, password)"
+       class="btn btn-primary btn-block">
+        Login
+    </a>
+
+
+    <a href="/auth/facebook" class="btn btn-primary btn-block">
+        <span class="fa fa-facebook"></span>
+        Facebook
+    </a>
+
+    <a class="btn btn-success btn-block"
+       href="#!/register">
+        Register
+    </a>
+
+</div>

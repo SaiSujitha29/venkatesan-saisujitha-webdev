@@ -25,7 +25,7 @@ var facebookConfig = {
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/assignment/index.html#!/user',
+        successRedirect: '/assignment/index.html#!/profile',
         failureRedirect: '/assignment/index.html#!/login'
     }));
 
@@ -64,6 +64,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
         .findUserByFacebookId(profile.id)
         .then(function (user) {
             if (!user) {
+
                 var newUser = {
                     username: profile.displayName,
                     facebook: {
@@ -78,6 +79,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
                         return done(null, response);
                     })
             } else {
+                console.log(profile);
                 return userModel
                     .updateFacebookToken(user._id, profile.id, token)
                     .then(function (response) {
