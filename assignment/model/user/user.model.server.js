@@ -15,7 +15,6 @@ userModel.updateFacebookToken = updateFacebookToken;
 module.exports = userModel;
 
 function createUser(user) {
-    user.password = bcrypt.hashSync(user.password);
     console.log(user);
     return userModel.create(user);
 }
@@ -26,17 +25,7 @@ function findUserById(userId) {
 
 function findUserByCredentials(username, password) {
     return userModel
-        .find({username: username})
-        .then(function (user) {
-            console.log(user);
-            if (!user) {
-                return user;
-            }
-            if (user.username === username && bcrypt.compareSync(password, user.password)) {
-                return user;
-            }
-            return null;
-        });
+        .findOne({username : username, password : password});
 }
 
 function deleteUser(userId) {

@@ -43,23 +43,20 @@ app.delete('/api/user/:userId', deleteUser);
 
 function localStrategy(username, password, done) {
     userModel
-        .findUserByCredentials(username, password)
-        .then(function (user) {
-                if (!user) {
-                    return done(null, false);
-                }
-                if (user.username === username && bcrypt.compareSync(password, user.password)) {
-                    return done(null, user);
-                } else {
-                    return done(null, false);
-                }
-            }, function (err) {
-                if (err) {
-                    return done(err);
-                } else {
-                    return done(null, false);
-                }
-            });
+        .findUserByUsername(username)
+        .then(function(user) {
+            if (bcrypt.compareSync (password, user.password)) {
+                return userModel
+                    .findUserByCredentials(username, user.password)
+                    .then(function (user) {
+                        if (user) {
+                            return done(null, user);
+                        } else {
+                            return done(null, false);
+                        }
+                    });
+            }
+        });
 }
 
 function facebookStrategy(token, refreshToken, profile, done) {
