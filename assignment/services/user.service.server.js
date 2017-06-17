@@ -67,7 +67,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
             if (!user) {
                 var newUser = {
                     username: profile.displayName,
-                    email: profile.emails,
+                    email: profile.emails[0].value,
                     facebook: {
                         id: profile.id,
                         token: token
