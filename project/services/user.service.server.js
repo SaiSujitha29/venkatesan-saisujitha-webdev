@@ -19,8 +19,7 @@ app.post('/api/logout', logout);
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
-    profileFields: ['email', 'id', 'name', 'displayName']
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
 };
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
@@ -65,9 +64,9 @@ function facebookStrategy(token, refreshToken, profile, done) {
         .findUserByFacebookId(profile.id)
         .then(function (user) {
             if (!user) {
+
                 var newUser = {
                     username: profile.displayName,
-                    email: profile.emails,
                     facebook: {
                         id: profile.id,
                         token: token
@@ -80,7 +79,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
                         return done(null, response);
                     })
             } else {
-                console.log(profile.emails.toString());
+                console.log(profile);
                 return userModel
                     .updateFacebookToken(user._id, profile.id, token)
                     .then(function (response) {
