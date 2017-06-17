@@ -6,14 +6,8 @@ var bcrypt = require("bcrypt-nodejs");
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-};
-
 passport.use(new LocalStrategy(localStrategy));
-passport.use(new FacebookStrategy(facebookConfig, FacebookStrategy));
+
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
@@ -22,13 +16,20 @@ app.get('/api/checkLoggedIn', checkLoggedIn);
 app.post('/api/register', register);
 app.post('/api/logout', logout);
 
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+};
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/#/user',
-        failureRedirect: '/#/login'
+        successRedirect: '/assignment/index.html#!/user',
+        failureRedirect: '/assignment/index.html#!/login'
     }));
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 app.get('/api/user/:userId', findUserById);
 // findUserByCredentials and findUserByUsername are combined
@@ -43,21 +44,50 @@ app.delete('/api/user/:userId', deleteUser);
 function localStrategy(username, password, done) {
     userModel
         .findUserByCredentials(username, password)
-        .then(
-            function (user) {
+        .then(function (user) {
                 if (!user) {
                     return done(null, false);
                 }
-                return done(null, user);
-            },
-            function (err) {
-                if (err) {return done(err); }
-            }
-        );
+                if (user.username === username && bcrypt.compareSync(password, user.password)) {
+                    return done(null, user);
+                } else {
+                    return done(null, false);
+                }
+            }, function (err) {
+                if (err) {
+                    return done(err);
+                } else {
+                    return done(null, false);
+                }
+            });
 }
 
-function FacebookStrategy() {
-    
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(function (user) {
+            if (!user) {
+                var newUser = {
+                    username: profile.displayName,
+                    facebook: {
+                        id: profile.id,
+                        token: token
+                    }
+                };
+
+                return userModel
+                    .createUser(newUser)
+                    .then(function (response) {
+                        return done(null, response);
+                    })
+            } else {
+                return userModel
+                    .updateFacebookToken(user._id, profile.id, token)
+                    .then(function (response) {
+                        return done(null, user);
+                    })
+            }
+        })
 }
 
 
@@ -82,7 +112,7 @@ function logout(req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    return userModel
+    userModel
         .createUser(user)
         .then(function (user) {
             req.login(user, function (status) {

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('UserModel', userSchema);
+var bcrypt = require("bcrypt-nodejs");
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
@@ -8,13 +9,15 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.deleteUser = deleteUser;
 userModel.updateUser = updateUser;
 userModel.findUserByUsername = findUserByUsername;
-userModel.findUserByFacebookId = findUserByFacebookId,
+userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.updateFacebookToken = updateFacebookToken;
 
 module.exports = userModel;
 
 function createUser(user) {
+    user.password = bcrypt.hashSync(user.password);
+    console.log(user);
     return userModel.create(user);
-
 }
 
 function findUserById(userId) {
@@ -22,7 +25,18 @@ function findUserById(userId) {
 }
 
 function findUserByCredentials(username, password) {
-    return userModel.findOne({username: username, password: password});
+    return userModel
+        .find({username: username})
+        .then(function (user) {
+            console.log(user);
+            if (!user) {
+                return user;
+            }
+            if (user.username === username && bcrypt.compareSync(password, user.password)) {
+                return user;
+            }
+            return null;
+        });
 }
 
 function deleteUser(userId) {
@@ -48,4 +62,17 @@ function findUserByFacebookId(facebookId) {
     return userModel.findOne({'facebook.id': facebookId});
 }
 
+function updateFacebookToken(userId, facebookId, token) {
+    var facebook = {
+        id: facebookId,
+        token: token
+    };
+
+    return userModel
+        .update({_id: userId}, {
+            $set : {
+                facebook: facebook
+            }
+        });
+}
 

@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(session({secret: "test test test"}));
+app.use(session({secret: "localhost"}));
 app.use(passport.initialize());
 app.use(passport.session());
 
