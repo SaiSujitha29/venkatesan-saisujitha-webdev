@@ -3,10 +3,10 @@
         .module('WebAppMaker')
         .controller('widgetEditController', widgetEditController);
     
-    function widgetEditController($sce, $routeParams, widgetService, $location) {
+    function widgetEditController(currentUser, $sce, $routeParams, widgetService, $location) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams.websiteId;
         model.pageId = $routeParams.pageId;
         model.widgetId = $routeParams.widgetId;
@@ -38,7 +38,7 @@
             widgetService
                 .deleteWidget(widgetId)
                 .then(function () {
-                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
                 });
         }
         
@@ -47,11 +47,10 @@
                 model.error = "Widget Name required";
                 return;
             }
-            wi
             widgetService
                 .updateWidget(widgetId, widget)
                 .then(function () {
-                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
                 });
         }
 

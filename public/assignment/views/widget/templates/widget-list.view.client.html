@@ -2,14 +2,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
+            <a class="navbar-link" href="#!/website/{{model.websiteId}}/page">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </p>
         <a class="navbar-brand">Widgets</a>
         <p class="navbar-text pull-right">
             <a class="navbar-link"
-               href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+               href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </p>
@@ -26,7 +26,7 @@
 
         <div ng-repeat="widget in model.widgets" class="wd-widget">
             <div class="wd-toolbar cog">
-                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                <a href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
 
@@ -65,18 +65,18 @@
     <div class="container-fluid">
         <p class="navbar-text pull-left">
             <a class="navbar-link"
-               href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+               href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class=" glyphicon glyphicon-play"></span>
             </a>
         </p>
         <p class="navbar-text pull-left">
             <a class="navbar-link"
-               href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+               href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class=" glyphicon glyphicon-eye-open"></span>
             </a>
         </p>
         <p class="navbar-text pull-right">
-            <a class="navbar-link" href="#!/user/{{model.userId}}">
+            <a class="navbar-link" href="#!/profile">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </p>

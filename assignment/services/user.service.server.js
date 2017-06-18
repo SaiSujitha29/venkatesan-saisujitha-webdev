@@ -46,16 +46,21 @@ function localStrategy(username, password, done) {
     userModel
         .findUserByUsername(username)
         .then(function(user) {
-            if (bcrypt.compareSync (password, user.password)) {
-                return userModel
-                    .findUserByCredentials(username, user.password)
-                    .then(function (user) {
-                        if (user) {
-                            return done(null, user);
-                        } else {
-                            return done(null, false);
-                        }
-                    });
+            if(user){
+                if (bcrypt.compareSync (password, user.password)) {
+                    return userModel
+                        .findUserByCredentials(username, user.password)
+                        .then(function (user) {
+                            if (user) {
+                                return done(null, user);
+                            } else {
+                                return done(null, false);
+                            }
+                        });
+                }
+            }
+            else {
+                return done(null, false);
             }
         });
 }
