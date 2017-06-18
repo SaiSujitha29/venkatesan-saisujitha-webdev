@@ -87,7 +87,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
             } else {
                 console.log(profile.emails.toString());
                 return userModel
-                    .updateFacebookToken(user._id, profile.id, token)
+                    .updateToken(user._id, profile.id, token)
                     .then(function (response) {
                         return done(null, user);
                     })

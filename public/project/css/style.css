@@ -4,6 +4,14 @@ select.form-control{
     margin-bottom: 5px;
 }
 
+.center{
+    text-align: center;
+}
+
+.glyphicon-hand-left{
+    font-size: xx-large;
+}
+
 head {
     position: static;
 }
@@ -120,7 +128,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
     padding-bottom: 20px;
 }
 
-.home h3 {
+.home h4 {
     color: #d9534f;
     padding-bottom: 15px;
 }

@@ -10,7 +10,7 @@ userModel.deleteUser = deleteUser;
 userModel.updateUser = updateUser;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByFacebookId = findUserByFacebookId;
-userModel.updateFacebookToken = updateFacebookToken;
+userModel.updateToken = updateToken;
 
 module.exports = userModel;
 
@@ -50,7 +50,7 @@ function findUserByFacebookId(facebookId) {
     return userModel.findOne({'facebook.id': facebookId});
 }
 
-function updateFacebookToken(userId, facebookId, token) {
+function updateToken(userId, facebookId, token) {
     var facebook = {
         id: facebookId,
         token: token
