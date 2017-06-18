@@ -1,39 +1,39 @@
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
-var userModel = mongoose.model('UserModel', userSchema);
+var userProjectModel = mongoose.model('userProjectModel', userSchema);
 var bcrypt = require("bcrypt-nodejs");
 
-userModel.createUser = createUser;
-userModel.findUserById = findUserById;
-userModel.findUserByCredentials = findUserByCredentials;
-userModel.deleteUser = deleteUser;
-userModel.updateUser = updateUser;
-userModel.findUserByUsername = findUserByUsername;
-userModel.findUserByFacebookId = findUserByFacebookId;
-userModel.updateFacebookToken = updateFacebookToken;
+userProjectModel.createUser = createUser;
+userProjectModel.findUserById = findUserById;
+userProjectModel.findUserByCredentials = findUserByCredentials;
+userProjectModel.deleteUser = deleteUser;
+userProjectModel.updateUser = updateUser;
+userProjectModel.findUserByUsername = findUserByUsername;
+userProjectModel.findUserByFacebookId = findUserByFacebookId;
+userProjectModel.updateFacebookToken = updateFacebookToken;
 
-module.exports = userModel;
+module.exports = userProjectModel;
 
 function createUser(user) {
     console.log(user);
-    return userModel.create(user);
+    return userProjectModel.create(user);
 }
 
 function findUserById(userId) {
-    return userModel.findById(userId);
+    return userProjectModel.findById(userId);
 }
 
 function findUserByCredentials(username, password) {
-    return userModel
+    return userProjectModel
         .findOne({username : username, password : password});
 }
 
 function deleteUser(userId) {
-    return userModel.remove({_id: userId});
+    return userProjectModel.remove({_id: userId});
 }
 
 function updateUser(userId, user) {
-    return userModel.update({_id: userId}, {
+    return userProjectModel.update({_id: userId}, {
         $set: {
             username: user.username,
             email: user.email,
@@ -44,11 +44,11 @@ function updateUser(userId, user) {
 }
 
 function findUserByUsername(username) {
-    return userModel.findOne({username: username});
+    return userProjectModel.findOne({username: username});
 }
 
 function findUserByFacebookId(facebookId) {
-    return userModel.findOne({'facebook.id': facebookId});
+    return userProjectModel.findOne({'facebook.id': facebookId});
 }
 
 function updateFacebookToken(userId, facebookId, token) {
@@ -57,7 +57,7 @@ function updateFacebookToken(userId, facebookId, token) {
         token: token
     };
 
-    return userModel
+    return userProjectModel
         .update({_id: userId}, {
             $set : {
                 facebook: facebook

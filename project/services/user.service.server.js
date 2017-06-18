@@ -1,5 +1,5 @@
 var app = require('../../express');
-var userModel = require('../model/user/user.model.server');
+var userProjectModel = require('../model/user/user.model.server');
 var passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
 
@@ -11,10 +11,10 @@ passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-app.post('/api/login', passport.authenticate('local') , login);
-app.get('/api/checkLoggedIn', checkLoggedIn);
-app.post('/api/register', register);
-app.post('/api/logout', logout);
+app.post('/api/project/login', passport.authenticate('local') , login);
+app.get('/api/project/checkLoggedIn', checkLoggedIn);
+app.post('/api/project/register', register);
+app.post('/api/project/logout', logout);
 
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -31,22 +31,22 @@ app.get('/auth/facebook/callback',
 
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
-app.get('/api/user/:userId', findUserById);
+app.get('/api/project/user/:userId', findUserById);
 // findUserByCredentials and findUserByUsername are combined
 // as a single function findUser since they have the same URL pattern
-app.get('/api/user', findUser);
-app.post('/api/user', createUser);
-app.put('/api/user/:userId', updateUser);
-app.delete('/api/user/:userId', deleteUser);
+app.get('/api/project/user', findUser);
+app.post('/api/project/user', createUser);
+app.put('/api/project/user/:userId', updateUser);
+app.delete('/api/project/user/:userId', deleteUser);
 
 
 
 function localStrategy(username, password, done) {
-    userModel
+    userProjectModel
         .findUserByUsername(username)
         .then(function(user) {
             if (bcrypt.compareSync (password, user.password)) {
-                return userModel
+                return userProjectModel
                     .findUserByCredentials(username, user.password)
                     .then(function (user) {
                         if (user) {
@@ -60,7 +60,7 @@ function localStrategy(username, password, done) {
 }
 
 function facebookStrategy(token, refreshToken, profile, done) {
-    userModel
+    userProjectModel
         .findUserByFacebookId(profile.id)
         .then(function (user) {
             if (!user) {
@@ -73,14 +73,14 @@ function facebookStrategy(token, refreshToken, profile, done) {
                     }
                 };
 
-                return userModel
+                return userProjectModel
                     .createUser(newUser)
                     .then(function (response) {
                         return done(null, response);
                     })
             } else {
                 console.log(profile);
-                return userModel
+                return userProjectModel
                     .updateFacebookToken(user._id, profile.id, token)
                     .then(function (response) {
                         return done(null, user);
@@ -110,8 +110,9 @@ function logout(req, res) {
 
 function register(req, res) {
     var user = req.body;
+    console.log(req);
     user.password = bcrypt.hashSync(user.password);
-    userModel
+    userProjectModel
         .createUser(user)
         .then(function (user) {
             req.login(user, function (status) {
@@ -125,7 +126,7 @@ function serializeUser(user, done) {
 }
 
 function deserializeUser(user, done) {
-    userModel
+    userProjectModel
         .findUserById(user._id)
         .then(
             function(user){
@@ -140,7 +141,7 @@ function deserializeUser(user, done) {
 //-------------------------------------------------------------------------------------
 function findUserById(req, res) {
     var userId = req.params['userId'];
-    userModel
+    userProjectModel
         .findUserById(userId)
         .then(function (user) {
             res.json(user);
@@ -152,7 +153,7 @@ function findUser(req, res) {
     var password = req.query['password'];
     //to check if the url is /api/user?username=username&password=password
     if(typeof password === 'undefined'){
-        userModel
+        userProjectModel
             .findUserByUsername(username)
             .then(function (user) {
                 if(user !== null){
@@ -164,7 +165,7 @@ function findUser(req, res) {
             });
     }
     else {
-        userModel
+        userProjectModel
             .findUserByCredentials(username, password)
             .then(function (user) {
                 res.json(user);
@@ -176,7 +177,7 @@ function findUser(req, res) {
 
 function createUser(req, res) {
     var user = req.body;
-    userModel
+    userProjectModel
         .createUser(user)
         .then(function (user) {
             res.json(user);
@@ -186,7 +187,7 @@ function createUser(req, res) {
 function updateUser(req, res) {
     var user = req.body;
     var userId = req.params.userId;
-    userModel
+    userProjectModel
         .updateUser(userId, user)
         .then(function (status) {
             res.sendStatus(200);
@@ -197,7 +198,7 @@ function updateUser(req, res) {
 
 function deleteUser(req, res) {
     var userId = req.params.userId;
-    userModel
+    userProjectModel
         .deleteUser(userId)
         .then(function () {
             res.sendStatus(200);

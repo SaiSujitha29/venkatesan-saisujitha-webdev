@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('MovieApp')
-        .controller('registerController', registerController);
+        .controller('registerProjectController', registerProjectController);
 
-    function registerController($location, userService) {
+    function registerProjectController($location, userService) {
 
         var model = this;
 
@@ -12,7 +12,6 @@
 
         // implementation
         function register(username, password, password2) {
-
             if(username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
                 return;
@@ -36,6 +35,7 @@
             userService
                 .findUserByUsername(username)
                 .then(function (user) {
+                    console.log(user);
                     if (user !== null) {
                         model.error = "sorry, that username is taken";
                     }
@@ -50,6 +50,7 @@
                     }
                 )
                 .then(function (user) {
+                    console.log(user);
                     $location.url('/profile');
                 });
         }

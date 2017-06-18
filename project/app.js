@@ -4,7 +4,7 @@ var app = require('../express');
 // mongoose.Promise = require('q').Promise;
 // mongoose.connect('mongodb://localhost/webdev_2017');
 
-var connectionString = 'mongodb://127.0.0.1:27017/webdev_2017';
+var connectionString = 'mongodb://127.0.0.1:27017/project';
 
 if(process.env.MLAB_USERNAME) {
     connectionString = process.env.MLAB_USERNAME + ":" +
@@ -19,7 +19,5 @@ mongoose.connect(connectionString);
 mongoose.Promise = require('q').Promise;
 
 require('./services/user.service.server');
-require('./services/website.service.server');
-require('./services/page.service.server');
-require('./services/widget.service.server');
+
 
