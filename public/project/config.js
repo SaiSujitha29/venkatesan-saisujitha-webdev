@@ -33,9 +33,9 @@
             });
     }
     
-    function checkLoggedIn($q, $location, userService) {
+    function checkLoggedIn($q, $location, userProjectService) {
         var deferred = $q.defer();
-        userService
+        userProjectService
             .checkLoggedIn()
             .then(function (currentUser) {
                 console.log(currentUser);

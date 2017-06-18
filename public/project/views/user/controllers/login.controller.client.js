@@ -3,7 +3,7 @@
         .module('MovieApp')
         .controller('loginController', loginController);
 
-    function loginController($location, userService) {
+    function loginController($location, userProjectService) {
 
         var model = this;
 
@@ -23,7 +23,7 @@
                 return;
             }
 
-            userService
+            userProjectService
                 //.findUserByCredentials(username, password)
                 .login(username, password)
                 .then(login, handleError);

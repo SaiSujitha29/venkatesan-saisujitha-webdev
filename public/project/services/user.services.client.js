@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('MovieApp')
-        .factory('userService', userService);
+        .factory('userProjectService', userProjectService);
 
-    function userService($http) {
+    function userProjectService($http) {
 
         var api = {
             createUser: createUser,
@@ -100,11 +100,8 @@
 
         function register(user) {
             var url = "/api/project/register";
-            console.log(url);
-            console.log(user);
             return $http.post(url, user)
                 .then(function (response) {
-                    console.log(response.data);
                     return response.data;
                 });
         }

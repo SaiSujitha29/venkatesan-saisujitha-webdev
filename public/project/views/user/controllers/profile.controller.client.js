@@ -3,7 +3,7 @@
         .module('MovieApp')
         .controller('profileController', profileController);
 
-    function profileController(currentUser,$location,userService, $routeParams) {
+    function profileController(currentUser,$location,userProjectService, $routeParams) {
 
         var model = this;
         var userId = currentUser._id;
@@ -20,7 +20,7 @@
                 model.message = "Username required";
                 return;
             }
-            userService
+            userProjectService
                 .updateUser(userId, user)
                 .then(function () {
                    model.message = "User updated successfully";
@@ -30,7 +30,7 @@
         }
 
         function deleteUser(id) {
-            userService
+            userProjectService
                 .deleteUser(id)
                 .then(function () {
                     $location.url('/');
@@ -38,7 +38,7 @@
         }
         
         function logout() {
-            userService
+            userProjectService
                 .logout()
                 .then(function () {
                         $location.url('/login');
