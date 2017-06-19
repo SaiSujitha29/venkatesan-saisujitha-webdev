@@ -41,7 +41,7 @@
             userProjectService
                 .logout()
                 .then(function () {
-                        $location.url('/login');
+                        $location.url('/profile');
                     }
                 );
         }

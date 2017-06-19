@@ -65,9 +65,11 @@
            id="last"
            class="form-control"/>
 
-    <a href="#!/user/{{model.user._id}}/website"
-       class="btn btn-block btn-primary">
-        Websites
+    <label> Current Stats</label>
+    <p>Number of Followers <a>{{model.followers.length}}</a></p>
+
+    <a href="#!/homefeed"
+       class="btn btn-block btn-primary">Home
     </a>
 
     <a ng-click="model.logout()"

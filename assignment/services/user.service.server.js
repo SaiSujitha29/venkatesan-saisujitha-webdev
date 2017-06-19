@@ -102,8 +102,8 @@ function login(req, res) {
 }
 
 function checkLoggedIn(req, res) {
-    if (req.isAuthenticated()) {
-        res.json(req.user)
+    if(req.isAuthenticated()) {
+        res.json(req.user);
     } else {
         res.send('0');
     }

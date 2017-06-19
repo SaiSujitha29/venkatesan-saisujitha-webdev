@@ -15,7 +15,7 @@ userProjectModel.updateFacebookToken = updateFacebookToken;
 module.exports = userProjectModel;
 
 function createUser(user) {
-    console.log(user);
+    user.roles = ['USER'];
     return userProjectModel.create(user);
 }
 

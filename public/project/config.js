@@ -8,7 +8,9 @@
 
             // user routing
             .when('/', {
-                templateUrl: 'home.html'
+                templateUrl: 'home/templates/home.html',
+                controller: 'homeController',
+                controllerAs: 'model'
             })
 
             .when('/login', {
@@ -30,6 +32,16 @@
                 resolve: {
                     currentUser: checkLoggedIn
                 }
+            })
+            .when('/homefeed', {
+                templateUrl: 'views/user/templates/register.view.client.html',
+                controller: 'registerProjectController',
+                controllerAs: 'model'
+            })
+            .when('/page/:movieId', {
+                templateUrl: 'home/templates/movie-page.view.client.html',
+                controller: 'movieController',
+                controllerAs: 'model'
             });
     }
     

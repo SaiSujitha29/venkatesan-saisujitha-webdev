@@ -81,7 +81,7 @@
                 });
 
         }
-        
+
         function checkLoggedIn() {
             var url = "/api/checkLoggedIn";
             return $http.get(url)

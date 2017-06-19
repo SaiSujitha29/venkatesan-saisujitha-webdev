@@ -3,10 +3,10 @@ var userProjectModel = require('../model/user/user.model.server');
 var passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
 
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy1 = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-passport.use(new LocalStrategy(localStrategy));
+passport.use(new LocalStrategy1(localStrategy1));
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -25,8 +25,8 @@ var facebookConfig = {
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/assignment/index.html#!/profile',
-        failureRedirect: '/assignment/index.html#!/login'
+        successRedirect: '/project/index.html#!/profile',
+        failureRedirect: '/project/index.html#!/login'
     }));
 
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -41,20 +41,21 @@ app.delete('/api/project/user/:userId', deleteUser);
 
 
 
-function localStrategy(username, password, done) {
+function localStrategy1(username, password, done) {
     userProjectModel
         .findUserByUsername(username)
         .then(function(user) {
             if (bcrypt.compareSync (password, user.password)) {
-                return userProjectModel
-                    .findUserByCredentials(username, user.password)
-                    .then(function (user) {
+               // return userProjectModel
+               //    .findUserByCredentials(username, user.password)
+                   // .then(function (user) {
+                        console.log(user);
                         if (user) {
                             return done(null, user);
                         } else {
                             return done(null, false);
                         }
-                    });
+                   // });
             }
         });
 }
@@ -89,7 +90,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
         })
 }
 
-
 function login(req, res) {
     var user = req.user;
     res.json(user);
@@ -110,7 +110,7 @@ function logout(req, res) {
 
 function register(req, res) {
     var user = req.body;
-    console.log(req);
+    console.log(user);
     user.password = bcrypt.hashSync(user.password);
     userProjectModel
         .createUser(user)
@@ -118,6 +118,9 @@ function register(req, res) {
             req.login(user, function (status) {
                 res.json(user);
             });
+        }, function (err) {
+            console.log(err);
+            res.send(err);
         });
 }
 

@@ -124,16 +124,16 @@
                 }
             });
     }
-    
+
     function checkLoggedIn($q, $location, userService) {
         var deferred = $q.defer();
         userService
             .checkLoggedIn()
             .then(function (currentUser) {
-                if (currentUser === '0'){
+                if(currentUser === '0') {
                     deferred.reject();
                     $location.url('/login');
-                }else {
+                } else {
                     deferred.resolve(currentUser);
                 }
             });

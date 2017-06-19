@@ -46,7 +46,7 @@
                         };
                         userProjectService
                             .register(newUser)
-                            .then(function (newUser) {
+                            .then(function () {
                                 $location.url('/profile');
                             });
                     })
