@@ -11,6 +11,8 @@
             checkLoggedIn: checkLoggedIn,
             register: register,
             logout: logout,
+            checkAdmin: checkAdmin,
+            findAllUsers: findAllUsers,
             findUserByCredentials : findUserByCredentials,
             findUserByUsername: findUserByUsername,
             findUserById: findUserById,
@@ -101,6 +103,22 @@
         function register(user) {
             var url = "/api/project/register";
             return $http.post(url, user)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkAdmin() {
+            var url = "/api/project/checkAdmin";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findAllUsers(username, password) {
+            var url = "/api/project/user";
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });

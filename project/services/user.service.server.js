@@ -15,6 +15,7 @@ app.post('/api/project/login', passport.authenticate('local') , login);
 app.get('/api/project/checkLoggedIn', checkLoggedIn);
 app.post('/api/project/register', register);
 app.post('/api/project/logout', logout);
+app.get('/api/project/checkAdmin', checkAdmin);
 
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -34,7 +35,7 @@ passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 app.get('/api/project/user/:userId', findUserById);
 // findUserByCredentials and findUserByUsername are combined
 // as a single function findUser since they have the same URL pattern
-app.get('/api/project/user', findUser);
+app.get('/api/project/user', isAdmin, findUser);
 app.post('/api/project/user', createUser);
 app.put('/api/project/user/:userId', updateUser);
 app.delete('/api/project/user/:userId', deleteUser);
@@ -95,6 +96,14 @@ function login(req, res) {
     res.json(user);
 }
 
+function checkAdmin(req, res) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
 function checkLoggedIn(req, res) {
     if (req.isAuthenticated()) {
         res.json(req.user)
@@ -151,6 +160,19 @@ function findUserById(req, res) {
         });
 }
 
+// function findAllUsers(req, res) {
+//     var username = req.query['username'];
+//     var password = req.query['password'];
+//     if(username && password) {
+//         return findUserByCredentials(req, res);
+//     }
+//     userModel
+//         .findAllUsers()
+//         .then(function (users) {
+//             res.json(users);
+//         });
+// }
+
 function findUser(req, res) {
     var username = req.query['username'];
     var password = req.query['password'];
@@ -185,6 +207,14 @@ function createUser(req, res) {
         .then(function (user) {
             res.json(user);
         });
+}
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
 }
 
 function updateUser(req, res) {

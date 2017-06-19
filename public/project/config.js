@@ -42,7 +42,49 @@
                 templateUrl: 'home/templates/movie-page.view.client.html',
                 controller: 'movieController',
                 controllerAs: 'model'
+            })
+            .when('/user-private', {
+                templateUrl: 'views/user/templates/user-private-profile.view.client.html',
+                controller: 'userPrivateProjectController',
+                controllerAs: 'model'
+            })
+
+            .when('/user-public', {
+                templateUrl: 'views/user/templates/user-public-profile.view.client.html',
+                controller: 'userPublicProjectController',
+                controllerAs: 'model'
+            })
+
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
+            .when('/admin/users', {
+                templateUrl: 'views/admin/templates/admin-users.view.client.html',
+                controller: 'adminUsersProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
             });
+    }
+
+    function checkAdmin($q, $location, userProjectService) {
+        var deferred = $q.defer();
+        userProjectService
+            .checkAdmin()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.resolve({});
+                    $location.url('/')
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
     }
     
     function checkLoggedIn($q, $location, userProjectService) {
