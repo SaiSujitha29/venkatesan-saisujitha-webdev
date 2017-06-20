@@ -18,7 +18,34 @@
     <br>
     <br>
     <h3>{{model.movie.title}}</h3>
+    <h4>{{model.movie.status}}</h4>
+    <h4>{{model.movie.release_date}}</h4>
+    <h4>{{model.movie.vote_average}}</h4>
+    <h4>{{model.movie.vote_count}}</h4>
+    <div ng-repeat="genre in model.genres">
+        {{genre.name}}
+    </div>
 
+        <div ng-repeat="cast in model.casts">
+            <ol>{{cast.name}}</ol>
+        </div>
 
+    <!--<div ng-repeat="s in model.similarMovie">-->
+        <!--<img ng-click="model.selectMovie(s.id)"-->
+             <!--class="thumbnail img-responsive"-->
+             <!--ng-src="http://image.tmdb.org/t/p/original{{s.poster_path}}"/>-->
+    <!--</div>-->
+
+    <h3>Recommended Movies</h3>
+
+    <!--<div ng-repeat="s in model.recommendedMovie">-->
+        <!--<img ng-click="model.selectMovie(s.id)"-->
+             <!--class="thumbnail img-responsive"-->
+             <!--ng-src="http://image.tmdb.org/t/p/original{{s.poster_path}}"/>-->
+    <!--</div>-->
+
+    {{model.movie}}
+
+    <iframe width="100%" src="{{model.getYouTubeEmbedUrl()}}"></iframe>
 
 </div>
