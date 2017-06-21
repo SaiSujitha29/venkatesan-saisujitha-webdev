@@ -43,6 +43,24 @@
         </div>
     </div>
 
+    <h4>Upcoming Movies</h4>
+
+    <div ng-repeat="movie in model.upcomingMovies">
+        {{movie.poster_path}}
+    </div>
+
+    <h4>Latest Movies</h4>
+
+    <div ng-repeat="movie in model.latestMovies">
+        {{movie.poster_path}}
+    </div>
+
+    <h4>Current Movies</h4>
+
+    <div ng-repeat="movie in model.currentMovies">
+        {{movie.poster_path}}
+    </div>
+
     <ul class="list-group">
 
         <div class="row content" ng-repeat="movie in model.movies">

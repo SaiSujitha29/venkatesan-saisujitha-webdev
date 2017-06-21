@@ -10,6 +10,9 @@
         this.searchCast = searchCast;
         this.similarMovies = similarMovies;
         this.recommendedMovies = recommendedMovies;
+        this.upcomingMovies = upcomingMovies;
+        this.latestMovies = latestMovies;
+        this.currentMovies = currentMovies;
 
         var key = "ac640050d4d7695842fcd9ee3c44de09";
         var upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=ac640050d4d7695842fcd9ee3c44de09&language=en-US&page=1';
@@ -19,6 +22,8 @@
         var cast = 'https://api.themoviedb.org/3/movie/ID/credits?api_key=ac640050d4d7695842fcd9ee3c44de09';
         var similar = 'https://api.themoviedb.org/3/movie/ID/similar?api_key=ac640050d4d7695842fcd9ee3c44de09&language=en-US&page=1';
         var recommendations = 'https://api.themoviedb.org/3/movie/ID/recommendations?api_key=ac640050d4d7695842fcd9ee3c44de09&language=en-US';
+        var latest = 'https://api.themoviedb.org/3/movie/latest?api_key=ac640050d4d7695842fcd9ee3c44de09&language=en-US';
+        var nowPlaying = 'https://api.themoviedb.org/3/movie/now_playing?api_key=ac640050d4d7695842fcd9ee3c44de09&language=en-US&page=1';
 
         function searchNewMovies(searchTerm) {
             var url = search.replace("TEXT", searchTerm);
@@ -53,6 +58,18 @@
         function recommendedMovies(movieId) {
             var url = recommendations.replace("ID", movieId);
             return $http.get(url);
+        }
+
+        function upcomingMovies() {
+            return $http.get(upcoming);
+        }
+
+        function latestMovies() {
+            return $http.get(latest);
+        }
+
+        function currentMovies() {
+            return $http.get(nowPlaying);
         }
     }
 })();
