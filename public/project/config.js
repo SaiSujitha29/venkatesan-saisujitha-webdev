@@ -43,6 +43,12 @@
                 controller: 'movieController',
                 controllerAs: 'model'
             })
+
+            .when('/search/:searchTerm', {
+                templateUrl: 'home/templates/search-page.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model'
+            })
             .when('/user-private', {
                 templateUrl: 'views/user/templates/user-private-profile.view.client.html',
                 controller: 'userPrivateProjectController',

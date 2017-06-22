@@ -8,12 +8,23 @@
 
         model.searchNewMovies = searchNewMovies;
         model.selectMovie = selectMovie;
-        model.upcomingIndex = 0;
-        model.increaseIndex = function () {
-          model.upcomingIndex++;
+        model.searchPage = searchPage;
+        model.upcomingIndex = 1;
+        model.increaseUpcoming = function () {
+            if(model.upcomingMovies.length <= model.upcomingIndex){
+                model.upcomingIndex = 1;
+            }
+            else {
+                model.upcomingIndex++;
+            }
         };
-        model.decreaseIndex = function () {
-          model.upcomingIndex--;
+        model.decreaseUpcoming = function () {
+            if(model.upcomingIndex == 1){
+                model.upcomingIndex = model.upcomingMovies.length;
+            }
+            else {
+                model.upcomingIndex--;
+            }
         };
 
         function init() {
@@ -36,6 +47,18 @@
                     model.currentMovies = response.data.results;
                 });
 
+            homeService
+                .popularMovies()
+                .then(function (response) {
+                    model.popularMovies = response.data.results;
+                });
+
+            homeService
+                .topRatedMovies()
+                .then(function (response) {
+                    model.topRatedMovies = response.data.results;
+                });
+
         }
         init();
 
@@ -49,6 +72,10 @@
 
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
+        }
+
+        function searchPage(searchTerm) {
+            $location.url('/search/' + searchTerm);
         }
 
     }

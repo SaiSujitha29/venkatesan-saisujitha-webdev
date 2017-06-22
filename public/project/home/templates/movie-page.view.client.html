@@ -30,43 +30,22 @@
         {{cast.name}}
     </div>
 
+    <h4>Similar Movies</h4>
+    <span style="display: inline-block">
+        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left"></div>
+        <div class="col" ng-repeat="movie in model.similarMovie">
+            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
+                 ng-click="model.selectMovie(movie.id)"
+                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
+        </div>
+        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
+    </span>
+
     <!--<div ng-repeat="s in model.similarMovie">-->
     <!--<img ng-click="model.selectMovie(s.id)"-->
     <!--class="thumbnail img-responsive"-->
     <!--ng-src="http://image.tmdb.org/t/p/original{{s.poster_path}}"/>-->
     <!--</div>-->
-
-
-    <div style="height: 305px">
-        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-            <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                <img ng-src="{{slide.image}}" style="margin:auto;">
-                <div class="carousel-caption">
-                    <h4>Slide {{slide.id}}</h4>
-                    <p>{{slide.text}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
-            <button type="button" class="btn btn-info" ng-click="randomize()">Randomize slides</button>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="noWrapSlides">
-                    Disable Slide Looping
-                </label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
-            <br />Enter a negative number or 0 to stop the interval.
-        </div>
-    </div>
-
-
-
 
     <h3>Recommended Movies</h3>
 

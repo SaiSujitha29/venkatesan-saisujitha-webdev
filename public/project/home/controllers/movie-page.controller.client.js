@@ -6,6 +6,23 @@
     function movieController($sce, $location, $routeParams, homeService, $scope) {
         var model = this;
         model.movieId = $routeParams['movieId'];
+        model.upcomingIndex = 1;
+        model.increaseUpcoming = function () {
+            if(model.similarMovie.length <= model.upcomingIndex){
+                model.upcomingIndex = 1;
+            }
+            else {
+                model.upcomingIndex++;
+            }
+        };
+        model.decreaseUpcoming = function () {
+            if(model.upcomingIndex == 1){
+                model.upcomingIndex = model.similarMovie.length;
+            }
+            else {
+                model.upcomingIndex--;
+            }
+        };
 
         function init() {
             homeService
@@ -61,73 +78,6 @@
 
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
-        }
-
-
-
-
-        $scope.myInterval = 5000;
-        $scope.noWrapSlides = false;
-        $scope.active = 0;
-        var slides = $scope.slides = [];
-        var currIndex = 0;
-
-        $scope.addSlide = function(movie) {
-            console.log(movie);
-            var newWidth = 600 + slides.length + 1;
-            slides.push({
-                image: "http://image.tmdb.org/t/p/original" + movie.poster_path,
-                text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
-                id: currIndex++
-            });
-        };
-
-        $scope.randomize = function() {
-            var indexes = generateIndexesArray();
-            assignNewIndexesToSlides(indexes);
-        };
-
-        console.log(model.similarMovie);
-
-        // for(var i =0; i <= model.similarMovie.length; i++){
-        //     $scope.addSlide(model.similarMovie[i]);
-        // }
-        for (i = 0; i < 5; i++) {
-            var curr = model.similarMovie[i];
-            console.log(curr);
-            $scope.addSlide(model.similarMovie[i]);
-        }
-
-        // Randomize logic below
-
-        function assignNewIndexesToSlides(indexes) {
-            for (var i = 0, l = slides.length; i < l; i++) {
-                slides[i].id = indexes.pop();
-            }
-        }
-
-        function generateIndexesArray() {
-            var indexes = [];
-            for (var i = 0; i < currIndex; ++i) {
-                indexes[i] = i;
-            }
-            return shuffle(indexes);
-        }
-
-        // http://stackoverflow.com/questions/962802#962890
-        function shuffle(array) {
-            var tmp, current, top = array.length;
-
-            if (top) {
-                while (--top) {
-                    current = Math.floor(Math.random() * (top + 1));
-                    tmp = array[current];
-                    array[current] = array[top];
-                    array[top] = tmp;
-                }
-            }
-
-            return array;
         }
 
     }
