@@ -46,8 +46,12 @@
     <h4>Upcoming Movies</h4>
 
     <div ng-repeat="movie in model.upcomingMovies">
-        {{movie.poster_path}}
+        <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1"
+        ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" width="100px">
     </div>
+    <div ng-click="model.decreaseIndex()" class="btn btn-default">Prev</div>
+    <div ng-click="model.increaseIndex()" class="btn btn-default">Next</div>
+    {{model.upcomingIndex}}
 
     <h4>Latest Movies</h4>
 

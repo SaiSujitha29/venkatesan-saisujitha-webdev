@@ -8,6 +8,13 @@
 
         model.searchNewMovies = searchNewMovies;
         model.selectMovie = selectMovie;
+        model.upcomingIndex = 0;
+        model.increaseIndex = function () {
+          model.upcomingIndex++;
+        };
+        model.decreaseIndex = function () {
+          model.upcomingIndex--;
+        };
 
         function init() {
             homeService
