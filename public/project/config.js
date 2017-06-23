@@ -54,7 +54,10 @@
             .when('/page/:movieId', {
                 templateUrl: 'home/templates/movie-page.view.client.html',
                 controller: 'movieController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
 
             .when('/search/:searchTerm', {
@@ -96,7 +99,7 @@
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/user/:userId/review/new', {
+            .when('/user/:userId/movie/:movieId/review/new', {
                 templateUrl: 'views/review/templates/review-new.view.client.html',
                 controller: 'reviewNewController',
                 controllerAs: 'model',

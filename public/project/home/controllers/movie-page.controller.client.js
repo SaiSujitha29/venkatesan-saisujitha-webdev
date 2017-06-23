@@ -3,10 +3,12 @@
         .module('MovieApp')
         .controller('movieController', movieController);
 
-    function movieController($sce, $location, $routeParams, homeService, $scope, reviewProjectService) {
+    function movieController(currentUser, $sce, $location, $routeParams, homeService, $scope, reviewProjectService) {
         var model = this;
         model.movieId = $routeParams['movieId'];
+        model.user = currentUser;
         model.upcomingIndex = 1;
+        model.createReview = createReview;
         model.increaseUpcoming = function () {
             if(model.similarMovie.length <= model.upcomingIndex){
                 model.upcomingIndex = 1;
@@ -65,8 +67,9 @@
 
             reviewProjectService
                     .findReviewsByMovieId(model.movieId)
-                    .then(function (reviews) {
-                        model.reviews = reviews;
+                    .then(function (response) {
+                        console.log(response);
+                        model.reviews = response;
                     });
         }
         init();
@@ -86,6 +89,11 @@
             $location.url('/page/' + movieId);
         }
 
+        function createReview(movieId) {
+            if(currentUser){
+                $location.url('/user/'+ currentUser._id + '/movie/'+ movieId + '/review/new');
+            }
+        }
 
 
     }

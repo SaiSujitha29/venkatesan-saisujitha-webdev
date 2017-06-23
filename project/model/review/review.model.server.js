@@ -28,8 +28,9 @@ function findAllReviewsForUser(userId) {
         .exec();
 }
 
-function createReview(userId, review) {
+function createReview(userId, movieId, review) {
     review._reviewer = userId;
+    review.movieId = movieId;
     return reviewProjectModel
         .create(review)
         .then(function (review) {
@@ -78,7 +79,7 @@ function findAllReviews() {
 function findReviewsByMovieId(movieId) {
     return reviewProjectModel
         .find({movieId: movieId})
-        .populate('movieId', 'movieId')
+        .populate('_reviewer')
         .exec();
 }
 

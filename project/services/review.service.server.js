@@ -3,7 +3,7 @@ var reviewProjectModel = require('../model/review/review.model.server');
 var userProjectModel = require('../model/user/user.model.server');
 
 app.get('/api/project/user/:userId/review', findAllReviewsForUser);
-app.post('/api/project/user/:userId/review', createReview);
+app.post('/api/project/user/:userId/movie/:movieId/review', createReview);
 app.put('/api/project/review/:reviewId', updateReview);
 app.get('/api/project/review/:reviewId', findReviewById);
 app.delete('/api/project/review/:reviewId', deleteReview);
@@ -21,9 +21,10 @@ function findAllReviewsForUser(req, res) {
 
 function createReview(req, res) {
     var review = req.body;
-    var userId = req.params.userId;
+    var userId = req.params['userId'];
+    var movieId = req.params.movieId;
     reviewProjectModel
-        .createReview(userId, review)
+        .createReview(userId, movieId, review)
         .then(function (review) {
             res.json(review);
         });

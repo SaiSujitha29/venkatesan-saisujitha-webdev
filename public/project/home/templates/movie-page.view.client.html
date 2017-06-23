@@ -59,6 +59,14 @@
 
     <div>Reviews</div>
 
-    {{model.reviews}}
+    <div ng-repeat="review in model.reviews">
+        {{review.name}}
+    </div>
+
+
+    <a class="btn btn-primary btn-lg pull-down pull-right"
+       ng-click="model.createReview(model.movieId)">
+        CreateReview
+    </a>
 
 </div>

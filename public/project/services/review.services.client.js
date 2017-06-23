@@ -25,8 +25,8 @@
                 });
         }
 
-        function createReview(userId, review) {
-            var url = "/api/project/user/" + userId + "/review";
+        function createReview(userId, movieId, review) {
+            var url = '/api/project/user/'+ userId + '/movie/' + movieId + '/review';
             return $http.post(url, review)
                 .then(function (response) {
                     return response.data;
@@ -66,7 +66,7 @@
         }
 
         function findReviewsByMovieId(movieId) {
-            var url = "api/project/"+movieId;
+            var url = "/api/project/"+movieId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
