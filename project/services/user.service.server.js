@@ -5,6 +5,7 @@ var bcrypt = require("bcrypt-nodejs");
 
 var LocalStrategy1 = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 passport.use(new LocalStrategy1(localStrategy1));
 
@@ -32,15 +33,33 @@ app.get('/auth/facebook/callback',
 
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
+
+
+var googleConfig = {
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : process.env.GOOGLE_CALLBACK_URL
+};
+
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/project/index.html#!/profile',
+        failureRedirect: '/project/index.html#!/login'
+    }));
+
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
 app.get('/api/project/user/:userId', findUserById);
 // findUserByCredentials and findUserByUsername are combined
 // as a single function findUser since they have the same URL pattern
-app.get('/api/project/user', isAdmin, findUser);
-app.post('/api/project/user', createUser);
+//app.get('/api/project/user', isAdmin, findUser);
+app.get('/api/project/user', isAdmin, findAllUsers);
+app.post('/api/project/user', isAdmin, createUser);
 app.put('/api/project/user/:userId', updateUser);
-app.delete('/api/project/user/:userId', deleteUser);
-
-
+app.delete('/api/project/user/:userId', isAdmin, deleteUser);
+//app.delete('/api/project/unregister', unregister);
+app.post('/api/project/unregister', unregister);
 
 function localStrategy1(username, password, done) {
     userProjectModel
@@ -91,6 +110,46 @@ function facebookStrategy(token, refreshToken, profile, done) {
         })
 }
 
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userProjectModel
+        .findUserByGoogleId(profile.id)
+        .then(function (user) {
+            if (user) {
+                return done(null, user);
+            } else {
+                var email = profile.emails[0].value;
+                var emailParts = email.split("@");
+                var newUser = {
+                    username: emailParts[0],
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    email: email,
+                    google: {
+                        id: profile.id,
+                        token: token
+                    }
+                };
+                return userProjectModel.createUser(newUser);
+            }
+        }, function (err) {
+            if (err) {
+                return done(err);
+            }
+        })
+        .then(function (user) {
+                return done(null, user);
+            },
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
+            }
+        );
+}
+
+
+
 function login(req, res) {
     var user = req.user;
     res.json(user);
@@ -133,6 +192,26 @@ function register(req, res) {
         });
 }
 
+/*function unregister(req, res) {
+    userProjectModel
+        .deleteUser(req.user._id)
+        .then(function (status) {
+            req.user.logout();
+            res.sendStatus(200);
+        }, function (err) {
+            console.log(err);
+        });
+}*/
+
+function unregister(req, res) {
+    userProjectModel
+        .deleteUser(req.user._id)
+        .then(function (user) {
+            req.logout();
+            res.sendStatus(200);
+        });
+}
+
 function serializeUser(user, done) {
     done(null, user);
 }
@@ -172,6 +251,19 @@ function findUserById(req, res) {
 //             res.json(users);
 //         });
 // }
+
+function findAllUsers(req, res) {
+    var username = req.query['username'];
+    var password = req.query['password'];
+    if(username && password) {
+        return findUserByCredentials(req, res);
+    }
+    userProjectModel
+        .findAllUsers()
+        .then(function (users) {
+            res.json(users);
+        });
+}
 
 function findUser(req, res) {
     var username = req.query['username'];
@@ -229,11 +321,14 @@ function updateUser(req, res) {
         });
 }
 
+
 function deleteUser(req, res) {
     var userId = req.params.userId;
     userProjectModel
         .deleteUser(userId)
-        .then(function () {
+        .then(function (){
             res.sendStatus(200);
         });
 }
+
+

@@ -17,7 +17,8 @@
             findUserByUsername: findUserByUsername,
             findUserById: findUserById,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            unregister: unregister
         };
 
         return api;
@@ -83,9 +84,16 @@
                 });
 
         }
-        
+
         function checkLoggedIn() {
             var url = "/api/project/checkLoggedIn";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        function checkAdmin() {
+            var url = "/api/project/checkAdmin";
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -107,12 +115,13 @@
                     return response.data;
                 });
         }
-
-        function checkAdmin() {
-            var url = "/api/project/checkAdmin";
-            return $http.get(url)
+        function unregister(userObj) {
+            var url = "/api/project/unregister";
+            return $http.post(url, userObj)
                 .then(function (response) {
                     return response.data;
+                }, function (err) {
+                    console.log(err);
                 });
         }
 

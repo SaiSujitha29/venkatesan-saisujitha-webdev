@@ -1,17 +1,8 @@
+
 input.form-control,
 textarea.form-control,
 select.form-control{
     margin-bottom: 5px;
-}
-.bcol {
-    float: left;
-}
-
-.col{
-    width: 200px;
-    float: left;
-    margin-left: 40px;
-
 }
 
 .center{
@@ -60,6 +51,22 @@ body {
 
 a:hover {
     text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown .dropdown-menu .dropdown-toggle {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown-menu .dropdown-toggle {
+    background-color: transparent ;
+    text-decoration: none;
+
+}
+
+.glyphicon-cog {
+    color: white;
 }
 
 .navbar-default {
@@ -89,6 +96,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 .navbar.navbar-default a {
     color: white;
 }
+
 
 .scrollable-left {
     position: absolute;
@@ -168,4 +176,38 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 
 .cog{
     z-index: 1;
+}
+.nav>li>a:hover, .nav>li>a:focus, .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+    background:#fff;
+}
+
+button{
+    width:200px;
+    height:50px;
+}
+
+button .msg-follow,
+button .msg-following,
+button .msg-unfollow{
+    display: none;
+}
+
+button .msg-follow{
+    display: inline;
+}
+
+button.following .msg-follow{
+    display: none;
+}
+
+button.following .msg-following{
+    display: inline;
+}
+
+button.following:not(.wait):hover .msg-following{
+    display: none;
+}
+
+button.following:not(.wait):hover .msg-unfollow{
+    display: inline;
 }

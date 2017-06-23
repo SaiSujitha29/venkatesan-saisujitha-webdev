@@ -11,16 +11,35 @@ userProjectModel.updateUser = updateUser;
 userProjectModel.findUserByUsername = findUserByUsername;
 userProjectModel.findUserByFacebookId = findUserByFacebookId;
 userProjectModel.updateFacebookToken = updateFacebookToken;
+userProjectModel.findAllUsers = findAllUsers;
+userProjectModel.findUserByGoogleId = findUserByGoogleId;
+
 
 module.exports = userProjectModel;
 
+function findAllUsers() {
+    return userProjectModel.find();
+}
+
+
 function createUser(user) {
+  /*  if(user.roles) {
+        user.roles = user.roles.split(',');
+    } else {
+        user.roles = ['USER'];
+    }
+    return userProjectModel.create(user);*/
+
     user.roles = ['USER'];
+
     return userProjectModel.create(user);
 }
 
 function findUserById(userId) {
-    return userProjectModel.findById(userId);
+    return userProjectModel
+        .findById(userId)
+        .populate('reviews')
+        .exec();
 }
 
 function findUserByCredentials(username, password) {
@@ -33,12 +52,14 @@ function deleteUser(userId) {
 }
 
 function updateUser(userId, user) {
+    //user.roles = user.roles.split(',');
     return userProjectModel.update({_id: userId}, {
         $set: {
             username: user.username,
             email: user.email,
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            roles: user.roles
         }
     });
 }
@@ -49,6 +70,10 @@ function findUserByUsername(username) {
 
 function findUserByFacebookId(facebookId) {
     return userProjectModel.findOne({'facebook.id': facebookId});
+}
+
+function findUserByGoogleId(googleId) {
+    return userProjectModel.findOne({'google.id':googleId});
 }
 
 function updateFacebookToken(userId, facebookId, token) {
@@ -64,4 +89,6 @@ function updateFacebookToken(userId, facebookId, token) {
             }
         });
 }
+
+
 

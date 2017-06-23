@@ -3,9 +3,10 @@
         .module('MovieApp')
         .controller('homeController', homeController);
 
-    function homeController(homeService, $location) {
+    function homeController(currentUser, homeService, userProjectService, $location) {
         var model = this;
-
+        model.currentUser = currentUser;
+        model.logout = logout;
         model.searchNewMovies = searchNewMovies;
         model.selectMovie = selectMovie;
         model.searchPage = searchPage;
@@ -76,6 +77,14 @@
 
         function searchPage(searchTerm) {
             $location.url('/search/' + searchTerm);
+        }
+
+        function logout() {
+            userProjectService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
     }

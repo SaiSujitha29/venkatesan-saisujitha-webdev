@@ -48,10 +48,10 @@
         function searchVideos(movieId) {
             var url = searchVideo.replace("ID", movieId);
             return $http.get(url);
-                // .then(function (response) {
-                //     console.log(response.data);
-                //     return response.data;
-                // });
+            // .then(function (response) {
+            //     console.log(response.data);
+            //     return response.data;
+            // });
         }
 
         function similarMovies(movieId) {

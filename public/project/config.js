@@ -10,7 +10,10 @@
             .when('/', {
                 templateUrl: 'home/templates/home.html',
                 controller: 'homeController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
 
             .when('/login', {
@@ -26,18 +29,28 @@
             })
 
             .when('/profile', {
-                templateUrl: 'views/user/templates/profile.view.client.html',
+                templateUrl: 'views/user/templates/user-private-profile.view.client.html',
                 controller: 'profileController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/homefeed', {
+
+            .when('/profile-public', {
+                templateUrl: 'views/user/templates/user-public-profile.view.client.html',
+                controller: 'userPublicProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn,
+                    currentUser: checkCurrentUser
+                }
+            })
+        /*    .when('/homefeed', {
                 templateUrl: 'views/user/templates/register.view.client.html',
                 controller: 'registerProjectController',
                 controllerAs: 'model'
-            })
+            })*/
             .when('/page/:movieId', {
                 templateUrl: 'home/templates/movie-page.view.client.html',
                 controller: 'movieController',
@@ -47,17 +60,6 @@
             .when('/search/:searchTerm', {
                 templateUrl: 'home/templates/search-page.view.client.html',
                 controller: 'searchController',
-                controllerAs: 'model'
-            })
-            .when('/user-private', {
-                templateUrl: 'views/user/templates/user-private-profile.view.client.html',
-                controller: 'userPrivateProjectController',
-                controllerAs: 'model'
-            })
-
-            .when('/user-public', {
-                templateUrl: 'views/user/templates/user-public-profile.view.client.html',
-                controller: 'userPublicProjectController',
                 controllerAs: 'model'
             })
 
@@ -74,6 +76,64 @@
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkAdmin
+                }
+            })
+
+           /* .when('/admin/reviews', {
+                templateUrl: 'views/admin/templates/admin-reviews.view.client.html',
+                controller: 'adminReviewsProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })*/
+
+            .when('/user/:userId/review', {
+                templateUrl: 'views/review/templates/review-list.view.client.html',
+                controller: 'reviewListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/:userId/review/new', {
+                templateUrl: 'views/review/templates/review-new.view.client.html',
+                controller: 'reviewNewController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/:userId/review/:reviewId', {
+                templateUrl: 'views/review/templates/review-edit.view.client.html',
+                controller: 'reviewEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/:userId/post', {
+                templateUrl: 'views/post/templates/post-list.view.client.html',
+                controller: 'postListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/:userId/post/new', {
+                templateUrl: 'views/post/templates/post-chooser.view.client.html',
+                controller: 'postNewController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/:userId/post/:postId', {
+                templateUrl: 'views/post/templates/post-edit.view.client.html',
+                controller: 'postEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
                 }
             });
     }
@@ -92,7 +152,21 @@
             });
         return deferred.promise;
     }
-    
+
+    function checkCurrentUser($q, $location, userProjectService) {
+        var deferred = $q.defer();
+        userProjectService
+            .checkLoggedIn()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.resolve({});
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
+    }
+
     function checkLoggedIn($q, $location, userProjectService) {
         var deferred = $q.defer();
         userProjectService

@@ -1,67 +1,113 @@
+<!--
+// username
+// reviews
+// number of followers
+// ability to follow/unfollow
+//-->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
 
             <p class="navbar-text pull-left">
-
                 <a href="#!/login"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
 
-            <a class="navbar-brand"
-               href="#!/user/{{model.user._id}}">
-                Profile
+            <a class="navbar-brand">
+                {{model.user.username}}
             </a>
 
             <p class="navbar-text pull-right">
-
-                <a ng-click="model.updateUser(model.user)"
+                <a href="#!/"
                    class="navbar-link">
-                    <span class="glyphicon glyphicon-ok "></span>
-                </a>
-            </p>
-
-            <p class="navbar-text pull-right">
-
-                <a ng-click="model.unregister()"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
-            </p>
-            <p class="navbar-text pull-right">
-
-                <a ng-click="model.logout()"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-log-out"></span>
+                    <span class="glyphicon glyphicon-home"></span>
                 </a>
             </p>
         </div>
     </div>
 </nav>
-
-<div ng-show="model.user.username">
-    {{vm.user.username}}
-</div>
-
-
 <br>
 
-<div class="container fluid">
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#followers">Followers</a></li>
-        <li><a data-toggle="tab" href="#reviews">Reviews</a></li>
-    </ul>
+<div ng-if="(model.user === user)">
+<button class = "btn btn-info pull-right">
+    <span class="msg-follow">Follow</span>
+    <span class="msg-following">Following</span>
+    <span class="msg-unfollow">Unfollow</span>
+</button>
+</div>
 
-    <div class="tab-content">
-        <div id="followers" class="tab-pane fade in active">
-            <h3>Followers</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div id="reviews" class="tab-pane fade">
-            <h3>Reviews</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
+    <div class="container fluid" ng-init="model.show='followers'">
+        <ul class="nav nav-tabs">
+            <li ng-if="!(model.user.roles.indexOf('CELEBRITY') > 0)"
+                ng-init="model.show ='reviews'"
+                ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
+                <a>Reviews</a>
+            </li>
+            <li ng-if="(model.user.roles.indexOf('CELEBRITY') > 0)"
+                ng-init="model.show ='posts'"
+                ng-click="model.show='posts'" ng-class="{'active': model.show==='posts'}">
+                <a>Posts</a>
+            </li>
+            <li ng-click="model.show ='followers'" ng-class="{'active': model.show==='followers'}">
+                <a>Followers</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div ng-show="model.show === 'followers'" id="followers" class="tab-pane fade in active">
+                <h3>Followers</h3>
+                <ul class="list-group">
+                    <li ng-repeat="review in model.reviews" class="list-group-item">
+                        {{review.name}}
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="model.show === 'reviews'" id="reviews" class="tab-pane fade in active">
+                <h3>Reviews</h3>
+                <ul class="list-group">
+                    <li ng-repeat="review in model.user.reviews" class="list-group-item">
+                        {{review.name}}
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="model.show === 'posts'" id="posts" class="tab-pane fade in active">
+                <h3>Posts</h3>
+                <ul class="list-group">
+                    <li ng-repeat="post in model.user.posts" class="list-group-item">
+                        {{post.name}}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!--
+<div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
+    <div class="container fluid" ng-init="model.show='followers'">
+        <ul class="nav nav-tabs">
+            <li ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}"><a>Reviews</a></li>
+        </ul>
+        <div class="tab-content">
+            <div ng-show="model.show === 'reviews'" id="reviews" class="tab-pane fade in active">
+                <h3>Reviews</h3>
+                <ul class="list-group">
+                    <li ng-repeat="review in model.user.reviews" class="list-group-item">
+                        {{review.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>-->
