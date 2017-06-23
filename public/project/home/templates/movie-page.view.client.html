@@ -26,7 +26,7 @@
         {{genre.name}}
     </div>
 
-    <div ng-repeat="cast in model.casts">
+    <div ng-repeat="cast in model.casts" style="float: left">
         {{cast.name}}
     </div>
 
@@ -56,5 +56,9 @@
     <!--</div>-->
 
     <!--<iframe width="100%" src="{{model.getYouTubeEmbedUrl()}}"></iframe>-->
+
+    <div>Reviews</div>
+
+    {{model.reviews}}
 
 </div>

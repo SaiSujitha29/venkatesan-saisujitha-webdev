@@ -8,6 +8,7 @@ app.put('/api/project/review/:reviewId', updateReview);
 app.get('/api/project/review/:reviewId', findReviewById);
 app.delete('/api/project/review/:reviewId', deleteReview);
 app.get('/api/project/review', isAdmin, findAllReviews);
+app.get('/api/project/:movieId', findReviewsByMovieId);
 
 function findAllReviewsForUser(req, res) {
     reviewProjectModel
@@ -79,4 +80,14 @@ function isAdmin(req, res, next) {
     } else {
         res.sendStatus(401);
     }
+}
+
+function findReviewsByMovieId(req, res) {
+    var movieId = req.params['movieId'];
+    console.log(movieId);
+     reviewProjectModel
+        .findReviewsByMovieId(movieId)
+        .then(function (reviews) {
+            res.json(reviews);
+        });
 }

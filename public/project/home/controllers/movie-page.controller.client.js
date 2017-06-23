@@ -3,7 +3,7 @@
         .module('MovieApp')
         .controller('movieController', movieController);
 
-    function movieController($sce, $location, $routeParams, homeService, $scope) {
+    function movieController($sce, $location, $routeParams, homeService, $scope, reviewProjectService) {
         var model = this;
         model.movieId = $routeParams['movieId'];
         model.upcomingIndex = 1;
@@ -61,7 +61,13 @@
                     for(i =0; i < data.length; i++){
                         model.recommendedMovie.push(data[i]);
                     }
-                })
+                });
+
+            reviewProjectService
+                    .findReviewsByMovieId(model.movieId)
+                    .then(function (reviews) {
+                        model.reviews = reviews;
+                    });
         }
         init();
 
@@ -79,6 +85,8 @@
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
         }
+
+
 
     }
 

@@ -12,6 +12,7 @@ var userProjectModel = require('../user/user.model.server');
 // update view
 
 reviewProjectModel.findAllReviewsForUser = findAllReviewsForUser;
+reviewProjectModel.findReviewsByMovieId = findReviewsByMovieId;
 reviewProjectModel.createReview = createReview;
 reviewProjectModel.updateReview = updateReview;
 reviewProjectModel.deleteReview = deleteReview;
@@ -72,6 +73,13 @@ function findReviewById(reviewId) {
 
 function findAllReviews() {
     return reviewProjectModel.find();
+}
+
+function findReviewsByMovieId(movieId) {
+    return reviewProjectModel
+        .find({movieId: movieId})
+        .populate('movieId', 'movieId')
+        .exec();
 }
 
 

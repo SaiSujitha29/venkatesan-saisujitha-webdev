@@ -5,6 +5,16 @@ select.form-control{
     margin-bottom: 5px;
 }
 
+.bcol {
+    float: left;
+}
+
+.col{
+    width: 200px;
+    float: left;
+    margin-left: 40px;
+}
+
 .center{
     text-align: center;
 }

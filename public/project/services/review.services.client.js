@@ -11,7 +11,8 @@
             updateReview: updateReview,
             deleteReview: deleteReview,
             findReviewById: findReviewById,
-            findAllReviews: findAllReviews
+            findAllReviews: findAllReviews,
+            findReviewsByMovieId: findReviewsByMovieId
         };
 
         return api;
@@ -58,6 +59,14 @@
 
         function findAllReviews(reviewer, review, rating) {
             var url = "/api/project/review";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findReviewsByMovieId(movieId) {
+            var url = "api/project/"+movieId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
