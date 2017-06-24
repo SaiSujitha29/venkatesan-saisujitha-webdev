@@ -11,6 +11,7 @@ userModel.updateUser = updateUser;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.updateToken = updateToken;
+userModel.
 
 module.exports = userModel;
 

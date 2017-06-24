@@ -6,7 +6,7 @@
     function movieController(currentUser, $sce, $location, $routeParams, homeService, $scope, reviewProjectService) {
         var model = this;
         model.movieId = $routeParams['movieId'];
-        model.user = currentUser;
+        //model.user = currentUser;
         model.upcomingIndex = 1;
         model.createReview = createReview;
         model.increaseUpcoming = function () {
@@ -27,6 +27,7 @@
         };
 
         function init() {
+
             homeService
                 .searchMovieById(model.movieId)
                 .then(function (response) {
@@ -76,6 +77,7 @@
 
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.selectMovie = selectMovie;
+        model.selectReview = selectReview;
 
         function getYouTubeEmbedUrl() {
             return homeService
@@ -90,11 +92,21 @@
         }
 
         function createReview(movieId) {
-            if(currentUser){
+            if(currentUser._id){
                 $location.url('/user/'+ currentUser._id + '/movie/'+ movieId + '/review/new');
+                }
+            else {
+                model.message = "Please login to continue!!!"
             }
         }
 
+        function selectReview(review) {
+            console.log(review);
+            reviewer = review._reviewer;
+            var userId = reviewer._id;
+            console.log(userId);
+            $location.url('/user/'+ userId + '/profile-public');
+        }
 
     }
 

@@ -37,12 +37,11 @@
                 }
             })
 
-            .when('/profile-public', {
+            .when('/user/:userId/profile-public', {
                 templateUrl: 'views/user/templates/user-public-profile.view.client.html',
                 controller: 'userPublicProjectController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn,
                     currentUser: checkCurrentUser
                 }
             })
@@ -56,7 +55,7 @@
                 controller: 'movieController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkCurrentUser
                 }
             })
 

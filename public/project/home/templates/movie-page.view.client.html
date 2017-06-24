@@ -22,11 +22,11 @@
     <h4>{{model.movie.release_date}}</h4>
     <h4>{{model.movie.vote_average}}</h4>
     <h4>{{model.movie.vote_count}}</h4>
-    <div ng-repeat="genre in model.genres">
+    <div ng-repeat="genre in model.genres" ng-show="$index||$index+1">
         {{genre.name}}
     </div>
 
-    <div ng-repeat="cast in model.casts" style="float: left">
+    <div ng-repeat="cast in model.casts" ng-show="$index||$index+1||$index+2">
         {{cast.name}}
     </div>
 
@@ -59,10 +59,19 @@
 
     <div>Reviews</div>
 
-    <div ng-repeat="review in model.reviews">
-        {{review.name}}
+    <div ng-show="model.reviews.length != 0">
+        <div ng-repeat="review in model.reviews">
+            <div ng-click="model.selectReview(review)">{{review.name}}</div>
+        </div>
     </div>
 
+    <div ng-show="model.reviews == 0">
+        No reviews yet.. Be the first to review it!
+    </div>
+
+    <div ng-show="model.message" class="alert alert-danger center">
+        {{model.message}}
+    </div>
 
     <a class="btn btn-primary btn-lg pull-down pull-right"
        ng-click="model.createReview(model.movieId)">
