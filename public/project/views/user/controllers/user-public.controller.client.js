@@ -83,6 +83,8 @@
                 .then(function (response) {
                     console.log(response);
                 });
+            model.isfollow = true;
+            $location.url('/user/'+ model.userId + '/profile-public');
         }
 
         function unfollow(follow, follower) {
@@ -92,6 +94,8 @@
                 .then(function (response) {
                     console.log(response);
                 });
+            model.isfollow = false;
+            $location.url('/user/'+ model.userId + '/profile-public');
         }
 
         // function followUser(newFollowerId) {
