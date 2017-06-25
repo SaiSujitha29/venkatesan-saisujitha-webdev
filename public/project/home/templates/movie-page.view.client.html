@@ -73,9 +73,34 @@
         </div>
     </div>
 
+    <div class="panel-body col-sm-4">
+        <div ng-if="model.similarMovie">
+            <div class="caption">
+                <h4>Similar Movies</h4>
+            </div>
+            <hr>
+
+                <a ng-repeat="movie in model.similarMovie | limitTo: 3">
+                    <img class="thumbnail img-responsive" src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+                </a>
+
+
+            <ul class="rel-results">
+                <li ng-repeat="movie in model.similarmovies.results | limitTo:10">
+                    <a href="#{{model.routerelated}}/{{movie.id}}" id="{{ $index + 1 }}">{{ movie.title }}</a>,
+                    {{ movie.release_date | limitTo:4}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</div>
+
 </div>
 
 <div class="container-fluid main" >
+
     <div class="panel panel-body">
 
         <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
@@ -118,6 +143,7 @@
             </div>
         </div>
     </div>
+
 
     </div>
 

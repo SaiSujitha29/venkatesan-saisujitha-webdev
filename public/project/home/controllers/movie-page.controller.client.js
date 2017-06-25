@@ -3,7 +3,8 @@
         .module('MovieApp')
         .controller('movieController', movieController);
 
-    function movieController(currentUser, $sce, $location, $routeParams, homeService, $scope, reviewProjectService) {
+    function movieController(currentUser, $sce, $location, $routeParams, homeService, $scope,
+                             reviewProjectService,postProjectService) {
         var model = this;
         model.movieId = $routeParams['movieId'];
         model.loggedUser = currentUser;
