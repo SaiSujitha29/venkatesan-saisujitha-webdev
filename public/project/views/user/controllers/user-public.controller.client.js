@@ -29,14 +29,16 @@
 
             var following = currentUser.following;
             model.isfollow = false;
-            for(i = 0; i < following.length; i++){
-                var currfollower = following[i];
-                console.log("in here");
-                console.log(currfollower._id);
-                console.log(model.userId);
-                if(currfollower._id === model.userId){
-                    model.isfollow = true;
-                    break;
+            if(following){
+                for(i = 0; i < following.length; i++){
+                    var currfollower = following[i];
+                    console.log("in here");
+                    console.log(currfollower._id);
+                    console.log(model.userId);
+                    if(currfollower._id === model.userId){
+                        model.isfollow = true;
+                        break;
+                    }
                 }
             }
 

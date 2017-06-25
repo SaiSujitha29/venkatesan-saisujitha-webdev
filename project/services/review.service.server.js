@@ -4,7 +4,7 @@ var userProjectModel = require('../model/user/user.model.server');
 
 app.get('/api/project/user/:userId/review', findAllReviewsForUser);
 app.post('/api/project/user/:userId/movie/:movieId/review', createReview);
-app.put('/api/project/review/:reviewId', updateReview);
+app.put('/api/project/user/:userId/movie/:movieId/review/:reviewId', updateReview);
 app.get('/api/project/review/:reviewId', findReviewById);
 app.delete('/api/project/review/:reviewId', deleteReview);
 app.get('/api/project/review', isAdmin, findAllReviews);
@@ -32,9 +32,11 @@ function createReview(req, res) {
 
 function updateReview(req, res) {
     var review = req.body;
+    var userId = req.params['userId'];
+    var movieId = req.params.movieId;
     var reviewId =  req.params.reviewId;
     reviewProjectModel
-        .updateReview(reviewId, review)
+        .updateReview(userId, movieId, reviewId, review)
         .then(function (status) {
             res.sendStatus(200);
         }, function(err) {

@@ -43,12 +43,14 @@ function createReview(userId, movieId, review) {
         });
 }
 
-function updateReview(reviewId, newReview) {
+function updateReview(userId, movieId, reviewId, review) {
     return reviewProjectModel.update({_id: reviewId}, {
         $set: {
-            name: newReview.name,
-            review: newReview.review,
-            rating: newReview.rating
+            _reviewer: userId,
+            name: review.name,
+            movieId: movieId,
+            review: review.review,
+            rating: review.rating
         }
     });
 

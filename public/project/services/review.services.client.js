@@ -33,8 +33,8 @@
                 });
         }
 
-        function updateReview(reviewId, review) {
-            var url = "/api/project/review/" + reviewId;
+        function updateReview(userId, movieId, reviewId, review) {
+            var url = '/api/project/user/' + userId + '/movie/' + movieId + '/review/' + reviewId;
             return $http.put(url, review)
                 .then(function (response) {
                     return response.data;

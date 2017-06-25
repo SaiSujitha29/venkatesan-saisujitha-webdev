@@ -106,7 +106,7 @@
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/user/:userId/review/:reviewId', {
+            .when('/user/:userId/movie/:movieId/review/:reviewId', {
                 templateUrl: 'views/review/templates/review-edit.view.client.html',
                 controller: 'reviewEditController',
                 controllerAs: 'model',

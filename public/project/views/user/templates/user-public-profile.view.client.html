@@ -30,8 +30,10 @@
 </nav>
 <br>
 
-
-<div ng-show="model.loggedUser._id">
+<!--{{model.user}}-->
+<!--{{model.loggedUser}}-->
+<!--{{model.user._id === model.loggedUser._id}}-->
+<div ng-show="model.loggedUser._id" ng-if="model.user._id !== model.loggedUser._id">
 <button class = "btn btn-info pull-right">
     <span class="msg-follow">
         <div ng-click="model.follow(model.user, model.loggedUser)">Follow</div>
@@ -45,7 +47,7 @@
 </button>
 </div>
 
-<div ng-show="model.loggedUser._id">
+<div ng-show="model.loggedUser._id" ng-if="model.user._id !== model.loggedUser._id">
     <span class="msg-following btn btn-info pull-right">
         <div ng-click="model.unfollow(model.user, model.loggedUser)">Following</div>
     </span>
@@ -86,7 +88,7 @@
                 </ul>
             </div>
             <div ng-show="model.show === 'following'" id="following" class="tab-pane fade in active">
-                <h3>Followers</h3>
+                <h3>Following</h3>
                 <ul class="list-group">
                     <li ng-repeat="following in model.user.following"
                         class="list-group-item"
