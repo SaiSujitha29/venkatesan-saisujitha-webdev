@@ -9,6 +9,7 @@
         model.loggedUser = currentUser;
         model.upcomingIndex = 1;
         model.createReview = createReview;
+        model.canCreate = false;
         model.increaseUpcoming = function () {
             if(model.similarMovie.length <= model.upcomingIndex){
                 model.upcomingIndex = 1;
@@ -38,6 +39,7 @@
                     //document.body.style.background = 'url(' + 'http://image.tmdb.org/t/p/original' + model.path + ') no-repeat top left';
                     //document.body.style.backgroundSize = 1;
                 });
+
 
             homeService
                 .searchCast(model.movieId)
@@ -72,6 +74,10 @@
                         console.log(response);
                         model.reviews = response;
                     });
+
+            if(model.loggedUser._id) {
+                model.canCreate = true;
+            }
         }
         init();
 
@@ -98,13 +104,21 @@
             $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
         }
 
-        function createReview(movieId) {
-            if(currentUser._id){
-                $location.url('/user/'+ currentUser._id + '/movie/'+ movieId + '/review/new');
-                }
-            else {
-                model.message = "Please login to continue!!!"
+        function createReview(review) {
+            console.log(review);
+            if(typeof review === 'undefined') {
+                model.error = "Review name required!";
+                return;
             }
+            return reviewProjectService
+                .createReview(model.loggedUser._id, model.movieId, review);
+            $location.url('/test/page/'+model.movieId);
+            // if(currentUser._id){
+            //     $location.url('/user/'+ currentUser._id + '/movie/'+ movieId + '/review/new');
+            //     }
+            // else {
+            //     model.message = "Please login to continue!!!"
+            // }
         }
 
         function deleteReview(review) {

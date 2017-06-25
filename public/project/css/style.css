@@ -50,7 +50,15 @@ div.container-fluid.user-main {
     padding-right: 50px;
 }
 
+div.container-fluid.main {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
 body {
+    background-color: gainsboro;
     padding-top: 50px;
     padding-bottom: 60px;
 }

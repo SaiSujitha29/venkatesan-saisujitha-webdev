@@ -6,6 +6,18 @@
     function configuration($routeProvider) {
         $routeProvider
 
+            .when('/test', {
+                templateUrl: 'home/templates/test.html'
+            })
+            // .when('/test/page/:movieId',{
+            //     templateUrl: 'home/templates/movie-page.test.html',
+            //     controller: 'movieController',
+            //     controllerAs: 'model',
+            //     resolve: {
+            //         currentUser: checkCurrentUser
+            //     }
+            // })
+
             // user routing
             .when('/', {
                 templateUrl: 'home/templates/home.html',

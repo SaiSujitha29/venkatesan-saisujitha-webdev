@@ -3,192 +3,170 @@
 
         <p class="navbar-text pull-left">
             <a class="navbar-link" href="#!/">
-                <span class="glyphicon glyphicon-hand-left btn-sm"></span>
+                <span class="glyphicon glyphicon-hand-left btn"></span>
             </a>
         </p>
 
         <br>
-
         <h3 class="navbar-text" style="color: white">Movie Page</h3>
     </div>
 </nav>
 
-<div class="container-fluid user-main">
+<div class="container-fluid main" style="padding-top: 50px; ">
 
-    <section>
+    <div class="panel zoomInRight col-sm-8" style="padding-top: 15px">
+
+        <img class="thumbnail img-responsive" src="http://image.tmdb.org/t/p/original{{model.movie.poster_path}}"/>
+
         <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
-            <div class="container fluid user-main" ng-init="model.show='info'" style="padding-top: 50px">
-                <ul class="nav nav-tabs">
-                    <li ng-init="model.show ='info'"
-                        ng-click="model.show='info'" ng-class="{'active': model.show==='info'}">
-                        <a>Basic Info</a>
-                    </li>
-                    <li ng-init="model.show ='cast'"
-                        ng-click="model.show='cast'" ng-class="{'active': model.show==='cast'}">
-                        <a>Cast and Genre</a>
-                    </li>
-                </ul>
-                <div ng-show="model.show === 'info'"
-                     id="info"
-                     class="tab-pane fade in active">
-                    <ul class="list-group">
-                        <div class="row content">
-                            <div class="col-xs-6 hidden-xs">
-                                <ul class="list-group">
-                                    <div class ="list-group-item">
-                                        <img class="thumbnail img-responsive" width="200px"
-                                             ng-src="http://image.tmdb.org/t/p/original{{model.movie.poster_path}}"/>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="col-xs-6">
-                                <ul class="list-group">
-                                    <div class ="list-group-item">
-                                        <h3>Title: {{model.movie.title}}</h3>
-                                        <h4>Release Status: {{model.movie.status}}</h4>
-                                        <h4>Release Date: {{model.movie.release_date}}</h4>
-                                        <h4>{{model.movie.vote_average}}</h4>
-                                        <h4>{{model.movie.vote_count}}</h4>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </ul>
-                </div>
-                <div ng-show="model.show === 'cast'"
-                     id="cast"
-                     class="tab-pane fade in active">
-                    <h3>Cast and Genre</h3>
-                    <ul class="list-group">
-
-                        <h4>Genre</h4>
-                        <div class="row">
-                            <div class="" ng-repeat="i in model.genres">
-                                <div class="clearfix" ng-if="$index % 4 == 0"></div>
-                                <div class="col">
-                                    <h5>{{ i.name }}</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
-                            Cast
-                        </button>
-
-                        <!--<h4>Cast</h4>-->
-                        <div class="row" id="demo" class="collapse">
-                            <div class="" ng-repeat="i in model.casts">
-                                <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                                <div class="col">
-                                    <h5>{{ i.name }}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <br>
-    <br>
-
-    <!--<iframe width="100%" src="{{model.getYouTubeEmbedUrl()}}"></iframe>-->
-
-    <section>
-        <h3>Reviews</h3>
-
-        <!--<ul class="list-group">-->
-            <!--&lt;!&ndash;<li class="list-group-item active">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div class="col-xs-3">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<b>Reviewer</b>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div class="col-xs-2">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<b>Review</b>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div class="col-xs-6">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<b>Rating</b>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--<li ng-repeat="review in model.reviews" class="list-group-item">-->
-                <!--<div class="row">-->
-                    <!--<ul>-->
-                    <!--<div class="col-xs-3">-->
-                        <!--{{review.name}}-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2">-->
-                        <!--{{review.rating}}-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-6">-->
-                        <!--{{review.review}}-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-1" ng-show="review._reviewer._id === model.loggedUser._id">-->
-                      <!--<span ng-click="model.editReview(review)"-->
-                            <!--class="glyphicon glyphicon-pencil pull-right"></span>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-1" ng-show="review._reviewer._id === model.loggedUser._id">-->
-                      <!--<span ng-click="model.deleteReview(review)"-->
-                            <!--class="glyphicon glyphicon-remove pull-right"></span>-->
-                    <!--</div>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</li>-->
-        <!--</ul>-->
-
-        <ul class="list-group" ng-show="model.reviews.length != 0">
-            <div class="row content" ng-repeat="review in model.reviews">
+            <ul class="nav nav-tabs">
+                <li ng-init="model.show ='info'"
+                    ng-click="model.show='info'" ng-class="{'active': model.show==='info'}">
+                    <a>Basic Info</a>
+                </li>
+                <li ng-init="model.show ='cast'"
+                    ng-click="model.show='cast'" ng-class="{'active': model.show==='cast'}">
+                    <a>Cast and Genre</a>
+                </li>
+            </ul>
+            <div ng-show="model.show === 'info'"
+                 id="info"
+                 class="tab-pane fade in active">
                 <ul class="list-group">
-                    <div class ="list-group-item">
-                        <li>
-                            <div ng-click="model.selectReview(review)">{{review.name}} {{review.rating}}</div>
-                            <div>{{review.review}}</div>
-                        </li>
+                    <h3>{{model.movie.title}}</h3>
+                    <h4>Release Date: {{model.movie.vote_average}}</h4>
+                    <h4>Release Date: {{model.movie.release_date}}</h4>
+                    <h4>Summary</h4>
+                    <p>{{model.movie.overview}}</p>
+                </ul>
+            </div>
+            <div ng-show="model.show === 'cast'"
+                 id="cast"
+                 class="tab-pane fade in active">
+                <h3>Cast and Genre</h3>
+                <ul class="list-group">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#genre">
+                        Genre
+                    </button>
+                    <div class="row" id="genre" class="collapse">
+                        <div class="" ng-repeat="i in model.genres | limitTo:15">
+                            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                            <div class="col">
+                                {{i.name}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
+                        Cast
+                    </button>
+                    <div class="row" id="demo" class="collapse">
+                        <div class="" ng-repeat="i in model.casts | limitTo:15">
+                            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                            <div class="col">
+                                {{i.name}}
+                            </div>
+                        </div>
                     </div>
                 </ul>
             </div>
-        </ul>
-
-        <div ng-show="model.reviews == 0">
-            No reviews yet.. Be the first to review it!
         </div>
+    </div>
 
-        <div ng-show="model.message" class="alert alert-danger center">
-            {{model.message}}
+</div>
+
+<div class="container-fluid main" >
+    <div class="panel panel-body">
+
+        <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
+            <ul class="nav nav-tabs">
+                <li ng-init="model.show ='reviews'"
+                    ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
+                    <a>Reviews</a>
+                </li>
+                <li ng-init="model.show ='Posts'"
+                    ng-click="model.show='Posts'" ng-class="{'active': model.show==='Posts'}">
+                    <a>Posts</a>
+                </li>
+            </ul>
+            <div ng-show="model.show === 'reviews'"
+                 id="reviews"
+                 class="tab-pane fade in active">
+
+                <ul class="list-group" ng-show="model.reviews.length != 0">
+                    <div class="row content" ng-repeat="review in model.reviews">
+                        <ul class="list-group">
+                            <div class ="list-group-item">
+                                <li>
+                                    <div ng-click="model.selectReview(review)">{{review.review}}</div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </ul>
+                <div ng-show="model.reviews == 0">
+                    No reviews yet.. Be the first to review it!
+                </div>
+            </div>
+            <div ng-show="model.show === 'Posts'"
+                 id="Posts"
+                 class="tab-pane fade in active">
+                <h3>Posts</h3>
+                <ul class="list-group">
+
+                </ul>
+            </div>
         </div>
+    </div>
 
-        <a class="btn btn-primary btn-sm pull-down pull-right"
-           ng-click="model.createReview(model.movieId)">
-            CreateReview
-        </a>
+    </div>
 
-    </section>
+<div class="container-fluid main">
+    <div class="panel panel-body">
 
-    <br>
-    <br>
-    <h4>Similar Movies</h4>
-    <span style="display: inline-block">
-        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left"></div>
-        <div class="col" ng-repeat="movie in model.similarMovie">
-            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
-                 ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
+        <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
+            <ul class="nav nav-tabs">
+                <li ng-init="model.show ='createReview'"
+                    ng-click="model.show='createReview'" ng-class="{'active': model.show==='createReview'}">
+                    <a>createReview</a>
+                </li>
+                <li ng-init="model.show ='createPost'" ng-show="model.loggedUser.roles.indexOf('CELEBRITY') >= 0"
+                    ng-click="model.show='createPost'" ng-class="{'active': model.show==='createPost'}">
+                    <a>createPost</a>
+                </li>
+            </ul>
+            <div ng-show="model.show === 'createReview'"
+                 id="createReview"
+                 class="tab-pane fade in active">
+                <div ng-show="model.reviews == 0">
+                    <h3>No reviews yet.. Be the first to review it!</h3>
+                </div>
+                    <strong><h4>Write a Review:</h4></strong>
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control"
+                                      rows="3"
+                                      placeholder="Please enter description of the review"
+                                      ng-model="review.review"
+                                      ng-disabled="!model.canCreate">
+                            </textarea>
+                        </div>
+                        <a href="" class="btn btn-success" ng-show="model.canCreate"
+                           ng-click="model.createReview(review)"
+                           role="button"><strong>Submit</strong></a>
+                        <a href="" class="btn btn-warning" ng-show="!model.canCreate" ng-disabled="!model.canCreate"
+                           role="button"><strong>Please login to review!</strong></a>
+                    </form>
+            </div>
+            <div ng-show="model.show === 'createPost'" ng-if="model.loggedUser.roles.indexOf('CELEBRITY') >= 0"
+                 id="createPost"
+                 class="tab-pane fade in active">
+                <h3>Posts</h3>
+                <ul class="list-group">
+                </ul>
+            </div>
         </div>
-        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
-    </span>
+    </div>
 
-    <h3>Recommended Movies</h3>
-
-    <span style="display: inline-block">
-        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left"></div>
-        <div class="col" ng-repeat="movie in model.recommendedMovie">
-            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
-                 ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
-        </div>
-        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
-    </span>
-
+</div>
 </div>

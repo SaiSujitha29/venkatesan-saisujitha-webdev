@@ -68,7 +68,8 @@
         <div class="col" ng-repeat="movie in model.upcomingMovies">
             <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
                  ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
+                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"
+                 class="thumbnail img-responsive" width="200px">
         </div>
         <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
     </span>

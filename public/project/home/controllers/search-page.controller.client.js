@@ -8,6 +8,7 @@
         model.searchTerm = $routeParams['searchTerm'];
         model.searchNewMovies = searchNewMovies;
         model.selectMovie = selectMovie;
+        model.selectNewMovie = selectNewMovie;
 
 
         function init() {
@@ -29,6 +30,10 @@
 
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
+        }
+
+        function selectNewMovie(movieId) {
+            $location.url('/test/page/' + movieId);
         }
 
     }
