@@ -18,6 +18,7 @@ reviewProjectModel.updateReview = updateReview;
 reviewProjectModel.deleteReview = deleteReview;
 reviewProjectModel.findReviewById = findReviewById;
 reviewProjectModel.findAllReviews = findAllReviews;
+reviewProjectModel.findMovieReviewByUserId = findMovieReviewByUserId;
 
 module.exports = reviewProjectModel;
 
@@ -26,6 +27,21 @@ function findAllReviewsForUser(userId) {
         .find({_reviewer: userId})
         .populate('_reviewer', 'username')
         .exec();
+}
+
+function findMovieReviewByUserId(userId, movieId) {
+    console.log("finally here");
+    var  reviews = reviewProjectModel.findOne();
+    return reviewProjectModel.findAllReviewsForUser(userId);
+    // if(reviews){
+    //     for(i = 0; i <= reviews.length; i++){
+    //         var currReview = reviews[i];
+    //         if(currReview.movieId+'' == movieId+''){
+    //             return currReview;
+    //         }
+    //     }
+    // }
+    // return 0;
 }
 
 function createReview(userId, movieId, review) {

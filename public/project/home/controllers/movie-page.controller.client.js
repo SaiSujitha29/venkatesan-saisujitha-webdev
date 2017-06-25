@@ -4,13 +4,14 @@
         .controller('movieController', movieController);
 
     function movieController(currentUser, $sce, $location, $routeParams, homeService, $scope,
-                             reviewProjectService,postProjectService) {
+                             reviewProjectService,postProjectService, $route) {
         var model = this;
         model.movieId = $routeParams['movieId'];
         model.loggedUser = currentUser;
         model.upcomingIndex = 1;
         model.createReview = createReview;
         model.canCreate = false;
+        model.canEdit = false;
         model.increaseUpcoming = function () {
             if(model.similarMovie.length <= model.upcomingIndex){
                 model.upcomingIndex = 1;
@@ -72,12 +73,40 @@
             reviewProjectService
                     .findReviewsByMovieId(model.movieId)
                     .then(function (response) {
-                        console.log(response);
                         model.reviews = response;
                     });
 
             if(model.loggedUser._id) {
-                model.canCreate = true;
+                var reviews = model.loggedUser.reviews;
+                console.log(reviews.length === 0);
+                if(reviews.length !== 0){
+                    for(i = 0; i < reviews.length; i++){
+                        var currReview = reviews[i];
+                        console.log(model.movieId === currReview.movieId+'');
+                        if(currReview.movieId+'' === model.movieId){
+                            model.canCreate = false;
+                            model.canEdit = true;
+                            break;
+                        }
+                        else {
+                            model.canCreate = true;
+                        }
+                    }
+                }
+                else{
+                    model.canCreate = true;
+                }
+            }
+            console.log("Wth");
+            console.log(model.canCreate);
+
+            if(model.canEdit){
+                reviewProjectService
+                    .findMovieReviewByUserId(model.loggedUser._id,model.movieId);
+                    // .then(function (response) {
+                    //     console.log(response);
+                    //     model.review = response;
+                    // });
             }
         }
         init();
@@ -102,6 +131,13 @@
 
         function editReview(review) {
             var reviewId = review._id;
+
+            reviewProjectService
+                .editReview(model.loggedUser._id, model.movieId, reviewId, review)
+                .then(function () {
+                    model.mssage = "Review Updated Successfully";
+                    $location.reload();
+                });
             $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
         }
 
@@ -111,15 +147,13 @@
                 model.error = "Review name required!";
                 return;
             }
-            return reviewProjectService
-                .createReview(model.loggedUser._id, model.movieId, review);
-            $location.url('/test/page/'+model.movieId);
-            // if(currentUser._id){
-            //     $location.url('/user/'+ currentUser._id + '/movie/'+ movieId + '/review/new');
-            //     }
-            // else {
-            //     model.message = "Please login to continue!!!"
-            // }
+            reviewProjectService
+                .createReview(model.loggedUser._id, model.movieId, review)
+                .then(function () {
+                    model.canCreate = false;
+                    model.canEdit = true;
+                    $route.reload();
+                });
         }
 
         function deleteReview(review) {

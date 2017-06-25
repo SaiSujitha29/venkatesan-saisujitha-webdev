@@ -45,29 +45,29 @@
                  class="tab-pane fade in active">
                 <h3>Cast and Genre</h3>
                 <ul class="list-group">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#genre">
-                        Genre
-                    </button>
-                    <div class="row" id="genre" class="collapse">
+
+                    <details>
+                        <summary>Genre</summary>
                         <div class="" ng-repeat="i in model.genres | limitTo:15">
                             <div class="clearfix" ng-if="$index % 4 == 0"></div>
                             <div class="col">
                                 {{i.name}}
                             </div>
                         </div>
-                    </div>
+                    </details>
 
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
-                        Cast
-                    </button>
-                    <div class="row" id="demo" class="collapse">
+                    <br>
+                    <br>
+
+                    <details>
+                        <summary>Cast</summary>
                         <div class="" ng-repeat="i in model.casts | limitTo:15">
-                            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
                             <div class="col">
                                 {{i.name}}
                             </div>
                         </div>
-                    </div>
+                    </details>
                 </ul>
             </div>
         </div>
@@ -81,7 +81,7 @@
             <hr>
 
                 <a ng-repeat="movie in model.similarMovie | limitTo: 3">
-                    <img class="thumbnail img-responsive" src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+                    <img class="thumbnail img-responsive" ng-click="model.selectMovie(movie.id)" src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
                 </a>
 
 
@@ -93,9 +93,6 @@
             </ul>
         </div>
     </div>
-
-</div>
-</div>
 
 </div>
 
@@ -118,19 +115,86 @@
                  id="reviews"
                  class="tab-pane fade in active">
 
-                <ul class="list-group" ng-show="model.reviews.length != 0">
-                    <div class="row content" ng-repeat="review in model.reviews">
-                        <ul class="list-group">
-                            <div class ="list-group-item">
-                                <li>
-                                    <div ng-click="model.selectReview(review)">{{review.review}}</div>
-                                </li>
-                            </div>
-                        </ul>
+                <div  ng-show="model.reviews.length != 0">
+                    <div class="well" ng-repeat="review in model.reviews">
+                        <p>
+                            <label ng-click="model.selectReview(review)"><u>{{review._reviewer.username}}</u></label>
+                        <h4>Rating : {{review.rating}}</h4>
+                        <h4>Review : </h4>
+                            <span>
+                                <p>{{review.review}}</p>
+                            </span>
+                        </p>
+                        <!--<div ng-click="model/selecctReview(review)">{{review.review}}</div>-->
                     </div>
-                </ul>
-                <div ng-show="model.reviews == 0">
-                    No reviews yet.. Be the first to review it!
+                </div>
+                <div class="well" ng-show="model.reviews == 0">
+                    <h5>No reviews yet.. Be the first to review it!</h5>
+                </div>
+
+                <div class="well" ng-show="!model.canEdit">
+                <h4>Write a Review:</h4>
+                <form>
+                    <div class="form-group">
+                            <textarea class="form-control"
+                                      rows="3"
+                                      placeholder="The movie is great!"
+                                      ng-model="review.review"
+                                      ng-disabled="!model.canCreate">
+                            </textarea>
+                    </div>
+                    <label for="rating">Rating</label>
+                    <div class="form-group">
+                        <select id="rating" class="form-control"
+                                value="5"
+                                ng-model = "review.rating"
+                                ng-disabled="!model.canCreate">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <a href="" class="btn btn-success " ng-show="model.canCreate"
+                       ng-click="model.createReview(review)"
+                       role="button"><strong>Review It!</strong></a>
+                    <a href="" class="btn btn-warning" ng-show="!model.canCreate" ng-disabled="!model.canCreate"
+                       role="button"><strong>Please login to review!</strong></a>
+                </form>
+                </div>
+                <div class="well" ng-show="model.canEdit">
+                    <div ng-show="model.message" class="alert alert-info">
+                        {{model.message}}
+                    </div>
+                    <h4>Edit Review:</h4>
+                    {{model.review}}
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control"
+                                      rows="3"
+                                      placeholder="The movie is great!"
+                                      ng-model="model.review">
+                            </textarea>
+                        </div>
+                        <label for="rating1">Rating</label>
+                        <div class="form-group">
+                            <select id="rating1" class="form-control"
+                                    value="5"
+                                    ng-model = "model.rating">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <a href="" class="btn btn-success " ng-show="model.canEdit"
+                           ng-click="model.editReview(review)"
+                           role="button"><strong>Update It!</strong></a>
+                        <!--<a href="" class="btn btn-warning" ng-show="!model.canEdit" ng-disabled="!model.canCreate"-->
+                           <!--role="button"><strong>Please login to review!</strong></a>-->
+                    </form>
                 </div>
             </div>
             <div ng-show="model.show === 'Posts'"

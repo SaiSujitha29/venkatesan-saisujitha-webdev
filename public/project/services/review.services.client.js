@@ -12,7 +12,8 @@
             deleteReview: deleteReview,
             findReviewById: findReviewById,
             findAllReviews: findAllReviews,
-            findReviewsByMovieId: findReviewsByMovieId
+            findReviewsByMovieId: findReviewsByMovieId,
+            findMovieReviewByUserId: findMovieReviewByUserId
         };
 
         return api;
@@ -67,6 +68,14 @@
 
         function findReviewsByMovieId(movieId) {
             var url = "/api/project/"+movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findMovieReviewByUserId(userId, movieId) {
+            var url = "/api/project/user/"+userId + "/movie/" + movieId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

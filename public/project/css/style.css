@@ -50,6 +50,15 @@ div.container-fluid.user-main {
     padding-right: 50px;
 }
 
+summary{
+    font-size: large;
+}
+
+u{
+    font-size: large;
+    color: #d9534f;
+}
+
 div.container-fluid.main {
     margin-left: 20px;
     margin-right: 20px;

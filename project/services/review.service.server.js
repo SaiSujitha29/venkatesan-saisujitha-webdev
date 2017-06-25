@@ -9,10 +9,23 @@ app.get('/api/project/review/:reviewId', findReviewById);
 app.delete('/api/project/review/:reviewId', deleteReview);
 app.get('/api/project/review', isAdmin, findAllReviews);
 app.get('/api/project/:movieId', findReviewsByMovieId);
+app.get('/api/project/user/:userId/movie/:movieId', findMovieReviewByUserId);
 
 function findAllReviewsForUser(req, res) {
     reviewProjectModel
         .findAllReviewsForUser(req.params.userId)
+        .then(function (reviews) {
+            res.json(reviews);
+        });
+
+}
+
+function findMovieReviewByUserId(req, res) {
+    console.log("inserver");
+    var userId = req.params['userId'];
+    var movieId = req.params.movieId;
+    reviewProjectModel
+        .findMovieReviewByUserId(userId, movieId)
         .then(function (reviews) {
             res.json(reviews);
         });
