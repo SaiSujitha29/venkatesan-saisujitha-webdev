@@ -25,7 +25,7 @@ module.exports = reviewProjectModel;
 function findAllReviewsForUser(userId) {
     return reviewProjectModel
         .find({_reviewer: userId})
-        .populate('_reviewer', 'username')
+        .populate('_reviewer')
         .exec();
 }
 

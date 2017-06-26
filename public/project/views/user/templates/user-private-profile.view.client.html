@@ -131,13 +131,15 @@
              class="tab-pane fade in active">
             <h3>Reviews</h3>
             <ul class="list-group">
+                {{model.user.reviews}}
                 <li ng-repeat="review in model.user.reviews" class="list-group-item">
-                    <a href="#!/profile-public">
-                        {{review.name}}
-                    </a>
+
+                    <!--<a href="#!/profile-public">-->
+                        {{review.review}}
+                    <!--</a>-->
                 </li>
-                <a class="btn btn-primary btn-block"
-                   href="#!/user/{{model.user._id}}/review">Reviews</a>
+                <!--<a class="btn btn-primary btn-block"-->
+                   <!--href="#!/user/{{model.user._id}}/review">Reviews</a>-->
             </ul>
         </div>
         <div class="tab-content">

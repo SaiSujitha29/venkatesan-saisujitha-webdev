@@ -20,6 +20,7 @@
             //access from dataset
             //article.dataset.user.reviews;
             var data = model.user.reviews;
+            console.log(model.user.reviews[0]);
             model.tableParams = new NgTableParams({}, { dataset: data});
         }
         init();

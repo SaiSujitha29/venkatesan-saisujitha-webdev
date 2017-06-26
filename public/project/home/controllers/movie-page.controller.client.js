@@ -15,6 +15,7 @@
 
         function init() {
 
+            // movie data
             homeService
                 .searchMovieById(model.movieId)
                 .then(function (response) {
@@ -50,6 +51,7 @@
                     }
                 });
 
+            // reviews
             reviewProjectService
                     .findReviewsByMovieId(model.movieId)
                     .then(function (response) {
@@ -65,7 +67,7 @@
                         console.log(model.movieId === currReview.movieId+'');
                         if(currReview.movieId+'' === model.movieId){
                             model.canCreate = false;
-                            model.canEdit = true;
+                            //model.canEdit = true;
                             break;
                         }
                         else {
@@ -90,7 +92,6 @@
         }
         init();
 
-        model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.createReview = createReview;
         model.selectMovie = selectMovie;
         model.selectReview = selectReview;
@@ -121,21 +122,23 @@
                 .createReview(model.loggedUser._id, model.movieId, review)
                 .then(function () {
                     model.canCreate = false;
-                    model.canEdit = true;
+                    //model.canEdit = true;
                     $route.reload();
                 });
         }
 
         function editReview(review) {
+            model.canEdit = true;
+            //$route.reload();
             var reviewId = review._id;
 
-            reviewProjectService
-                .editReview(model.loggedUser._id, model.movieId, reviewId, review)
-                .then(function () {
-                    model.mssage = "Review Updated Successfully";
-                    $location.reload();
-                });
-            $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
+            // reviewProjectService
+            //     .editReview(model.loggedUser._id, model.movieId, reviewId, review)
+            //     .then(function () {
+            //         model.mssage = "Review Updated Successfully";
+            //         $location.reload();
+            //     });
+            // $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
         }
 
         function deleteReview(review) {
