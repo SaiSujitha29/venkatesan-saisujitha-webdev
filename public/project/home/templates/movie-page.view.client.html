@@ -21,11 +21,11 @@
         <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
             <ul class="nav nav-tabs">
                 <li ng-init="model.show ='info'"
+                    class="active"
                     ng-click="model.show='info'" ng-class="{'active': model.show==='info'}">
                     <a>Basic Info</a>
                 </li>
-                <li ng-init="model.show ='cast'"
-                    ng-click="model.show='cast'" ng-class="{'active': model.show==='cast'}">
+                <li ng-click="model.show='cast'" ng-class="{'active': model.show==='cast'}">
                     <a>Cast and Genre</a>
                 </li>
             </ul>
@@ -102,12 +102,10 @@
 
         <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
             <ul class="nav nav-tabs">
-                <li ng-init="model.show ='reviews'"
-                    ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
+                <li ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
                     <a>Reviews</a>
                 </li>
-                <li ng-init="model.show ='Posts'"
-                    ng-click="model.show='Posts'" ng-class="{'active': model.show==='Posts'}">
+                <li ng-click="model.show='Posts'" ng-class="{'active': model.show==='Posts'}">
                     <a>Posts</a>
                 </li>
             </ul>
@@ -200,63 +198,91 @@
             <div ng-show="model.show === 'Posts'"
                  id="Posts"
                  class="tab-pane fade in active">
-                <h3>Posts</h3>
-                <ul class="list-group">
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-    </div>
-
-<div class="container-fluid main">
-    <div class="panel panel-body">
-
-        <div ng-if="!(model.user.roles.indexOf('ADMIN') > 0)">
-            <ul class="nav nav-tabs">
-                <li ng-init="model.show ='createReview'"
-                    ng-click="model.show='createReview'" ng-class="{'active': model.show==='createReview'}">
-                    <a>createReview</a>
-                </li>
-                <li ng-init="model.show ='createPost'" ng-show="model.loggedUser.roles.indexOf('CELEBRITY') >= 0"
-                    ng-click="model.show='createPost'" ng-class="{'active': model.show==='createPost'}">
-                    <a>createPost</a>
-                </li>
-            </ul>
-            <div ng-show="model.show === 'createReview'"
-                 id="createReview"
-                 class="tab-pane fade in active">
-                <div ng-show="model.reviews == 0">
-                    <h3>No reviews yet.. Be the first to review it!</h3>
+                <div  ng-show="model.reviews.length != 0">
+                    <div class="well" ng-repeat="review in model.reviews">
+                        <p>
+                            <label ng-click="model.selectReview(review)"><u>{{review._reviewer.username}}</u></label>
+                        <h4>Rating : {{review.rating}}</h4>
+                        <h4>Review : </h4>
+                        <span>
+                                <p>{{review.review}}</p>
+                            </span>
+                        </p>
+                        <!--<div ng-click="model/selecctReview(review)">{{review.review}}</div>-->
+                    </div>
                 </div>
-                    <strong><h4>Write a Review:</h4></strong>
+                <div class="well" ng-show="model.reviews == 0">
+                    <h5>No reviews yet.. Be the first to review it!</h5>
+                </div>
+
+                <div class="well" ng-show="!model.canEdit">
+                    <h4>Write a Review:</h4>
                     <form>
                         <div class="form-group">
                             <textarea class="form-control"
                                       rows="3"
-                                      placeholder="Please enter description of the review"
+                                      placeholder="The movie is great!"
                                       ng-model="review.review"
                                       ng-disabled="!model.canCreate">
                             </textarea>
                         </div>
-                        <a href="" class="btn btn-success" ng-show="model.canCreate"
+                        <label for="rating">Rating</label>
+                        <div class="form-group">
+                            <select id="rating" class="form-control"
+                                    value="5"
+                                    ng-model = "review.rating"
+                                    ng-disabled="!model.canCreate">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <a href="" class="btn btn-success " ng-show="model.canCreate"
                            ng-click="model.createReview(review)"
-                           role="button"><strong>Submit</strong></a>
+                           role="button"><strong>Review It!</strong></a>
                         <a href="" class="btn btn-warning" ng-show="!model.canCreate" ng-disabled="!model.canCreate"
                            role="button"><strong>Please login to review!</strong></a>
                     </form>
-            </div>
-            <div ng-show="model.show === 'createPost'" ng-if="model.loggedUser.roles.indexOf('CELEBRITY') >= 0"
-                 id="createPost"
-                 class="tab-pane fade in active">
-                <h3>Posts</h3>
-                <ul class="list-group">
-                </ul>
+                </div>
+                <div class="well" ng-show="model.canEdit">
+                    <div ng-show="model.message" class="alert alert-info">
+                        {{model.message}}
+                    </div>
+                    <h4>Edit Review:</h4>
+                    {{model.review}}
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control"
+                                      rows="3"
+                                      placeholder="The movie is great!"
+                                      ng-model="model.review">
+                            </textarea>
+                        </div>
+                        <label for="rating2">Rating</label>
+                        <div class="form-group">
+                            <select id="rating2" class="form-control"
+                                    value="5"
+                                    ng-model = "model.rating">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <a href="" class="btn btn-success " ng-show="model.canEdit"
+                           ng-click="model.editReview(review)"
+                           role="button"><strong>Update It!</strong></a>
+                        <!--<a href="" class="btn btn-warning" ng-show="!model.canEdit" ng-disabled="!model.canCreate"-->
+                        <!--role="button"><strong>Please login to review!</strong></a>-->
+                    </form>
             </div>
         </div>
     </div>
 
-</div>
+
+    </div>
+
 </div>
