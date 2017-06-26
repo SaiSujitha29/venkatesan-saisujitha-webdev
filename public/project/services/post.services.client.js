@@ -10,15 +10,24 @@
             findPostsByUserId:findPostsByUserId,
             findPostById:findPostById,
             updatePost: updatePost,
-            deletePost: deletePost
+            deletePost: deletePost,
+            findPostsByMovieId: findPostsByMovieId
         };
 
-        function createPost (userId, post) {
-            var url = "/api/project/user/" + userId + "/post";
+        function createPost (userId, movieId, post) {
+            var url = '/api/project/user/'+ userId + '/movie/' + movieId + '/post';
             return $http.post(url, post)
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function findPostsByMovieId(movieId) {
+            var url = "/api/project/posts/" + movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function updatePost(postId, post) {

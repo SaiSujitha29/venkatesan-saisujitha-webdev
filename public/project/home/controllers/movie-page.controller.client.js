@@ -52,6 +52,13 @@
                     }
                 });
 
+            //posts
+            postProjectService
+                .findPostsByMovieId(model.movieId)
+                .then(function (response) {
+                    model.posts = response;
+                });
+
             // reviews
             reviewProjectService
                     .findReviewsByMovieId(model.movieId)
@@ -99,6 +106,7 @@
         model.editReview = editReview;
         model.deleteReview = deleteReview;
         model.updateReview = updateReview;
+        model.createPost = createPost;
 
         // navigate to another movie page
         function selectMovie(movieId) {
@@ -165,6 +173,20 @@
         }
 
         //Posts
+
+        function createPost(post) {
+            if(typeof post === 'undefined') {
+                model.error = "Review name required!";
+                return;
+            }
+            console.log("create");
+            console.log(post);
+            postProjectService
+                .createPost(model.loggedUser._id, model.movieId, post)
+                .then(function () {
+                    $route.reload();
+                })
+        }
 
         $(document).on('change', '.div-toggle', function() {
             var target = $(this).data('target');

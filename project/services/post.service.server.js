@@ -4,12 +4,13 @@ var userProjectModel = require('../model/user/user.model.server');
 var multer = require('multer');
 var upload = multer({ dest: __dirname + '/../../public/project/uploads'});
 
-app.post('/api/project/user/:userId/post', createPost);
+app.post('/api/project/user/:userId/movie/:movieId/post', createPost);
 app.get('/api/project/user/:userId/post', findPostsByUserId);
 app.get('/api/project/post/:postId', findPostById);
 app.put('/api/project/post/:postId', updatePost);
 app.delete('/api/project/post/:postId', deletePost);
 app.get('/api/project/post', isAdmin, findAllPosts);
+app.get('/api/project/posts/:movieId', findPostsByMovieId);
 
 //app.post ('/api/project/upload', upload.single('myFile'), uploadImage);
 
@@ -22,12 +23,27 @@ function findPostsByUserId(req, res) {
 
 }
 
+function findPostsByMovieId(req, res) {
+    var movieId = req.params.movieId;
+    console.log("in server");
+    console.log(movieId);
+    postProjectModel
+        .findPostsByMovieId(movieId)
+        .then(function (posts) {
+            res.json(posts);
+        })
+}
+
 function createPost(req, res) {
     var post = req.body;
     var userId = req.params.userId;
+    var movieId = req.params.movieId;
+    console.log("heloooooooooooooooooooooooooooooooo");
+    console.log(post);
     postProjectModel
-        .createPost(userId, post)
+        .createPost(userId, movieId, post)
         .then(function (post) {
+            console.log(post);
             res.json(post);
         });
 }

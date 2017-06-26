@@ -9,23 +9,23 @@ postProjectModel.updatePost = updatePost;
 postProjectModel.deletePost = deletePost;
 postProjectModel.findPostById = findPostById;
 postProjectModel.findAllPosts = findAllPosts;
-
+postProjectModel.findPostsByMovieId = findPostsByMovieId;
 
 module.exports = postProjectModel;
 
 
-function createPost(userId, post) {
+function createPost(userId, movieId, post) {
     post._author = userId;
+    post.movieId = movieId;
     return postProjectModel
         .create(post)
-        .then( function (post) {
+        .then(function (post) {
             userProjectModel
                 .findUserById(userId)
                 .then(function (user) {
                     user.posts.push(post._id);
                     user.save();
                 });
-            return post;
         });
 }
 
@@ -33,6 +33,13 @@ function findPostsByUserId(userId) {
     return postProjectModel
         .find({_author : userId})
         .sort({order: 1});
+}
+
+function findPostsByMovieId(movieId) {
+    return postProjectModel
+        .find({movieId: movieId})
+        .populate('_author')
+        .exec();
 }
 
 function findPostById(postId) {
