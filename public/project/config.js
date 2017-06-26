@@ -6,9 +6,9 @@
     function configuration($routeProvider) {
         $routeProvider
 
-            .when('/test', {
-                templateUrl: 'home/templates/test.html'
-            })
+            // .when('/test', {
+            //     templateUrl: 'home/templates/test.html'
+            // })
             // .when('/test/page/:movieId',{
             //     templateUrl: 'home/templates/movie-page.test.html',
             //     controller: 'movieController',
