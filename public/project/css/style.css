@@ -54,6 +54,10 @@ summary{
     font-size: large;
 }
 
+.hide {
+    display: none;
+}
+
 u{
     font-size: large;
     color: #d9534f;

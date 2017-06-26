@@ -141,9 +141,9 @@
                                       ng-disabled="!model.canCreate">
                             </textarea>
                     </div>
-                    <label for="rating">Rating</label>
+                    <label for="rating5">Rating</label>
                     <div class="form-group">
-                        <select id="rating" class="form-control"
+                        <select id="rating5" class="form-control"
                                 value="5"
                                 ng-model = "review.rating"
                                 ng-disabled="!model.canCreate">
@@ -199,16 +199,16 @@
                  id="Posts"
                  class="tab-pane fade in active">
                 <div  ng-show="model.reviews.length != 0">
-                    <div class="well" ng-repeat="review in model.reviews">
-                        <p>
-                            <label ng-click="model.selectReview(review)"><u>{{review._reviewer.username}}</u></label>
-                        <h4>Rating : {{review.rating}}</h4>
-                        <h4>Review : </h4>
-                        <span>
-                                <p>{{review.review}}</p>
-                            </span>
-                        </p>
-                        <!--<div ng-click="model/selecctReview(review)">{{review.review}}</div>-->
+                    <select class="div-toggle" data-target=".my-info-1">
+                        <option value="orange" data-show=".citrus">Orange</option>
+                        <option value="lemon" data-show=".citrus">Lemon</option>
+                        <option value="apple" data-show=".pome">Apple</option>
+                        <option value="pear" data-show=".pome">Pear</option>
+                    </select>
+
+                    <div class="my-info-1">
+                        <div class="citrus hide">Citrus is...</div>
+                        <div class="pome hide">A pome is...</div>
                     </div>
                 </div>
                 <div class="well" ng-show="model.reviews == 0">
@@ -281,8 +281,6 @@
             </div>
         </div>
     </div>
-
-
     </div>
 
 </div>
