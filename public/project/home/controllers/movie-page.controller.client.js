@@ -5,29 +5,13 @@
 
     function movieController(currentUser, $sce, $location, $routeParams, homeService, $scope,
                              reviewProjectService,postProjectService, $route) {
+
         var model = this;
         model.movieId = $routeParams['movieId'];
         model.loggedUser = currentUser;
         model.upcomingIndex = 1;
-        model.createReview = createReview;
         model.canCreate = false;
         model.canEdit = false;
-        model.increaseUpcoming = function () {
-            if(model.similarMovie.length <= model.upcomingIndex){
-                model.upcomingIndex = 1;
-            }
-            else {
-                model.upcomingIndex++;
-            }
-        };
-        model.decreaseUpcoming = function () {
-            if(model.upcomingIndex == 1){
-                model.upcomingIndex = model.similarMovie.length;
-            }
-            else {
-                model.upcomingIndex--;
-            }
-        };
 
         function init() {
 
@@ -37,11 +21,7 @@
                     model.movie = response.data;
                     model.genres = response.data.genres;
                     var path = model.movie.backdrop_path;
-                    //model.path = response.data.backdrop_path;
-                    //document.body.style.background = 'url(' + 'http://image.tmdb.org/t/p/original' + model.path + ') no-repeat top left';
-                    //document.body.style.backgroundSize = 1;
                 });
-
 
             homeService
                 .searchCast(model.movieId)
@@ -97,7 +77,6 @@
                     model.canCreate = true;
                 }
             }
-            console.log("Wth");
             console.log(model.canCreate);
 
             if(model.canEdit){
@@ -112,33 +91,24 @@
         init();
 
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
+        model.createReview = createReview;
         model.selectMovie = selectMovie;
         model.selectReview = selectReview;
         model.editReview = editReview;
         model.deleteReview = deleteReview;
 
-        function getYouTubeEmbedUrl() {
-            return homeService
-                .searchVideos(model.movieId)
-                .then(function (response) {
-                    model.videoKeys = response.data.results;
-                })
-        }
-
+        // navigate to another movie page
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
         }
 
-        function editReview(review) {
-            var reviewId = review._id;
-
-            reviewProjectService
-                .editReview(model.loggedUser._id, model.movieId, reviewId, review)
-                .then(function () {
-                    model.mssage = "Review Updated Successfully";
-                    $location.reload();
-                });
-            $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
+        // CRUD reviews
+        function selectReview(review) {
+            console.log(review);
+            reviewer = review._reviewer;
+            var userId = reviewer._id;
+            console.log(userId);
+            $location.url('/user/'+ userId + '/profile-public');
         }
 
         function createReview(review) {
@@ -156,17 +126,23 @@
                 });
         }
 
+        function editReview(review) {
+            var reviewId = review._id;
+
+            reviewProjectService
+                .editReview(model.loggedUser._id, model.movieId, reviewId, review)
+                .then(function () {
+                    model.mssage = "Review Updated Successfully";
+                    $location.reload();
+                });
+            $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
+        }
+
         function deleteReview(review) {
 
         }
 
-        function selectReview(review) {
-            console.log(review);
-            reviewer = review._reviewer;
-            var userId = reviewer._id;
-            console.log(userId);
-            $location.url('/user/'+ userId + '/profile-public');
-        }
+        //Posts
 
         $(document).on('change', '.div-toggle', function() {
             var target = $(this).data('target');
