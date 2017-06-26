@@ -136,8 +136,7 @@
                     <h5>No reviews yet.. Be the first to review it!</h5>
                 </div>
 
-                <div class="well" ng-show="!model.canEdit"
-                ng-hide="model.canEdit">
+                <div class="well" ng-show="!model.canEdit">
                 <h4>Write a Review:</h4>
                 <form>
                     <div class="form-group">
@@ -173,20 +172,19 @@
                         {{model.message}}
                     </div>
                     <h4>Edit Review:</h4>
-                    {{model.review}}
                     <form>
                         <div class="form-group">
                             <textarea class="form-control"
                                       rows="3"
                                       placeholder="The movie is great!"
-                                      ng-model="model.review">
+                                      ng-model="model.review.review">
                             </textarea>
                         </div>
                         <label for="rating1">Rating</label>
                         <div class="form-group">
                             <select id="rating1" class="form-control"
                                     value="5"
-                                    ng-model = "model.rating">
+                                    ng-model = "model.review.rating">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -195,8 +193,11 @@
                             </select>
                         </div>
                         <a href="" class="btn btn-success " ng-show="model.canEdit"
-                           ng-click="model.editReview(review)"
+                           ng-click="model.updateReview(model.review)"
                            role="button"><strong>Update It!</strong></a>
+                        <a href="" class="btn btn-danger " ng-show="model.canEdit"
+                           ng-click="model.deleteReview(model.review)"
+                           role="button"><strong>Delete It!</strong></a>
                         <!--<a href="" class="btn btn-warning" ng-show="!model.canEdit" ng-disabled="!model.canCreate"-->
                            <!--role="button"><strong>Please login to review!</strong></a>-->
                     </form>

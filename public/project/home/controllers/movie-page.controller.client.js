@@ -12,6 +12,7 @@
         model.upcomingIndex = 1;
         model.canCreate = false;
         model.canEdit = false;
+        model.canView = true;
 
         function init() {
 
@@ -97,6 +98,7 @@
         model.selectReview = selectReview;
         model.editReview = editReview;
         model.deleteReview = deleteReview;
+        model.updateReview = updateReview;
 
         // navigate to another movie page
         function selectMovie(movieId) {
@@ -123,25 +125,42 @@
                 .then(function () {
                     model.canCreate = false;
                     //model.canEdit = true;
+                    model.canView = false;
                     $route.reload();
                 });
         }
 
         function editReview(review) {
             model.canEdit = true;
-            //$route.reload();
+            model.review = review;
+        }
+
+        function updateReview(review) {
+
             var reviewId = review._id;
 
-            // reviewProjectService
-            //     .editReview(model.loggedUser._id, model.movieId, reviewId, review)
-            //     .then(function () {
-            //         model.mssage = "Review Updated Successfully";
-            //         $location.reload();
-            //     });
-            // $location.url('/user/' + currentUser._id + '/movie/' + model.movieId + '/review/' + reviewId);
+            reviewProjectService
+                .updateReview(model.loggedUser._id, model.movieId, reviewId, review)
+                .then(function (review) {
+                    console.log(review);
+                     model.message = "Review Updated Successfully";
+                    $route.reload();
+                });
         }
 
         function deleteReview(review) {
+            console.log(review);
+            var reviewId = review._id;
+
+            reviewProjectService
+                .deleteReview(model.loggedUser._id, model.movieId, reviewId, review)
+                .then(function () {
+                    model.message = "Review Deleted Successfully";
+                    model.canCreate = true;
+                    //model.canEdit = true;
+                    model.canView = true;
+                    $route.reload();
+                });
 
         }
 
