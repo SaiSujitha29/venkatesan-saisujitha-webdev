@@ -1,12 +1,80 @@
 <div class ="container-fluid">
-    <h1>Admin Reviews</h1>
+    <h1>Reviews</h1>
     <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-4">
+                    <b>Username</b>
+                </div>
+                <div class="col-xs-3">
+                    <b>Movie</b>
+                </div>
+                <div class="col-xs-3">
+                    <b>Review</b>
+                </div>
+                <div class="col-xs-1">
+                    <b>Rating</b>
+                </div>
+                <div class="col-xs-1">
+
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-4">
+                    <input ng-model="model.review._reviewer"
+                           class="form-control"/>
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.review.movieId"
+                           class="form-control"/>
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.review.review"
+                           class="form-control"/>
+                </div>
+                <div class="col-xs-1">
+                    <input ng-model="model.review.rating"
+                           class="form-control"/>
+                </div>
+                <div class="col-xs-1">
+                    <span ng-click="model.updateReview(model.review); model.user={}"
+                          class="glyphicon glyphicon-ok pull-right"></span>
+                    <span ng-click="model.createReview(model.review); model.user={}"
+                          class="glyphicon glyphicon-plus pull-right"></span>
+                </div>
+            </div>
+        </li>
         <li ng-repeat="review in model.reviews" class="list-group-item">
-            <span ng-click="model.deleteReview(review)"
-                  class="glyphicon glyphicon-remove pull-right"></span>
-            {{review.name}}
-            {{review.review}}
-            {{review.rating}}
+            <div class="row">
+                <div class="col-xs-4"> <!--ng-click="model.selectUsername(username)-->
+                    {{review._reviewer}}
+                </div>
+                <div class="col-xs-3"> <!--ng-click="model.selectUsername(username)-->
+                    {{review.movieId}}
+                </div>
+                <div class="col-xs-3">
+                    {{review.review}}
+                </div>
+                <div class="col-xs-1">
+                    {{review.rating}}
+                </div>
+                <div class="col-xs-1">
+                      <span ng-click="model.selectReview(review)"
+                            class="glyphicon glyphicon-pencil pull-right"></span>
+                      <span ng-click="model.deleteReview(review)"
+                            class="glyphicon glyphicon-remove pull-right"></span>
+                </div>
+            </div>
+
+            <!--<span ng-click="model.updateUser(user, model.userId)"
+                  class="glyphicon glyphicon-cog pull-right"></span>
+            <span ng-click="model.createUser(user)"
+                  class="glyphicon glyphicon-plus pull-right"></span>
+            <a href = "/api/project/profile">-->
+
+            </a>
         </li>
     </ul>
 </div>

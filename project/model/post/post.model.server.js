@@ -11,6 +11,7 @@ postProjectModel.findPostById = findPostById;
 postProjectModel.findAllPosts = findAllPosts;
 postProjectModel.findPostsByMovieId = findPostsByMovieId;
 
+
 module.exports = postProjectModel;
 
 
@@ -32,7 +33,8 @@ function createPost(userId, movieId, post) {
 function findPostsByUserId(userId) {
     return postProjectModel
         .find({_author : userId})
-        .sort({order: 1});
+        .populate('_author')
+        .exec();
 }
 
 function findPostsByMovieId(movieId) {
@@ -43,25 +45,29 @@ function findPostsByMovieId(movieId) {
 }
 
 function findPostById(postId) {
-    return postProjectModel.findOne({_id: postId});
+    return postProjectModel.findById(postId);
 }
 
-function updatePost(postId, post) {
+function updatePost(userId, movieId, postId, post) {
     return postProjectModel.update({_id: postId}, {
         $set: {
+            _author: userId,
+            movieId: movieId,
             name: post.name,
             postType: post.postType,
-            post: post.post
+            post: post.post,
+            url: post.url,
+            width: post.width
         }
     });
 }
 
-function deletePost(postId){
+function deletePost(userId, movieId, postId, post){
     return postProjectModel
         .remove({_id: postId})
         .then(function () {
-            postProjectModel
-                .findOne({posts: postId})
+            userProjectModel
+                .findOne({_id: postId})
                 .then(function (user) {
                     var index = user.posts.indexOf(postId);
                     user.posts.splice(index, 1);
@@ -73,72 +79,3 @@ function deletePost(postId){
 function findAllPosts() {
     return postProjectModel.find();
 }
-
-/*function reorderWidget(pageId, start, end) {
-    return pageModel
-        .findPageById(pageId)
-        .then(function (page) {
-            var widgets = page.widgets;
-            var index = widgets.splice(start, 1)[0];
-            widgets.splice(end, 0, index);
-            page.widgets = widgets;
-            return pageModel.updatePage(pageId, page);
-        });
-}*/
-
-/*
-
-function findPostsByUserId(userId) {
-    return postProjectModel
-        .find({_author: userId})
-        .populate('_author', 'username')
-        .exec();
-}
-
-function createPost(userId, post) {
-    post._author = userId;
-    return postProjectModel
-        .create(post)
-        .then(function (post) {
-            userProjectModel
-                .findUserById(userId)
-                .then(function (user) {
-                    user.posts.push(post);
-                    user.save();
-                });
-        });
-}
-
-function updatePost(postId, newPost) {
-    return postProjectModel.update({_id: postId}, {
-        $set: {
-            name: newPost.name,
-            post: newPost.post
-        }
-    });
-
-}
-
-function deletePost(postId) {
-    return postProjectModel
-        .remove({_id: postId})
-        .then(function () {
-            userProjectModel
-                .findOne({posts: postId})
-                .then(function (user) {
-                    var index = user.posts.indexOf(postId);
-                    user.posts.splice(index, 1);
-                    user.save();
-                });
-        });
-}
-
-function findPostById(postId) {
-    return postProjectModel.findById(postId)
-}
-
-function findAllPosts() {
-    return postProjectModel.find();
-}
-
-*/

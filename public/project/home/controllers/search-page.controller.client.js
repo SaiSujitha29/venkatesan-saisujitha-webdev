@@ -3,8 +3,9 @@
         .module('MovieApp')
         .controller('searchController', searchController);
 
-    function searchController($location, $routeParams, homeService) {
+    function searchController(currentUser, $location, $routeParams, homeService) {
         var model = this;
+        model.currentUser = currentUser;
         model.searchTerm = $routeParams['searchTerm'];
         model.searchNewMovies = searchNewMovies;
         model.selectMovie = selectMovie;

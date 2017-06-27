@@ -100,7 +100,3 @@ function findReviewsByMovieId(movieId) {
         .populate('_reviewer')
         .exec();
 }
-
-
-
-

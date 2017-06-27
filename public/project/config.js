@@ -6,9 +6,9 @@
     function configuration($routeProvider) {
         $routeProvider
 
-            // .when('/test', {
-            //     templateUrl: 'home/templates/test.html'
-            // })
+            .when('/test', {
+                templateUrl: 'home/templates/test.html'
+            })
             // .when('/test/page/:movieId',{
             //     templateUrl: 'home/templates/movie-page.test.html',
             //     controller: 'movieController',
@@ -74,7 +74,10 @@
             .when('/search/:searchTerm', {
                 templateUrl: 'home/templates/search-page.view.client.html',
                 controller: 'searchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
 
             .when('/admin', {
@@ -93,37 +96,21 @@
                 }
             })
 
-           /* .when('/admin/reviews', {
+            .when('/admin/reviews', {
                 templateUrl: 'views/admin/templates/admin-reviews.view.client.html',
                 controller: 'adminReviewsProjectController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkAdmin
                 }
-            })*/
+            })
 
-            .when('/user/:userId/review', {
-                templateUrl: 'views/review/templates/review-list.view.client.html',
-                controller: 'reviewListController',
+            .when('/admin/posts', {
+                templateUrl: 'views/admin/templates/admin-posts.view.client.html',
+                controller: 'adminPostsProjectController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
-            .when('/user/:userId/movie/:movieId/review/new', {
-                templateUrl: 'views/review/templates/review-new.view.client.html',
-                controller: 'reviewNewController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
-            .when('/user/:userId/movie/:movieId/review/:reviewId', {
-                templateUrl: 'views/review/templates/review-edit.view.client.html',
-                controller: 'reviewEditController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkAdmin
                 }
             })
             .when('/user/:userId/post', {

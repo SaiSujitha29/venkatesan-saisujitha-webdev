@@ -3,17 +3,16 @@
         .module('MovieApp')
         .controller('userPublicProjectController', userPublicProjectController);
 
-    function userPublicProjectController( currentUser, $location, userProjectService, $routeParams) {
+    function userPublicProjectController( currentUser, $location, userProjectService, $routeParams, $scope, $route) {
 
         var model = this;
         model.userId = $routeParams['userId'];
         model.loggedUser = currentUser;
+        model.isfollow = false;
         if (model.loggedUser !== 0){
             //model.followUsers = followUsers;
             //model.unfollowUsers = unfollowUsers;
         }
-
-
 
         model.follow = follow;
         model.unfollow = unfollow;
@@ -27,8 +26,9 @@
                     model.user = user;
                 });
 
+
             var following = currentUser.following;
-            model.isfollow = false;
+
             if(following){
                 for(i = 0; i < following.length; i++){
                     var currfollower = following[i];
@@ -36,46 +36,21 @@
                     console.log(currfollower._id);
                     console.log(model.userId);
                     if(currfollower._id === model.userId){
-                        model.isfollow = true;
+                         model.isfollow = true;
                         break;
                     }
                 }
             }
 
-
-            $('button').click(function(){
-                var $this = $(this);
-                $this.toggleClass('following');
-                if($this.is('.following')){
-                    $this.addClass('wait');
-                }
-            }).on('mouseleave',function(){
-                $(this).removeClass('wait');
-            })
-
+            console.log(model.isfollow);
         }
         init();
 
         model.selectFollower = selectFollower;
-        model.isfollowing = isfollowing;
 
         function selectFollower(follower) {
             var userId = follower._id;
             $location.url('/user/'+ userId + '/profile-public');
-        }
-
-        function isfollowing(loggedUser, user) {
-            var following = loggedUser.following;
-            for(i = 0; i < following.length; i++){
-                var currfollower = following[i];
-                console.log("in here");
-                console.log(currfollower);
-                if(currfollower._id === model.userId){
-                    model.isfollow = true;
-                    break;
-                }
-            }
-            model.isfollow = false;
         }
 
         function follow(follow, follower) {
@@ -84,8 +59,11 @@
                 .followUser(follow, follower)
                 .then(function (response) {
                     console.log(response);
+                    init();
                 });
-            model.isfollow = true;
+             model.isfollow = true;
+             console.log("plsssssssssssssssssssssssssssssss");
+             console.log(model.isfollow);
             $location.url('/user/'+ model.userId + '/profile-public');
         }
 
@@ -95,27 +73,11 @@
                 .unfollowUser(follow, follower)
                 .then(function (response) {
                     console.log(response);
+                    init();
                 });
             model.isfollow = false;
             $location.url('/user/'+ model.userId + '/profile-public');
         }
-
-        // function followUser(newFollowerId) {
-        //     userProjectService
-        //         .followUser(newFollowerId)
-        //         .then(function (response) {
-        //             console.log(response);
-        //         })
-        // }
-        //
-        // function unfollowUser(userId, newFollowerId) {
-        //         userProjectService
-        //             .unfollowUser(userId, newFollowerId)
-        //             .then(function (response) {
-        //                 model.followers = response;
-        //             })
-        // }
-
     }
 
 })();
