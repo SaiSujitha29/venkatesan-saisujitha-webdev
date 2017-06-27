@@ -250,9 +250,9 @@
                     <h5>No posts yet.. Celebrity? Be the first to post!</h5>
                 </div>
 
-                <div class="well" ng-show="!model.canEdit">
+                <div class="well">
                     <h4>Write a Post:</h4>
-                    <select class="div-toggle" data-target=".my-info-1">
+                    <select class="div-toggle" data-target=".my-info-1" ng-disabled="model.normalUser">
                         <option value="Text" data-show=".text">Text</option>
                         <option value="Image" data-show=".image">Image</option>
                         <option Video="apple" data-show=".video">Video</option>
@@ -323,9 +323,9 @@
                         </div>
                         <a href="" class="btn btn-success "
                            ng-click="model.createPost(post)"
-                           role="button"><strong>Post It!</strong></a>
-                        <!--<a href="" class="btn btn-warning" ng-show="!model.canCreate" ng-disabled="!model.canCreate"-->
-                        <!--role="button"><strong>Please login to review!</strong></a>-->
+                           role="button" ng-disabled="model.normalUser"><strong>Post It!</strong></a>
+                        <a href="" class="btn btn-warning" ng-show="model.normalUser" ng-disabled="model.normalUser"
+                        role="button"><strong>Celebrity? Please login to Post!</strong></a>
                     </form>
                 </div>
                     <div class="well" ng-show="model.canEdit">

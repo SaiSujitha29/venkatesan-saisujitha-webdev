@@ -16,7 +16,7 @@
         model.canCreate = false;
         model.canEdit = false;
         model.canView = true;
-        model.normal = true;
+        model.normalUser = true;
         model. getYouTubeEmbedUrl =  getYouTubeEmbedUrl;
 
         function init() {
@@ -62,6 +62,9 @@
                 .findPostsByMovieId(model.movieId)
                 .then(function (response) {
                     model.posts = response;
+                    // if(model.posts.length != 0){
+                    //     model.canEdit = true;
+                    // }
                 });
 
             // reviews
@@ -70,6 +73,19 @@
                 .then(function (response) {
                     model.reviews = response;
                 });
+
+            if(model.loggedUser._id){
+                console.log(model.loggedUser.roles);
+                console.log(model.loggedUser.roles.indexOf('CELEBRITY'));
+                if(model.loggedUser.roles.indexOf('CELEBRITY') >= 0) {
+                    model.normalUser = false;
+                }
+                else if (model.loggedUser.roles.indexOf('ADMIN') >= 0) {
+                    model.normalUser = false;
+                }
+            }
+            console.log("normal user isssssssssssssss");
+            console.log(model.normalUser);
 
             // for reviews
             if(model.loggedUser._id) {
@@ -94,15 +110,6 @@
                 }
             }
             console.log(model.canCreate);
-
-            // if(model.canEdit){
-            //     reviewProjectService
-            //         .findMovieReviewByUserId(model.loggedUser._id,model.movieId);
-            //     // .then(function (response) {
-            //     //     console.log(response);
-            //     //     model.review = response;
-            //     // });
-            // }
         }
         init();
 
