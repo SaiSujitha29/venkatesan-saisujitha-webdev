@@ -3,19 +3,12 @@
         .module('MovieApp')
         .controller('userPublicProjectController', userPublicProjectController);
 
-    function userPublicProjectController( currentUser, $location, userProjectService, $routeParams, $scope, $route) {
+    function userPublicProjectController( currentUser, $location, userProjectService, $routeParams, $scope) {
 
         var model = this;
         model.userId = $routeParams['userId'];
         model.loggedUser = currentUser;
         model.isfollow = false;
-        if (model.loggedUser !== 0){
-            //model.followUsers = followUsers;
-            //model.unfollowUsers = unfollowUsers;
-        }
-
-        model.follow = follow;
-        model.unfollow = unfollow;
 
         function init(){
 
@@ -41,11 +34,11 @@
                     }
                 }
             }
-
-            console.log(model.isfollow);
         }
         init();
 
+        model.follow = follow;
+        model.unfollow = unfollow;
         model.selectFollower = selectFollower;
 
         function selectFollower(follower) {
@@ -54,7 +47,6 @@
         }
 
         function follow(follow, follower) {
-            console.log("jefelnvkm");
             userProjectService
                 .followUser(follow, follower)
                 .then(function (response) {
@@ -62,13 +54,10 @@
                     init();
                 });
              model.isfollow = true;
-             console.log("plsssssssssssssssssssssssssssssss");
-             console.log(model.isfollow);
             $location.url('/user/'+ model.userId + '/profile-public');
         }
 
         function unfollow(follow, follower) {
-            console.log("trying to unfollow");
             userProjectService
                 .unfollowUser(follow, follower)
                 .then(function (response) {
