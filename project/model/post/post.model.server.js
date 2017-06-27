@@ -55,6 +55,7 @@ function updatePost(userId, movieId, postId, post) {
             movieId: movieId,
             name: post.name,
             postType: post.postType,
+            description: post.description,
             post: post.post,
             url: post.url,
             width: post.width
