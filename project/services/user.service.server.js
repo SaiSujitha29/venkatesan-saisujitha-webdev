@@ -19,6 +19,7 @@ app.post('/api/project/logout', logout);
 app.get('/api/project/checkAdmin', checkAdmin);
 app.post('/api/project/follow', followUser);
 app.post('/api/project/unfollow', unfollowUser);
+app.post('/api/project/user/:userId/updatePassword', updatePassword);
 app.get('api/project/user/:userId/followers', findFollowersById);
 
 var facebookConfig = {
@@ -69,16 +70,16 @@ function localStrategy1(username, password, done) {
         .findUserByUsername(username)
         .then(function(user) {
             if (bcrypt.compareSync (password, user.password)) {
-               // return userProjectModel
-               //    .findUserByCredentials(username, user.password)
-                   // .then(function (user) {
+               return userProjectModel
+                  .findUserByCredentials(username, user.password)
+                   .then(function (user) {
                         console.log(user);
                         if (user) {
                             return done(null, user);
                         } else {
                             return done(null, false);
                         }
-                   // });
+                   });
             }
         });
 }
@@ -149,6 +150,32 @@ function googleStrategy(token, refreshToken, profile, done) {
                 }
             }
         );
+}
+
+function updatePassword(req, res) {
+    var userId = req.params['userId'];
+    var data = req.body;
+    var oldPwd = data.oldPwd;
+    var newPwd = data.newPwd;
+    var verifyPwd = data.verify;
+    console.log(oldPwd);
+    console.log(newPwd);
+    console.log(verifyPwd);
+    console.log(userId);
+    userProjectModel
+        .findUserById(userId)
+        .then(function(user) {
+            console.log(user);
+            if (bcrypt.compareSync (oldPwd, user.password)) {
+                user.password = bcrypt.hashSync(newPwd);
+                userProjectModel
+                    .updatePassword(userId, user)
+                    .then(function () {
+                        res.sendStatus(200);
+                    })
+            }
+        });
+    res.sendStatus(200);
 }
 
 
@@ -222,6 +249,8 @@ function register(req, res) {
             res.send(err);
         });
 }
+
+
 
 /*function unregister(req, res) {
     userProjectModel

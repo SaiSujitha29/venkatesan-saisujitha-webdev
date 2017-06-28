@@ -8,7 +8,7 @@
 
         var model = this;
         model.user = currentUser;
-        var userId = currentUser._id;
+        model.userId = currentUser._id;
 
         model.updateUser = updateUser;
         model.unregister = unregister;
@@ -16,6 +16,7 @@
         model.selectMovie = selectMovie;
         model.selectFollower = selectFollower;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
+        model.updatePassword = updatePassword;
 
         function init(){
             model.reviews = currentUser.reviews;
@@ -24,6 +25,40 @@
 
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
+        }
+
+        function updatePassword(oldPwd, newPwd, verify) {
+            if (oldPwd === null || oldPwd === '' || typeof oldPwd === 'undefined') {
+                model.error = 'Please enter the current Password for verification';
+                return;
+            }
+
+            if (newPwd === null || newPwd === '' || typeof newPwd === 'undefined') {
+                model.error = 'New Password is required';
+                return;
+            }
+
+            if (verify === null || verify === '' || typeof verify === 'undefined') {
+                model.error = 'verify password is required';
+                return;
+            }
+
+            if (newPwd !== verify) {
+                console.log("not matching");
+                model.error = "passwords must match";
+                return;
+            }
+            var info = {
+              oldPwd: oldPwd,
+                newPwd: newPwd,
+                verify: verify
+            };
+            userProjectService
+                .updatePassword(model.userId, info)
+                .then(function (response) {
+                    console.log(response);
+                })
+
         }
 
         function selectFollower(follower) {
@@ -65,5 +100,6 @@
                     $location.url('/login');
                 });
         }
+
     }
 }) ();

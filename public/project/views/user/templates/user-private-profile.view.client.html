@@ -43,6 +43,7 @@
                                     </a>
                                 </li>
                             </ul>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -58,6 +59,11 @@
 </nav>
 
 <div class="container-fluid user-main">
+
+    <div ng-show="model.error"
+         class="alert alert-danger center">
+        {{model.error}}
+    </div>
 
     <label for="username">Username</label>
     <input type=text
@@ -85,7 +91,38 @@
            placeholder="last name (Example: Wonderland)"
            id="last"
            class="form-control"/>
+
+    <details>
+        <summary>Update Password</summary>
+        <div>
+            <label for="password">Old Password</label>
+            <input type="text"
+                   ng-model="password"
+                   placeholder="Enter Current Password"
+                   id="password"
+                   class="form-control"/>
+            <label for="new">New Password</label>
+            <input type="text"
+                   ng-model="newPassword"
+                   placeholder="Enter New Password"
+                   id="new"
+                   class="form-control"/>
+            <label for="verifyNew">Confirm New Password Password</label>
+            <input type="text"
+                   ng-model="verifyPassword"
+                   placeholder="Confirm New Password"
+                   id="verifyNew"
+                   class="form-control"/>
+            <div class="col">
+                {{i.name}}
+            </div>
+            <a href="" class="btn btn-success "
+               ng-click="model.updatePassword(password, newPassword, verifyPassword)"
+               role="button"><strong>Update Password</strong></a>
+        </div>
+    </details>
 </div>
+
 <br>
 <br>
 <br>

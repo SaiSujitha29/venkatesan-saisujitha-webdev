@@ -16,7 +16,7 @@ userProjectModel.findUserByGoogleId = findUserByGoogleId;
 userProjectModel.followUser = followUser;
 userProjectModel.unfollowUser = unfollowUser;
 userProjectModel.findFollowersById = findFollowersById;
-
+userProjectModel.updatePassword = updatePassword;
 
 module.exports = userProjectModel;
 
@@ -67,6 +67,14 @@ function updateUser(userId, user) {
             lastName: user.lastName,
             roles: user.roles
         }
+    });
+}
+
+function updatePassword(userId, user) {
+    return userProjectModel.update({_id: userId}, {
+       $set: {
+           password: user.password
+       }
     });
 }
 
