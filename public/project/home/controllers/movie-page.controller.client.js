@@ -17,6 +17,7 @@
         model.canEdit = false;
         model.canView = true;
         model.normalUser = true;
+        model.currentEdit = false;
         model. getYouTubeEmbedUrl =  getYouTubeEmbedUrl;
 
         function init() {
@@ -149,7 +150,6 @@
                 .createReview(model.loggedUser._id, model.movieId, review)
                 .then(function () {
                     model.canCreate = false;
-                    //model.canEdit = true;
                     model.canView = false;
                     init();
                 });
@@ -225,6 +225,7 @@
 
         function editPost(post) {
             model.canEdit = true;
+            model.currentEdit = true;
             model.post = post;
         }
 
