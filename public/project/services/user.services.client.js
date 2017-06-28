@@ -52,6 +52,14 @@
                 });
         }
 
+        function updatePassword(userId, info) {
+            var url = "/api/project/user/"+ userId + "/updatePassword";
+            return $http.post(url, info)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
         function deleteUser(userId) {
             var url = "/api/project/user/" + userId;
             return $http.delete(url)
@@ -119,14 +127,6 @@
                     return response.data;
                 });
         }
-
-        function updatePassword(userId, info) {
-            var url = "/api/project/user/"+ userId + "/updatePassword";
-            return $http.post(url, info)
-                .then(function (response) {
-                    return response.data;
-                })
-        }
         function unregister(userObj) {
             var url = "/api/project/unregister";
             return $http.post(url, userObj)
@@ -137,7 +137,7 @@
                 });
         }
 
-        function findAllUsers(username, password) {
+        function findAllUsers() {
             var url = "/api/project/user";
             return $http.get(url)
                 .then(function (response) {
@@ -151,7 +151,7 @@
                 follow: follow,
                 follower: follower
             };
-            return $http.put(url, info)
+            return $http.post(url, info)
                 .then(function (response) {
                     return response.data;
                 })
@@ -163,7 +163,7 @@
                 follow: follow,
                 follower: follower
             };
-            return $http.put(url, info)
+            return $http.post(url, info)
                 .then(function (response) {
                     return response.data;
                 })

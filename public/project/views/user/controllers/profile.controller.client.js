@@ -20,11 +20,39 @@
 
         function init(){
             model.reviews = currentUser.reviews;
+            if (currentUser.reviews === 0) {
+                model.error1 = model.user.username + "does not have any reviews yet"
+            }
         }
         init();
 
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
+        }
+
+        function selectFollower(follower) {
+            var userId = follower._id;
+            $location.url('/user/'+ userId + '/profile-public');
+        }
+
+        function getYouTubeEmbedUrl(youtubeLink) {
+            var embedUrl = "https://www.youtube.com/embed/";
+            var youTubeLinkParts = youtubeLink.split('/');
+            var id = youTubeLinkParts[youTubeLinkParts.length - 1];
+            embedUrl += id;
+            return $sce.trustAsResourceUrl(embedUrl);
+        }
+
+        function updateUser(user) {
+            if (user.username === ""){
+                model.error = "Username required";
+                return;
+            }
+            userProjectService
+                .updateUser(user._id, user)
+                .then(function () {
+                    model.message = "User updated successfully!";
+                });
         }
 
         function updatePassword(oldPwd, newPwd, verify) {
@@ -49,7 +77,7 @@
                 return;
             }
             var info = {
-              oldPwd: oldPwd,
+                oldPwd: oldPwd,
                 newPwd: newPwd,
                 verify: verify
             };
@@ -60,28 +88,6 @@
                 })
 
         }
-
-        function selectFollower(follower) {
-            var userId = follower._id;
-            $location.url('/user/'+ userId + '/profile-public');
-        }
-
-        function getYouTubeEmbedUrl(youtubeLink) {
-            var embedUrl = "https://www.youtube.com/embed/";
-            var youTubeLinkParts = youtubeLink.split('/');
-            var id = youTubeLinkParts[youTubeLinkParts.length - 1];
-            embedUrl += id;
-            return $sce.trustAsResourceUrl(embedUrl);
-        }
-
-        function updateUser(user) {
-            userProjectService
-                .updateUser(user._id, user)
-                .then(function () {
-                    model.message = "User updated successfully!";
-                });
-        }
-
 
         function unregister() {
             userProjectService
@@ -100,6 +106,5 @@
                     $location.url('/login');
                 });
         }
-
     }
 }) ();

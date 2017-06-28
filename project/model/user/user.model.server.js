@@ -18,20 +18,24 @@ userProjectModel.unfollowUser = unfollowUser;
 userProjectModel.findFollowersById = findFollowersById;
 userProjectModel.updatePassword = updatePassword;
 
+
 module.exports = userProjectModel;
 
 function findAllUsers() {
     return userProjectModel.find();
 }
 
+function updatePassword(userId, user) {
+    return userProjectModel.update({_id: userId}, {
+        $set: {
+            password: user.password
+        }
+    });
+}
 
 function createUser(user) {
-  /*  if(user.roles) {
-        user.roles = user.roles.split(',');
-    } else {
-        user.roles = ['USER'];
-    }
-    return userProjectModel.create(user);*/
+
+    user.roles = ['USER'];
 
     return userProjectModel.create(user);
 }
@@ -65,14 +69,6 @@ function updateUser(userId, user) {
             lastName: user.lastName,
             roles: user.roles
         }
-    });
-}
-
-function updatePassword(userId, user) {
-    return userProjectModel.update({_id: userId}, {
-       $set: {
-           password: user.password
-       }
     });
 }
 
@@ -153,6 +149,3 @@ function updateFacebookToken(userId, facebookId, token) {
             }
         });
 }
-
-
-

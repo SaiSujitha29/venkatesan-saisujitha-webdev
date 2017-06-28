@@ -81,12 +81,12 @@ function findReviewById(req, res) {
 }
 
 function findAllReviews(req, res) {
-    // var reviewer = req.query['_reviewer'];
-    // var review = req.query['review'];
-    // var rating = req.query['rating'];
-    // if(reviewer && review && rating) {
-    //     return findAllReviewsForUser(req, res);
-    // }
+    var reviewer = req.query['_reviewer'];
+    var review = req.query['review'];
+    var rating = req.query['rating'];
+    if(reviewer && review && rating) {
+        return findAllReviewsForUser(req, res);
+    }
     reviewProjectModel
         .findAllReviews()
         .then(function (reviews) {

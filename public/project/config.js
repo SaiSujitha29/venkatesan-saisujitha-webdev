@@ -6,21 +6,9 @@
     function configuration($routeProvider) {
         $routeProvider
 
-            .when('/test', {
-                templateUrl: 'home/templates/test.html'
-            })
-            // .when('/test/page/:movieId',{
-            //     templateUrl: 'home/templates/movie-page.test.html',
-            //     controller: 'movieController',
-            //     controllerAs: 'model',
-            //     resolve: {
-            //         currentUser: checkCurrentUser
-            //     }
-            // })
-
             // user routing
             .when('/', {
-                templateUrl: 'home/templates/home.html',
+                templateUrl: 'views/home/templates/home.html',
                 controller: 'homeController',
                 controllerAs: 'model',
                 resolve: {
@@ -63,7 +51,7 @@
                 controllerAs: 'model'
             })*/
             .when('/page/:movieId', {
-                templateUrl: 'home/templates/movie-page.view.client.html',
+                templateUrl: 'views/home/templates/movie-page.view.client.html',
                 controller: 'movieController',
                 controllerAs: 'model',
                 resolve: {
@@ -72,7 +60,7 @@
             })
 
             .when('/search/:searchTerm', {
-                templateUrl: 'home/templates/search-page.view.client.html',
+                templateUrl: 'views/home/templates/search-page.view.client.html',
                 controller: 'searchController',
                 controllerAs: 'model',
                 resolve: {
@@ -113,9 +101,55 @@
                     currentUser: checkAdmin
                 }
             })
+
+            .when('/admin/posts/edit/:postId', {
+                templateUrl: 'views/admin/templates/admin-posts-edit.view.client.html',
+                controller: 'adminPostEditsProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
+            .when('/admin/posts/new', {
+                templateUrl: 'views/admin/templates/admin-posts-chooser.view.client.html',
+                controller: 'adminPostNewProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
+            .when('/admin/posts/new/text', {
+                templateUrl: 'views/admin/templates/admin-posts-new-text.view.client.html',
+                controller: 'adminPostNewProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
+            .when('/admin/posts/new/image', {
+                templateUrl: 'views/admin/templates/admin-posts-new-image.view.client.html',
+                controller: 'adminPostNewProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
+            .when('/admin/posts/new/youtube', {
+                templateUrl: 'views/admin/templates/admin-posts-new-youtube.view.client.html',
+                controller: 'adminPostNewProjectController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
             .when('/user/:userId/post', {
                 templateUrl: 'views/post/templates/post-list.view.client.html',
-                controller: 'postListController',
+                controller: 'adminController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn
@@ -124,14 +158,6 @@
             .when('/user/:userId/post/new', {
                 templateUrl: 'views/post/templates/post-chooser.view.client.html',
                 controller: 'postNewController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
-            .when('/user/:userId/post/:postId', {
-                templateUrl: 'views/post/templates/post-edit.view.client.html',
-                controller: 'postEditController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn

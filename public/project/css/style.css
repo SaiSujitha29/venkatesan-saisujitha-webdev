@@ -1,4 +1,3 @@
-
 input.form-control,
 textarea.form-control,
 select.form-control{
@@ -113,6 +112,9 @@ a:hover {
     color: white;
 }
 
+.glyphicon-plu {
+    color:white;
+}
 .navbar-default {
     background-color: cornflowerblue;
 }

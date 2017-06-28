@@ -29,7 +29,7 @@
                     console.log(currfollower._id);
                     console.log(model.userId);
                     if(currfollower._id === model.userId){
-                         model.isfollow = true;
+                        model.isfollow = true;
                         break;
                     }
                 }
@@ -67,7 +67,7 @@
                     console.log(response);
                     init();
                 });
-             model.isfollow = true;
+            model.isfollow = true;
             $location.url('/user/'+ model.userId + '/profile-public');
         }
 
@@ -79,6 +79,7 @@
                     init();
                 });
             model.isfollow = false;
+            init();
             $location.url('/user/'+ model.userId + '/profile-public');
         }
     }

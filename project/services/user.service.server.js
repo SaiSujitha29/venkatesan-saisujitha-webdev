@@ -17,10 +17,10 @@ app.get('/api/project/checkLoggedIn', checkLoggedIn);
 app.post('/api/project/register', register);
 app.post('/api/project/logout', logout);
 app.get('/api/project/checkAdmin', checkAdmin);
-app.put('/api/project/follow', followUser);
-app.put('/api/project/unfollow', unfollowUser);
-app.post('/api/project/user/:userId/updatePassword', updatePassword);
+app.post('/api/project/follow', followUser);
+app.post('/api/project/unfollow', unfollowUser);
 app.get('api/project/user/:userId/followers', findFollowersById);
+app.post('/api/project/user/:userId/updatePassword', updatePassword);
 
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -68,18 +68,18 @@ app.post('/api/project/unregister', unregister);
 function localStrategy1(username, password, done) {
     userProjectModel
         .findUserByUsername(username)
-        .then(function(user) {
-            if (bcrypt.compareSync (password, user.password)) {
-               return userProjectModel
-                  .findUserByCredentials(username, user.password)
-                   .then(function (user) {
+        .then(function (user) {
+            if (bcrypt.compareSync(password, user.password)) {
+                return userProjectModel
+                    .findUserByCredentials(username, user.password)
+                    .then(function (user) {
                         console.log(user);
                         if (user) {
                             return done(null, user);
                         } else {
                             return done(null, false);
                         }
-                   });
+                    });
             }
         });
 }
@@ -176,7 +176,6 @@ function updatePassword(req, res) {
 }
 
 
-
 function login(req, res) {
     var user = req.user;
     res.json(user);
@@ -246,8 +245,6 @@ function register(req, res) {
             res.send(err);
         });
 }
-
-
 
 /*function unregister(req, res) {
     userProjectModel

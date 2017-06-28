@@ -65,12 +65,8 @@
 
         function findAllPosts() {
             var url = "/api/posts";
-            console.log("In cccccccccccccccccccc");
-            console.log(url);
             return $http.get(url)
                 .then(function (response) {
-                    console.log("In client server");
-                    console.log(response);
                     return response.data;
                 });
         }

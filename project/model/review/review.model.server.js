@@ -30,6 +30,7 @@ function findAllReviewsForUser(userId) {
 }
 
 function findMovieReviewByUserId(userId, movieId) {
+    console.log("finally here");
     var  reviews = reviewProjectModel.findOne();
     return reviewProjectModel.findAllReviewsForUser(userId);
     // if(reviews){

@@ -5,26 +5,27 @@
 
     function adminPostsProjectController(postProjectService, $location, $routeParams) {
         var model = this;
-        model.postId = $routeParams['postId'];
+        //model.postId = $routeParams['postId'];
+        //model.userId = $routeParams['userId'];
+        //model._author = $routeParams['_author'];
+
 
         model.deletePost = deletePost;
         model.selectPost = selectPost;
         model.createPost = createPost;
         model.updatePost = updatePost;
+        model.findPost = findPost;
 
         function init() {
-
-            postProjectService
-                .findAllPosts()
-                .then(function (posts) {
-                    console.log('this is the post');
-                    console.log(posts);
-                    console.log(posts[0]._author);
-                    model.posts = posts;
-                });
+            findAllPosts();
         }
-
         init();
+
+
+        function findPost(post) {
+            console.log(post);
+           $location.url('/admin/posts/edit/' + post._id);
+        }
 
         // change the number of paramaters passed to delete, update, to match client server
         function deletePost(post) {
@@ -49,15 +50,14 @@
                 .then(findAllPosts);
         }
 
-        // function findAllPosts() {
-        //     postProjectService
-        //         .findAllPosts()
-        //         .then(function (posts) {
-        //             console.log('this is the post');
-        //             console.log(posts[0]._author);
-        //             model.posts = posts;
-        //         });
-        // }
+        function findAllPosts() {
+            postProjectService
+                .findAllPosts()
+                .then(function (posts) {
+                    console.log('this is the post');
+                    model.posts = posts;
+                });
+        }
 
     }
 })();
