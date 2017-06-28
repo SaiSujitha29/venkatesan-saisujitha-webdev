@@ -42,6 +42,7 @@ function findUserById(userId) {
     return userProjectModel
         .findById(userId)
         .populate('reviews')
+        .populate('posts')
         .populate('followers')
         .populate('following')
         .exec();

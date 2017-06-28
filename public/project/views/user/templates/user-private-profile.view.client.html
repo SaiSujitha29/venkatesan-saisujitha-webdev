@@ -96,8 +96,8 @@
                 ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
                 <a>Reviews</a>
             </li>
-            <li ng-if="(model.user.roles.indexOf('CELEBRITY') > 0) ||
-                       (model.user.roles.indexOf('ADMIN') > 0)"
+            <li ng-if="(model.user.roles.indexOf('CELEBRITY') >= 0) ||
+                       (model.user.roles.indexOf('ADMIN') >= 0)"
                 ng-click="model.show ='posts'" ng-class="{'active': model.show==='posts'}">
                 <a>Posts</a>
             </li>
@@ -122,11 +122,10 @@
              class="tab-pane fade in active">
             <h3>Reviews</h3>
             <ul class="list-group">
-
                     <li ng-repeat="review in model.user.reviews" class="list-group-item">
 
                         <div class="reviewFormat well">
-                            <a class="btn btn-primary btn-sm pull-right"
+                            <a class="btn btn-success btn-sm pull-right"
                                ng-click="model.selectMovie(review.movieId)">
                                 Go to review page
                             </a>
@@ -136,9 +135,6 @@
 
                         </div>
                     </li>
-
-                <!--<a class="btn btn-primary btn-block"-->
-                <!--href="#!/user/{{model.user._id}}/review">Reviews</a>-->
             </ul>
         </div>
         <div class="tab-content">
@@ -147,8 +143,17 @@
                  class="tab-pane fade in active">
                 <h3>Followers</h3>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        Followers here
+                    <li ng-repeat="post in model.user.posts" class="list-group-item">
+                        <div class="reviewFormat well">
+                            <a class="btn btn-success btn-sm pull-right"
+                               ng-click="model.selectMovie(review.movieId)">
+                                Go to review page
+                            </a>
+                            <h4>Review : </h4>
+
+                            <p>{{review.review}}</p>
+
+                        </div>
                     </li>
                 </ul>
             </div>

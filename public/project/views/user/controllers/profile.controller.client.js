@@ -14,6 +14,7 @@
         model.unregister = unregister;
         model.logout = logout;
         model.selectMovie = selectMovie;
+        model.selectFollower = selectFollower;
 
         function init(){
             model.reviews = currentUser.reviews;
@@ -22,6 +23,11 @@
 
         function selectMovie(movieId) {
             $location.url('/page/' + movieId);
+        }
+
+        function selectFollower(follower) {
+            var userId = follower._id;
+            $location.url('/user/'+ userId + '/profile-public');
         }
 
 

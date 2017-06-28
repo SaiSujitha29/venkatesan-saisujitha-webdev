@@ -3,7 +3,7 @@
         .module('MovieApp')
         .controller('userPublicProjectController', userPublicProjectController);
 
-    function userPublicProjectController( currentUser, $location, userProjectService, $routeParams, $scope) {
+    function userPublicProjectController( currentUser, $location, userProjectService, $routeParams, $scope, $sce) {
 
         var model = this;
         model.userId = $routeParams['userId'];
@@ -40,6 +40,20 @@
         model.follow = follow;
         model.unfollow = unfollow;
         model.selectFollower = selectFollower;
+        model.selectMovie = selectMovie;
+        model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
+
+        function selectMovie(movieId) {
+            $location.url('/page/' + movieId);
+        }
+
+        function getYouTubeEmbedUrl(youtubeLink) {
+            var embedUrl = "https://www.youtube.com/embed/";
+            var youTubeLinkParts = youtubeLink.split('/');
+            var id = youTubeLinkParts[youTubeLinkParts.length - 1];
+            embedUrl += id;
+            return $sce.trustAsResourceUrl(embedUrl);
+        }
 
         function selectFollower(follower) {
             var userId = follower._id;
