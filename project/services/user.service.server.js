@@ -17,8 +17,8 @@ app.get('/api/project/checkLoggedIn', checkLoggedIn);
 app.post('/api/project/register', register);
 app.post('/api/project/logout', logout);
 app.get('/api/project/checkAdmin', checkAdmin);
-app.post('/api/project/follow', followUser);
-app.post('/api/project/unfollow', unfollowUser);
+app.put('/api/project/follow', followUser);
+app.put('/api/project/unfollow', unfollowUser);
 app.post('/api/project/user/:userId/updatePassword', updatePassword);
 app.get('api/project/user/:userId/followers', findFollowersById);
 

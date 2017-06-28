@@ -151,7 +151,7 @@
                 follow: follow,
                 follower: follower
             };
-            return $http.post(url, info)
+            return $http.put(url, info)
                 .then(function (response) {
                     return response.data;
                 })
@@ -163,7 +163,7 @@
                 follow: follow,
                 follower: follower
             };
-            return $http.post(url, info)
+            return $http.put(url, info)
                 .then(function (response) {
                     return response.data;
                 })
