@@ -33,8 +33,6 @@ function createUser(user) {
     }
     return userProjectModel.create(user);*/
 
-    user.roles = ['USER'];
-
     return userProjectModel.create(user);
 }
 

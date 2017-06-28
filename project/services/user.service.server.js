@@ -128,6 +128,7 @@ function googleStrategy(token, refreshToken, profile, done) {
                     username: emailParts[0],
                     firstName: profile.name.givenName,
                     lastName: profile.name.familyName,
+                    password: bcrypt.hashSync("password"),
                     email: email,
                     google: {
                         id: profile.id,
@@ -158,10 +159,6 @@ function updatePassword(req, res) {
     var oldPwd = data.oldPwd;
     var newPwd = data.newPwd;
     var verifyPwd = data.verify;
-    console.log(oldPwd);
-    console.log(newPwd);
-    console.log(verifyPwd);
-    console.log(userId);
     userProjectModel
         .findUserById(userId)
         .then(function(user) {
@@ -354,6 +351,7 @@ function findUser(req, res) {
 
 function createUser(req, res) {
     var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
     userProjectModel
         .createUser(user)
         .then(function (user) {
