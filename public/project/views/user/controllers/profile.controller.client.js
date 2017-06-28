@@ -3,7 +3,7 @@
         .module('MovieApp')
         .controller('profileController', profileController);
 
-    function profileController(currentUser, $location, userProjectService, $routeParams, homeService) {
+    function profileController(currentUser, $location, userProjectService, $routeParams, homeService, $sce) {
 
 
         var model = this;
@@ -15,6 +15,7 @@
         model.logout = logout;
         model.selectMovie = selectMovie;
         model.selectFollower = selectFollower;
+        model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
 
         function init(){
             model.reviews = currentUser.reviews;
@@ -30,6 +31,13 @@
             $location.url('/user/'+ userId + '/profile-public');
         }
 
+        function getYouTubeEmbedUrl(youtubeLink) {
+            var embedUrl = "https://www.youtube.com/embed/";
+            var youTubeLinkParts = youtubeLink.split('/');
+            var id = youTubeLinkParts[youTubeLinkParts.length - 1];
+            embedUrl += id;
+            return $sce.trustAsResourceUrl(embedUrl);
+        }
 
         function updateUser(user) {
             userProjectService

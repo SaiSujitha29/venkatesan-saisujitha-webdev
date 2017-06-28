@@ -111,9 +111,41 @@
              class="tab-pane fade in active">
             <h3>Posts</h3>
             <ul class="list-group">
-                {{post.post}}
                 <li ng-repeat="post in model.user.posts" class="list-group-item">
-                    {{post.post}}
+                    <div class="well reviewFormat">
+                        <a class="btn btn-success btn-sm pull-right"
+                           ng-click="model.selectMovie(post.movieId)">
+                            Go to review page
+                        </a>
+                        <div ng-switch ="post.postType">
+                            <div ng-switch-when="TEXT">
+                                    <span>
+                                <p>{{post.post}}</p>
+                                </span>
+                            </div>
+                            <div ng-switch-when = "IMAGE">
+                                <!--<label ng-click="model.selectPost(post)"><u>{{post._author.username}}</u></label>-->
+                                <span>
+                                    <p>{{post.name}}</p>
+                                    </span>
+
+                                <img ng-src="{{post.url}}"
+                                     width="{{post.width}}"/>
+
+                            </div>
+                            <div ng-switch-when = "YOUTUBE">
+                                <!--<label ng-click="model.selectPost(post)"><u>{{post._author.username}}</u></label>-->
+                                <span>
+                                <p>{{post.description}}</p>
+                                </span>
+
+                                <div class="youtube-post">
+                                    <iframe width="100%" src="{{model.getYouTubeEmbedUrl(post.url)}}"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        {{review.review}}
+                    </div>
                 </li>
             </ul>
         </div>
@@ -143,16 +175,11 @@
                  class="tab-pane fade in active">
                 <h3>Followers</h3>
                 <ul class="list-group">
-                    <li ng-repeat="post in model.user.posts" class="list-group-item">
-                        <div class="reviewFormat well">
-                            <a class="btn btn-success btn-sm pull-right"
-                               ng-click="model.selectMovie(review.movieId)">
-                                Go to review page
+                    <li ng-repeat="follower in model.user.followers" class="list-group-item">
+                        <div>
+                            <a ng-click="model.selectFollower(follower)">
+                                {{follower.username}}
                             </a>
-                            <h4>Review : </h4>
-
-                            <p>{{review.review}}</p>
-
                         </div>
                     </li>
                 </ul>
