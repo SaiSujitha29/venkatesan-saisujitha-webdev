@@ -9,6 +9,19 @@ select.form-control{
     float: left;
 }
 
+p.ng-binding{
+    width: 100%;
+    float: left;
+}
+
+div.well.ng-scope{
+    min-block-size: 250px;
+}
+
+div.reviewFormat{
+    min-block-size: 200px;
+}
+
 .hide {
     display: none;
 }

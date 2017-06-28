@@ -94,7 +94,10 @@
                 <h3>Reviews</h3>
                 <ul class="list-group">
                     <li ng-repeat="review in model.user.reviews" class="list-group-item">
-                        {{review.review}}
+                        <div class="well reviewFormat">
+                            {{review.review}}
+                        </div>
+
                     </li>
                 </ul>
             </div>

@@ -123,12 +123,7 @@
                             <label ng-click="model.selectReview(review)"><u>{{review._reviewer.username}}</u></label>
                         <h4>Rating : {{review.rating}}</h4>
                         <h4>Review : </h4>
-                        <span>
-                                <p>{{review.review}}</p>
-                            </span>
-
-                        </p>
-
+                        <span><p>{{review.review}}</p></span>
                         <!--<div ng-click="model/selecctReview(review)">{{review.review}}</div>-->
                     </div>
                 </div>
@@ -144,8 +139,10 @@
                                       rows="3"
                                       placeholder="The movie is great!"
                                       ng-model="review.review"
-                                      ng-disabled="!model.canCreate">
+                                      ng-disabled="!model.canCreate"
+                                      maxlength="500">
                             </textarea>
+                            <h6>Limit to 500</h6>
                         </div>
                         <label for="rating5">Rating</label>
                         <div class="form-group">
@@ -177,8 +174,10 @@
                             <textarea class="form-control"
                                       rows="3"
                                       placeholder="The movie is great!"
-                                      ng-model="model.review.review">
+                                      ng-model="model.review.review"
+                                      maxlength="500">
                             </textarea>
+                            <h6>Limit to 500</h6>
                         </div>
                         <label for="rating1">Rating</label>
                         <div class="form-group">
@@ -263,12 +262,14 @@
                                 <div class="my-info-1">
                                     <div class="text hide">
                                         <div class="form-group">
-                                        <textarea class="form-control"
+                                            <textarea class="form-control"
                                                   rows="3"
                                                   placeholder="The movie is great!"
                                                   ng-model="post.post"
-                                                  ng-disabled="model.normalUser">
-                                        </textarea>
+                                                  ng-disabled="model.normalUser"
+                                                  maxlength="500">
+                                            </textarea>
+                                            <h6>Limit to 500</h6>
                                         </div>
                                     </div>
                                     <div class="image hide">
@@ -344,8 +345,10 @@
                                                 <textarea class="form-control"
                                                                 rows="3"
                                                                 placeholder="The movie is great!"
-                                                                ng-model="model.post.post">
+                                                                ng-model="model.post.post"
+                                                                maxlength="500">
                                                 </textarea>
+                                                <h6>Limit to 500</h6>
                                             </div>
                                         </div>
                                         <div ng-switch-when="IMAGE">

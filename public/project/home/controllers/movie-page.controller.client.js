@@ -76,8 +76,6 @@
                 });
 
             if(model.loggedUser._id){
-                console.log(model.loggedUser.roles);
-                console.log(model.loggedUser.roles.indexOf('CELEBRITY'));
                 if(model.loggedUser.roles.indexOf('CELEBRITY') >= 0) {
                     model.normalUser = false;
                 }
@@ -85,8 +83,6 @@
                     model.normalUser = false;
                 }
             }
-            console.log("normal user isssssssssssssss");
-            console.log(model.normalUser);
 
             // for reviews
             if(model.loggedUser._id) {
@@ -167,14 +163,12 @@
             reviewProjectService
                 .updateReview(model.loggedUser._id, model.movieId, reviewId, review)
                 .then(function (review) {
-                    console.log(review);
                     model.message = "Review Updated Successfully";
                     $route.reload();
                 });
         }
 
         function deleteReview(review) {
-            console.log(review);
             var reviewId = review._id;
 
             reviewProjectService
@@ -192,10 +186,8 @@
         //Posts
 
         function selectPost(post) {
-            console.log(post);
             author = post._author;
             var userId = author._id;
-            console.log(userId);
             $location.url('/user/'+ userId + '/profile-public');
         }
 
@@ -204,8 +196,6 @@
                 model.error = "Review name required!";
                 return;
             }
-            console.log("create");
-            console.log(post);
             if(post.post) {
                 post.postType = 'TEXT';
             }
@@ -235,14 +225,12 @@
             postProjectService
                 .updatePost(model.loggedUser._id, model.movieId, postId, post)
                 .then(function (post) {
-                    console.log(post);
                     model.message = "Post Updated Successfully";
                     $route.reload();
                 });
         }
 
         function deletePost(post) {
-            console.log(post);
             var postId = post._id;
 
             postProjectService

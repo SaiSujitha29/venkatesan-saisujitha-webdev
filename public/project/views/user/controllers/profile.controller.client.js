@@ -3,7 +3,7 @@
         .module('MovieApp')
         .controller('profileController', profileController);
 
-    function profileController(currentUser, $location, userProjectService, $routeParams, NgTableParams) {
+    function profileController(currentUser, $location, userProjectService, $routeParams, homeService) {
 
 
         var model = this;
@@ -13,14 +13,17 @@
         model.updateUser = updateUser;
         model.unregister = unregister;
         model.logout = logout;
+        model.selectMovie = selectMovie;
 
         function init(){
-            //model.user.reviews;
-           // var self = this;
-            //access from dataset
-            //article.dataset.user.reviews;
+            model.reviews = currentUser.reviews;
         }
         init();
+
+        function selectMovie(movieId) {
+            $location.url('/page/' + movieId);
+        }
+
 
         function updateUser(user) {
             userProjectService

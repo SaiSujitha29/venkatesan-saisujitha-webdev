@@ -122,12 +122,21 @@
              class="tab-pane fade in active">
             <h3>Reviews</h3>
             <ul class="list-group">
-                <li ng-repeat="review in model.user.reviews" class="list-group-item">
 
-                    <!--<a href="#!/profile-public">-->
-                    {{review.review}}
-                    <!--</a>-->
-                </li>
+                    <li ng-repeat="review in model.user.reviews" class="list-group-item">
+
+                        <div class="reviewFormat well">
+                            <a class="btn btn-primary btn-sm pull-right"
+                               ng-click="model.selectMovie(review.movieId)">
+                                Go to review page
+                            </a>
+                            <h4>Review : </h4>
+
+                            <p>{{review.review}}</p>
+
+                        </div>
+                    </li>
+
                 <!--<a class="btn btn-primary btn-block"-->
                 <!--href="#!/user/{{model.user._id}}/review">Reviews</a>-->
             </ul>
