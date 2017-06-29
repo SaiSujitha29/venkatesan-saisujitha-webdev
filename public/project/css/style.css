@@ -39,6 +39,10 @@ div.reviewFormat{
     color: white;
 }
 
+.goBack{
+    color: black;
+}
+
 head {
     position: static;
 }
