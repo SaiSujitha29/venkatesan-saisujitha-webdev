@@ -30,6 +30,11 @@
         }
 
         function createUser(user) {
+            if(typeof user === 'undefined' || !user.username ||user.username ==="") {
+                model.error = "Username field required";
+                return;
+            }
+            console.log(user);
             user.password = "password";
             userProjectService
                 .createUser(user)
@@ -41,6 +46,11 @@
         }
 
         function updateUser(user) {
+            if(typeof user === 'undefined' || !user.username ||user.username ==="") {
+                model.error = "Username field required";
+                return;
+            }
+
             userProjectService
                 .updateUser(user._id, user)
                 .then(findAllUsers);

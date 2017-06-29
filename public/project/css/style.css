@@ -131,6 +131,10 @@ ul.dropdown-menu.dropdown-menu-right{
     background-color: #94618e;
 }
 
+.glyphicon-plus{
+    color: black;
+}
+
 .navbar-text,
 a{
     color: white;

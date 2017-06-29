@@ -26,6 +26,11 @@
 </nav>
 
 <div class ="container-fluid user-main">
+
+    <div ng-show="model.error" class="alert alert-danger center">
+        {{model.error}}
+    </div>
+
     <h1>Reviews</h1>
     <ul class="list-group">
         <li class="list-group-item active">
