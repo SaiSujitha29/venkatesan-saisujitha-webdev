@@ -63,10 +63,10 @@
     <h4>Upcoming Movies</h4>
 
     <span style="display: inline-block">
-        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left jumbotron"></div>
-        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right jumbotron"></div>
-        <div class="col" ng-repeat="movie in model.upcomingMovies">
-            <img ng-show="model.upcomingIndex==$index"
+        <!--<div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left jumbotron"></div>-->
+        <!--<div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right jumbotron"></div>-->
+        <div class="col" ng-repeat="movie in model.upcomingMovies | limitTo: 4">
+            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
                  ng-click="model.selectMovie(movie.id)"
                  ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"
                  class="thumbnail img-responsive">
