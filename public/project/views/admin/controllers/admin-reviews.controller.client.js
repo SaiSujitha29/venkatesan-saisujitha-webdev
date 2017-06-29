@@ -23,7 +23,6 @@
         }
 
         function deleteReview(review) {
-            console.log(review._id);
             reviewProjectService
                 .deleteReview(review._reviewer, review.movieId, review._id, review)
                 .then(findAllReviews);

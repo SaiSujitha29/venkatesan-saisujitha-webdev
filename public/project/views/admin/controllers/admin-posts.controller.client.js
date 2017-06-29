@@ -27,7 +27,6 @@
         }
 
         function findPost(post) {
-            console.log(post);
            $location.url('/admin/posts/edit/' + post._id);
         }
 
@@ -58,7 +57,6 @@
             postProjectService
                 .findAllPosts()
                 .then(function (posts) {
-                    console.log('this is the post');
                     model.posts = posts;
                 });
         }

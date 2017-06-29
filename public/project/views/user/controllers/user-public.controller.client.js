@@ -15,7 +15,6 @@
             userProjectService
                 .findUserById(model.userId)
                 .then(function (user) {
-                    console.log(user);
                     model.user = user;
                 });
 
@@ -25,9 +24,6 @@
             if(following){
                 for(i = 0; i < following.length; i++){
                     var currfollower = following[i];
-                    console.log("in here");
-                    console.log(currfollower._id);
-                    console.log(model.userId);
                     if(currfollower._id === model.userId){
                         model.isfollow = true;
                         break;
@@ -69,7 +65,6 @@
             userProjectService
                 .followUser(follow, follower)
                 .then(function (response) {
-                    console.log(response);
                     init();
                 });
             model.isfollow = true;
@@ -80,7 +75,6 @@
             userProjectService
                 .unfollowUser(follow, follower)
                 .then(function (response) {
-                    console.log(response);
                     init();
                 });
             model.isfollow = false;

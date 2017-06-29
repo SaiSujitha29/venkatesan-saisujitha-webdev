@@ -172,23 +172,16 @@
 
         // CRUD reviews
         function selectReview(review) {
-            console.log(review);
             reviewer = review._reviewer;
             var userId = reviewer._id;
-            console.log(userId);
             $location.url('/user/'+ userId + '/profile-public');
         }
 
         function createReview(review) {
-            console.log(review);
             if(typeof review === 'undefined' || (!review.rating))  {
                 model.error = "Both fields required!";
                 return;
             }
-            /*if(!review.rating) {
-                model.message = "Please include rating";
-                return;
-            }*/
 
             reviewProjectService
                 .createReview(model.loggedUser._id, model.movieId, review)

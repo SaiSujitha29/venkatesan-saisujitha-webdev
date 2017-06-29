@@ -72,7 +72,6 @@
             }
 
             if (newPwd !== verify) {
-                console.log("not matching");
                 model.error = "passwords must match";
                 return;
             }

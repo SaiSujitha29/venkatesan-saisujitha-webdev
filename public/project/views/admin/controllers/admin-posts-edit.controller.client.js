@@ -15,7 +15,6 @@
                 .findPostById(model.postId)
                 .then(function(post) {
                     model.post = post;
-                    console.log(post.postType);
                 });
         }
         init();
@@ -33,7 +32,6 @@
             postProjectService
                 .updatePost(model.loggedUser._id, post.movieId, postId, post)
                 .then(function (post) {
-                    console.log(post);
                     model.message = "Post Updated Successfully";
                     $location.url('/admin/posts');
                 });

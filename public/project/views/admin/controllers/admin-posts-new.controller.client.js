@@ -18,13 +18,10 @@
         }
 
         function create(post) {
-            console.log(post);
             if(typeof post === 'undefined') {
                 model.error = "Review name required!";
                 return;
             }
-            console.log("create");
-            console.log(post);
             if(post.post) {
                 post.postType = 'TEXT';
             }
@@ -37,7 +34,6 @@
             postProjectService
                 .createPost(model.loggedUser._id, post.movieId, post)
                 .then(function (post) {
-                    console.log(post);
                     $location.url('/admin/posts');
                 })
         }

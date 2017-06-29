@@ -10,23 +10,6 @@
         model.searchNewMovies = searchNewMovies;
         model.selectMovie = selectMovie;
         model.searchPage = searchPage;
-        model.upcomingIndex = 1;
-        model.increaseUpcoming = function () {
-            if(model.upcomingMovies.length <= model.upcomingIndex){
-                model.upcomingIndex = 1;
-            }
-            else {
-                model.upcomingIndex++;
-            }
-        };
-        model.decreaseUpcoming = function () {
-            if(model.upcomingIndex == 1){
-                model.upcomingIndex = model.upcomingMovies.length;
-            }
-            else {
-                model.upcomingIndex--;
-            }
-        };
 
         function init() {
             homeService
@@ -38,7 +21,6 @@
             homeService
                 .latestMovies()
                 .then(function (response) {
-                    console.log(response.data);
                     model.latestMovies = response.data;
                 });
 

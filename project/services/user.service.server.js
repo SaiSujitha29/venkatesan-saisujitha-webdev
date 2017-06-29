@@ -114,7 +114,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
                         return done(null, response);
                     })
             } else {
-                console.log(profile);
                 return userProjectModel
                     .updateFacebookToken(user._id, profile.id, token)
                     .then(function (response) {
@@ -172,7 +171,6 @@ function updatePassword(req, res) {
     userProjectModel
         .findUserById(userId)
         .then(function(user) {
-            console.log(user);
             if (bcrypt.compareSync (oldPwd, user.password)) {
                 user.password = bcrypt.hashSync(newPwd);
                 userProjectModel
@@ -202,8 +200,6 @@ function checkAdmin(req, res) {
 
 function followUser(req, res) {
     var data = req.body;
-    console.log("in servr");
-    console.log(data);
     userProjectModel
         .followUser(data.follow, data.follower);
     res.sendStatus(200);
@@ -211,8 +207,6 @@ function followUser(req, res) {
 
 function unfollowUser(req, res) {
     var data = req.body;
-    console.log("in servr");
-    console.log(data);
     userProjectModel
         .unfollowUser(data.follow, data.follower);
     res.sendStatus(200);
@@ -243,7 +237,6 @@ function logout(req, res) {
 
 function register(req, res) {
     var user = req.body;
-    console.log(user);
     user.password = bcrypt.hashSync(user.password);
     userProjectModel
         .createUser(user)
@@ -252,21 +245,9 @@ function register(req, res) {
                 res.json(user);
             });
         }, function (err) {
-            console.log(err);
             res.send(err);
         });
 }
-
-/*function unregister(req, res) {
-    userProjectModel
-        .deleteUser(req.user._id)
-        .then(function (status) {
-            req.user.logout();
-            res.sendStatus(200);
-        }, function (err) {
-            console.log(err);
-        });
-}*/
 
 function unregister(req, res) {
     userProjectModel
