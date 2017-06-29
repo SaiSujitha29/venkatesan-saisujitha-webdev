@@ -7,7 +7,7 @@ var LocalStrategy1 = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-passport.use(new LocalStrategy1(localStrategy1));
+passport.use('local', new LocalStrategy1(localStrategy1));
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -69,19 +69,29 @@ function localStrategy1(username, password, done) {
     userProjectModel
         .findUserByUsername(username)
         .then(function (user) {
-            if (bcrypt.compareSync(password, user.password)) {
+            if(!user){
+                return done(null, false);
+            }
+            if (user.username === username && bcrypt.compareSync(password, user.password)) {
                 return userProjectModel
                     .findUserByCredentials(username, user.password)
                     .then(function (user) {
-                        console.log(user);
                         if (user) {
                             return done(null, user);
                         } else {
                             return done(null, false);
                         }
-                    });
+                    });}
+        }, function (err) {
+            if (err) {
+                return done(err);
+            } else {
+                return done(null, false);
             }
         });
+
+                //     });
+            // }        });
 }
 
 function facebookStrategy(token, refreshToken, profile, done) {
@@ -185,7 +195,8 @@ function checkAdmin(req, res) {
     if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
         res.json(req.user);
     } else {
-        res.send('0');
+        res.sendStatus(401);
+        return;
     }
 }
 
