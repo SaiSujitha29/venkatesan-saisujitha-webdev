@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="nav navbar-text navbar-link pull-left">
-                <span ng-click="model.goBack()" class="glyphicon glyphicon-hand-left btn-sm"></span>
+                <span ng-click="model.goBack()" class="glyphicon glyphicon-chevron-left btn-sm"></span>
             </a>
 
             <ul class="nav navbar-nav pull-right">
@@ -36,14 +36,15 @@
     </div>
 </nav>
 
-<div class="container-fluid home user-main">
-
+<div class="container-fluid user-main">
+    
     <div class="container-fluid user-main">
-        <div class="searchPadding input-group search-bar ">
+        <div class="input-group search-bar">
             <input type="text"
                    class="form-control"
-                   ng-model="searchText"/>
-            <span ng-click="model.searchNewMovies(searchText)" class="input-group-addon glyphicon glyphicon-search"></span>
+                   ng-model="searchText"
+                   placeholder="Search movie here..."/>
+            <span ng-click="model.searchPage(searchText)" class="input-group-addon glyphicon glyphicon-search"></span>
         </div>
     </div>
 
@@ -56,20 +57,20 @@
                     </div>
                 </ul>
             </div>
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-8 well">
                 <div class ="list-group-item">
                     <h3>{{movie.title}}</h3>
 
                     <br>
                     {{movie.overview}}
-
+                </div>
+                <div class="col-xs-12 col-sm-8 well-sm pull-right">
                     <a class="btn btn-primary btn-lg pull-down pull-right"
                        ng-click="model.selectMovie(movie.id)">
                         Details
                     </a>
                 </div>
                 <br>
-
             </div>
         </div>
     </ul>
