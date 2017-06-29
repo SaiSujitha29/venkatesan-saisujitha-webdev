@@ -93,7 +93,7 @@ div.container-fluid.main {
 }
 
 body {
-    background-color: #d7cec7;
+    background-color: #f8eee7;
     padding-top: 50px;
     padding-bottom: 60px;
 }
@@ -128,7 +128,7 @@ a:hover {
 .navbar-default,
 a.dropdown-toggle,
 ul.dropdown-menu.dropdown-menu-right{
-    background-color: rosybrown;
+    background-color: #94618e;
 }
 
 .navbar-text,

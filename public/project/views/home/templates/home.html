@@ -70,6 +70,9 @@
                          ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid user-main">
 
         <h4>Current Movies</h4>
 
@@ -80,20 +83,26 @@
                      ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
             </div>
         </div>
+    </div>
 
-        <h4>Popular Movies</h4>
+    <div class="container-fluid user-main">
 
-        <div ng-repeat="movie in model.popularMovies | limitTo: 4">
+        <h4>Top Rated Movies</h4>
+
+        <div ng-repeat="movie in model.topRatedMovies | limitTo: 4">
             <div class="col-sm-6 col-md-3 thumbnail">
                 <img class="img-responsive"
                      ng-click="model.selectMovie(movie.id)"
                      ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
             </div>
         </div>
+    </div>
 
-        <h4>Top Rated Movies</h4>
+    <div class="container-fluid user-main">
 
-        <div ng-repeat="movie in model.topRatedMovies | limitTo: 4">
+        <h4>Popular Movies</h4>
+
+        <div ng-repeat="movie in model.popularMovies | limitTo: 4">
             <div class="col-sm-6 col-md-3 thumbnail">
                 <img class="img-responsive"
                      ng-click="model.selectMovie(movie.id)"
