@@ -6,7 +6,7 @@
         </a>
 
         <br>
-        <h3 class="navbar-text">Movie Page</h3>
+        <h3 class="navbar-text"><u>Movie Page</u></h3>
     </div>
 </nav> <!--navigation ends-->
 
@@ -22,10 +22,10 @@
                 <li ng-init="model.show ='info'"
                     class="active"
                     ng-click="model.show='info'" ng-class="{'active': model.show==='info'}">
-                    <a>Basic Info</a>
+                    <a><b>Basic Info</b></a>
                 </li>
                 <li ng-click="model.show='cast'" ng-class="{'active': model.show==='cast'}">
-                    <a>Cast and Genre</a>
+                    <a><b>Cast and Genre</b></a>
                 </li>
             </ul>
             <div ng-show="model.show === 'info'"
@@ -33,7 +33,7 @@
                  class="tab-pane fade in active">
                 <ul class="list-group">
                     <h3>{{model.movie.title}}</h3>
-                    <h4>Release Date: {{model.movie.vote_average}}</h4>
+                    <h4>Vote Average: {{model.movie.vote_average}}</h4>
                     <h4>Release Date: {{model.movie.release_date}}</h4>
                     <h4>Summary</h4>
                     <p>{{model.movie.overview}}</p>
@@ -102,10 +102,10 @@
         <div>
             <ul class="nav nav-tabs">
                 <li ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
-                    <a>Reviews</a>
+                    <a><b>Reviews</b></a>
                 </li>
                 <li ng-click="model.show='Posts'" ng-class="{'active': model.show==='Posts'}">
-                    <a>Posts</a>
+                    <a><b>Posts</b></a>
                 </li>
             </ul>
             <div ng-show="model.show === 'reviews'"
@@ -118,7 +118,7 @@
                               ng-click="model.editReview(review)"
                               class="glyphicon glyphicon-pencil pull-right"></span>
                         <p>
-                            <label ng-click="model.selectReview(review)"><u>{{review._reviewer.username}}</u></label>
+                            <label ng-click="model.selectReview(review)"><b>{{review._reviewer.username}}</b></label>
                         <h4>Rating : {{review.rating}}</h4>
                         <h4>Review : </h4>
                         <span><p>{{review.review}}</p></span>
@@ -225,7 +225,7 @@
                         <span ng-show="model.loggedUser._id === post._author._id && post.postType != 'IMAGE'"
                               ng-click="model.editPost(post)"
                               class="glyphicon glyphicon-pencil pull-right"></span>
-                        <label ng-click="model.selectPost(post)"><u>{{post._author.username}}</u></label>
+                        <label ng-click="model.selectPost(post)"><b>{{post._author.username}}</b></label>
                         <span ng-show="model.loggedUser._id === post._author._id && post.postType == 'IMAGE'"
                               ng-click="model.deletePost(post)"
                               class="glyphicon glyphicon-remove pull-right"></span>

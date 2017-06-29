@@ -1,4 +1,4 @@
-input.form-control,
+nput.form-control,
 textarea.form-control,
 select.form-control{
     margin-bottom: 5px;
@@ -12,6 +12,7 @@ p.ng-binding{
     width: 100%;
     float: left;
 }
+
 
 div.well.ng-scope{
     min-block-size: 250px;
@@ -36,7 +37,7 @@ div.reviewFormat{
 
 .glyphicon-hand-left{
     font-size: xx-large;
-    color: white;
+    color: black;
 }
 
 .goBack{
@@ -79,10 +80,10 @@ u{
     color: white;
 }
 
-a.navbar-link,
-h3.navbar-text{
+a.navbar-link{
     color: white;
 }
+
 
 
 div.container-fluid.main {
@@ -102,9 +103,16 @@ body {
     border: none;
 }
 
-a:hover {
-    text-decoration: none;
-    background-color: transparent;
+a {
+    color: black;
+}
+
+b {
+    color:black;
+}
+
+h3 {
+    color:black;
 }
 
 .dropdown .dropdown-menu .dropdown-toggle {
@@ -123,7 +131,7 @@ a:hover {
 }
 
 .glyphicon-plus {
-    color:white;
+    color:black;
 }
 .navbar-default,
 a.dropdown-toggle,
@@ -131,12 +139,9 @@ ul.dropdown-menu.dropdown-menu-right{
     background-color: #94618e;
 }
 
-.glyphicon-plus{
-    color: black;
-}
 
-.navbar-text,
-a{
+
+.navbar-text, a {
     color: white;
 }
 
@@ -244,6 +249,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 .cog{
     z-index: 1;
 }
+
 .nav>li>a:hover, .nav>li>a:focus, .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
     background:#fff;
 }

@@ -135,20 +135,20 @@
     <ul class="nav nav-tabs">
         <li ng-init="model.show ='reviews'"
             ng-click="model.show='reviews'" ng-class="{'active': model.show==='reviews'}">
-            <a>Reviews</a>
+            <a><b>Reviews</b></a>
         </li>
         <li ng-if="(model.user.roles.indexOf('CELEBRITY') >= 0) ||
                        (model.user.roles.indexOf('ADMIN') >= 0)"
             ng-click="model.show ='posts'" ng-class="{'active': model.show==='posts'}">
-            <a>Posts</a>
+            <a><b>Posts</b></a>
         </li>
         <li ng-if = "!(model.user.roles.indexOf('ADMIN') >= 0)"
             ng-click="model.show='followers'" ng-class="{'active': model.show==='followers'}">
-            <a>Followers</a>
+            <a><b>Followers</b></a>
         </li>
         <li ng-if = "!(model.user.roles.indexOf('ADMIN') >= 0)"
             ng-click="model.show='following'" ng-class="{'active': model.show==='following'}">
-            <a>Following</a>
+            <a><b>Following</b></a>
         </li>
     </ul>
     <div ng-show="model.show === 'posts'"
