@@ -12,12 +12,16 @@
         model.selectUser = selectUser;
         model.createUser = createUser;
         model.updateUser = updateUser;
-       // model.selectUsername = selectUsername;
+        model.goBack = goBack;
 
         function init() {
             findAllUsers();
         }
         init();
+
+        function goBack() {
+            window.history.back();
+        }
 
         function deleteUser(user) {
             userProjectService

@@ -45,11 +45,6 @@
                     currentUser: checkCurrentUser
                 }
             })
-        /*    .when('/homefeed', {
-                templateUrl: 'views/user/templates/register.view.client.html',
-                controller: 'registerProjectController',
-                controllerAs: 'model'
-            })*/
             .when('/page/:movieId', {
                 templateUrl: 'views/home/templates/movie-page.view.client.html',
                 controller: 'movieController',

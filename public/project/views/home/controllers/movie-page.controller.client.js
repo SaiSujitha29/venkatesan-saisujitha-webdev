@@ -7,10 +7,9 @@
                              reviewProjectService,postProjectService, $route) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.movieId = $routeParams['movieId'];
         model.postId = $routeParams['postId'];
-
         model.loggedUser = currentUser;
         model.upcomingIndex = 1;
         model.canCreate = false;
@@ -18,10 +17,9 @@
         model.canView = true;
         model.normalUser = true;
         model.currentEdit = false;
-        model. getYouTubeEmbedUrl =  getYouTubeEmbedUrl;
+        model.getYouTubeEmbedUrl =  getYouTubeEmbedUrl;
 
         function init() {
-
             // movie data
             homeService
                 .searchMovieById(model.movieId)
@@ -113,8 +111,10 @@
 
             // for reviews
             if(model.loggedUser._id) {
+                model.ok = false;
                 var reviews = model.loggedUser.reviews;
                 console.log(reviews.length === 0);
+                model.imageFlag = false;
                 if(reviews.length !== 0){
                     for(i = 0; i < reviews.length; i++){
                         var currReview = reviews[i];
@@ -148,6 +148,22 @@
         model.deletePost = deletePost;
         model.editPost = editPost;
         model.updatePost = updatePost;
+        model.imageType = imageType;
+        model.goBack = goBack;
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function imageType(flag) {
+            model.ok = true;
+            if (flag === 'URL'){
+                model.imageFlag = false;
+            }
+            else{
+                model.imageFlag = true;
+            }
+        }
 
         // navigate to another movie page
         function selectMovie(movieId) {
@@ -275,7 +291,7 @@
                     model.message = "Post Deleted Successfully";
                     model.canCreate = true;
                     model.canView = true;
-                    $route.reload();
+                    init();
                 });
 
         }

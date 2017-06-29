@@ -24,7 +24,6 @@ div.reviewFormat{
 .hide {
     display: none;
 }
-
 .col{
     width: 200px;
     float: left;
@@ -37,6 +36,7 @@ div.reviewFormat{
 
 .glyphicon-hand-left{
     font-size: xx-large;
+    color: white;
 }
 
 head {
@@ -72,8 +72,14 @@ summary{
 
 u{
     font-size: large;
-    color: #d9534f;
+    color: white;
 }
+
+a.navbar-link,
+h3.navbar-text{
+    color: white;
+}
+
 
 div.container-fluid.main {
     margin-left: 20px;
@@ -83,7 +89,7 @@ div.container-fluid.main {
 }
 
 body {
-    background-color: gainsboro;
+    background-color: #d7cec7;
     padding-top: 50px;
     padding-bottom: 60px;
 }
@@ -112,11 +118,18 @@ a:hover {
     color: white;
 }
 
-.glyphicon-plu {
+.glyphicon-plus {
     color:white;
 }
-.navbar-default {
-    background-color: cornflowerblue;
+.navbar-default,
+a.dropdown-toggle,
+ul.dropdown-menu.dropdown-menu-right{
+    background-color: rosybrown;
+}
+
+.navbar-text,
+a{
+    color: white;
 }
 
 .navbar-default .navbar-brand {
@@ -193,7 +206,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom {
 }
 
 .home h4 {
-    color: #d9534f;
+    color: #76323f;
     padding-bottom: 15px;
 }
 

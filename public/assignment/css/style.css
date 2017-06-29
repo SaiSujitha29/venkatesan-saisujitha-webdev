@@ -8,6 +8,10 @@ head {
     position: static;
 }
 
+.searchPadding{
+    padding-top: 50px;
+}
+
 footer {
     position: static;
 }
