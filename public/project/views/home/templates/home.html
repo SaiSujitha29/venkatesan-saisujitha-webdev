@@ -59,51 +59,46 @@
         </div>
     </div>
 
+    <div class="container-fluid user-main">
 
-    <h4>Upcoming Movies</h4>
+        <h4>Upcoming Movies</h4>
 
-    <span style="display: inline-block">
-        <!--<div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left jumbotron"></div>-->
-        <!--<div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right jumbotron"></div>-->
-        <div class="col" ng-repeat="movie in model.upcomingMovies | limitTo: 4">
-            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
-                 ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"
-                 class="thumbnail img-responsive">
+        <div ng-repeat="movie in model.upcomingMovies | limitTo: 4">
+            <div class="col-sm-6 col-md-3 thumbnail">
+                    <img class="img-responsive"
+                         ng-click="model.selectMovie(movie.id)"
+                         ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+            </div>
         </div>
-    </span>
 
-    <h4>Current Movies</h4>
-    <span style="display: inline-block">
-        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left"></div>
-        <div class="col" ng-repeat="movie in model.currentMovies">
-            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
-                 ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
+        <h4>Current Movies</h4>
+
+        <div ng-repeat="movie in model.currentMovies | limitTo: 4">
+            <div class="col-sm-6 col-md-3 thumbnail">
+                <img class="img-responsive"
+                     ng-click="model.selectMovie(movie.id)"
+                     ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+            </div>
         </div>
-        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
-    </span>
 
-    <h4>Popular Movies</h4>
-    <span style="display: inline-block">
-        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left"></div>
-        <div class="col" ng-repeat="movie in model.popularMovies">
-            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
-                 ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
+        <h4>Popular Movies</h4>
+
+        <div ng-repeat="movie in model.popularMovies | limitTo: 4">
+            <div class="col-sm-6 col-md-3 thumbnail">
+                <img class="img-responsive"
+                     ng-click="model.selectMovie(movie.id)"
+                     ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+            </div>
         </div>
-        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
-    </span>
 
-    <h4>Top Rated Movies</h4>
-    <span style="display: inline-block">
-        <div ng-click="model.decreaseUpcoming()" class="bcol glyphicon glyphicon-chevron-left pull-left"></div>
-        <div class="col" ng-repeat="movie in model.topRatedMovies">
-            <img ng-show="model.upcomingIndex==$index||model.upcomingIndex==$index+1||model.upcomingIndex==$index+2"
-                 ng-click="model.selectMovie(movie.id)"
-                 ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}" class="thumbnail img-responsive" width="200px">
+        <h4>Top Rated Movies</h4>
+
+        <div ng-repeat="movie in model.topRatedMovies | limitTo: 4">
+            <div class="col-sm-6 col-md-3 thumbnail">
+                <img class="img-responsive"
+                     ng-click="model.selectMovie(movie.id)"
+                     ng-src="http://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+            </div>
         </div>
-        <div ng-click="model.increaseUpcoming()" class="bcol glyphicon glyphicon-chevron-right pull-right"></div>
-    </span>
-
+    </div>
 </div>
